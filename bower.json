@@ -1,0 +1,38 @@
+{
+  "name": "weekendcinema",
+  "version": "1.0.0",
+  "description": "Weekend Cinema UI",
+  "author": "Ganesh Karamala",
+  "contributors": [
+    {
+      "name": "",
+      "email": ""
+    }
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "GruntFile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "font-awesome": "4.5.0",
+    "jquery": "2.1.3",
+    "moment": "2.13.0",
+    "angular": "1.4.8",
+    "angular-messages": "1.4.8",
+    "angular-aria": "1.4.8",
+    "angular-animate": "1.4.8",
+    "angular-material":"1.1.4",
+    "angular-ui-calendar": "1.0.1",
+    "fullcalendar": "3.5.1",
+    "ui-router":"0.4.2",
+    "owl.carousel":"2.2.1"
+  },
+  "resolutions": {
+    "jquery": "1.11.3",
+    "angular": "1.4.8",
+    "fullcalendar": "2.8.0"
+  }
+}

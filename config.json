@@ -1,0 +1,13 @@
+{
+	"http": 
+	{
+		"port": "3000"
+	},
+
+	"db": 
+	{
+		"hostName": "mongodb://weekendcinema:wc@ds059672.mongolab.com",
+		"port": 59672,
+		"databaseName": "weekendcinema"
+	}
+}

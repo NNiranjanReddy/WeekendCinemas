@@ -1,0 +1,13 @@
+<spinner ng-show="isLoading"></spinner>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3" ng-repeat="cinema in jukeBox">
+			<div class="card padding-v-5">
+				<div class="easy-block-v1">
+					<my-youtube class="" code="cinema.songs.youtubeUrl" options={showInfo:false}></my-youtube>
+					<div class="easy-block-v1-badge bg-color-darkturquoise">{{cinema.songs.releaseDt | date : 'mediumDate'}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

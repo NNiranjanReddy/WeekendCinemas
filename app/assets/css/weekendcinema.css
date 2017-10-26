@@ -1,0 +1,595 @@
+@import
+	url(https://fonts.googleapis.com/css?family=Work+Sans|Hind+Guntur);
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak] {
+	display: none !important;
+}
+
+body {
+	font-family: 'Work Sans', 'Hind Guntur', serif;
+	background-color: #eee;
+}
+
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+span.badge {
+    margin-bottom: 0px;
+}
+ul {
+	padding-left: 0px;
+	list-style-type: none;
+}
+p {
+	margin: 5px 0 5px 0;
+}
+span, p, li {
+	font-size: 14px;
+}
+marquee{
+	color: white;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+hr {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-top: 2px #2d2d2d;
+}
+
+.main-view {
+    background-color: #eee;
+}
+
+
+.main-view a{
+    color: #000;
+}
+.main-view .container {
+	padding: 0;
+	margin-bottom: 5px;
+	background-color: white;
+}
+
+.margin-top-5{
+	margin-top: 5px;
+}
+.margin-top-2{
+	margin-top: 2px;
+}
+.margin-top-10{
+	margin-top: 10px;
+}
+.margin-top-30{
+	margin-top: 30px;
+}
+.margin-top-40{
+	margin-top: 40px;
+}
+.margin-top-100{
+	margin-top:100px
+}
+.padding-v-5{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.padding-left-10{
+    padding-left: 10px;
+}
+.img-small-w{
+	max-height: 80px;
+	max-width: 125px; 
+}
+
+.img-fixed-height-150{
+	max-height: 150px;
+	min-height: 150px;
+}
+
+.img-fixed-height-250{
+	max-height: 250px;
+	min-height: 250px;
+	width: 100%;
+}
+.img-fixed-height-250-h{
+	max-height: 250px;
+	min-height: 250px;
+	width: 100%;
+}
+.img-fixed-height-72{
+	max-height: 72px;
+	min-height: 72px;
+	width: 100%;
+}
+
+.img-fixed-height-350{
+	max-height: 350px;
+	min-height: 350px;
+}
+.img-max-height-250{
+    max-height: 250px;
+	width: 100%;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Source Sans Pro', 'Hind Guntur', serif;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.h4, h4 {
+	font-size: 16px;
+}
+
+.wrapper {
+	background-color: #eee;
+}
+
+.padding-0{
+	padding: 0px;
+}
+
+.float-right {
+	float: right;
+}
+
+.thumbnail .caption {
+	padding: 0px;
+	color: #333;
+}
+
+.ellipsis-text{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    width: 100%;
+}
+
+.carousel-caption {
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 10px 15px;
+	background-color: #ff9800
+}
+
+.carousel-control.right,.carousel-control.left {
+	background-image: none
+}
+@media screen and (min-width: 768px) {
+.carousel-caption {
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+}
+
+.list-group {
+	margin-bottom: 5px;
+}
+
+.jumbotron {
+	margin-bottom: 5px;
+	background-color: #222;
+}
+
+.jumbotron .container {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	background-color: #222;
+}
+
+.jumbotron p {
+	margin-bottom: 0px;
+	font-size: 14px;
+	color: #fff;
+	font-weight: 500;
+}
+
+.jumbotron a {
+	color: #fff;
+}
+
+blockquote {
+	margin-bottom: 0px;
+}
+
+.inline-block>li {
+	display: inline-block;
+}
+
+.breadcrumb {
+	margin-bottom: 0px;
+	background-color: #222;
+}
+
+.breadcrumb>li>a {
+	color: white;
+	text-decoration: none
+}
+
+.img-small {
+	width: 60px;
+	height: 60px;
+}
+
+.youtube {
+	height: 400px;
+}
+
+.youtube-320 {
+	height: 320px;
+}
+
+.youtube-180 {
+	height: 180px;
+}
+
+@media ( max-width : 768px) {
+	.youtube, .youtube-320 {
+		height: 200px;
+	}
+
+	.img-fixed-height-250-h{
+		max-height: 150px;
+		min-height: 150px;
+		width: 100%;
+	}
+	.img-fixed-height-350{
+		max-height: 200px;
+		min-height: 200px;
+	}
+}
+
+.badge {
+	font-weight: 500;
+	border-radius: 0;
+	display: -webkit-inline-box;
+	font-size: inherit;
+}
+
+.badge-large {
+	font-weight: 500;
+	border-radius: 0;
+	font-size: 16px;
+}
+
+.badge-TEASER {
+	background-color: #2196f3;
+}
+
+.badge-trailer {
+	background-color: #4caf50;
+}
+
+.badge-news {
+	background-color: #ff9800;
+}
+
+.badge-NEXT_ANTY, .badge-shortfilm {
+	background-color: #f44336;
+}
+
+.badge-video, .badge-live, .badge-history {
+	background-color: #f44336;
+}
+
+.color-Teaser {
+	color: #2196f3;
+}
+
+.color-Trailer {
+	color: #4caf50;
+}
+
+.color-News {
+	color: #ff9800;
+}
+
+.color-SHORTFILM {
+	color: #f44336;
+}
+
+.color-VIDEO {
+	color: #f44336;
+}
+
+.color-BIRTHDAY {
+	color: #ff015d
+}
+
+.badge-BIRTHDAY {
+	background-color: #ff015d
+}
+
+
+.bg-color-TEASER {
+	background-color: #2196f3;
+}
+
+.bg-color-TRAILER {
+	background-color: #4caf50;
+}
+
+.bg-color-BBB {
+	background-color: #00bcd4;
+}
+.bg-color-black {
+	background: #000;
+}
+
+.bg-color-NEWS {
+	background-color: #ff9800;
+}
+
+.bg-color-SHORTFILM {
+	background-color: #f44336;
+}
+
+.bg-color-MUSIC {
+	background-color: #8d38c9;
+}
+
+.bg-color-INCINEMAS {
+	background-color: #4caf50;
+}
+
+.bg-color-darkorchid {
+	background-color: #8d38c9;
+}
+
+.bg-color-darkslateblue {
+	background-color: #3f51b5;
+}
+
+.bg-color-dodgerblue {
+	background-color: #2196f3;
+}
+
+.bg-color-mediumseagreen {
+	background-color: #4caf50;
+}
+
+.bg-color-darkturquoise {
+	background-color: #00bcd4;
+}
+
+.bg-color-darkorange {
+	background-color: #ff9800;
+}
+
+.bg-color-tomato {
+	background-color: #f44336;
+}
+.bg-color-gray{
+	background-color: #eee;
+}
+.color-darkorchid {
+	color: #8d38c9;
+}
+
+.color-darkslateblue {
+	color: #3f51b5;
+}
+
+.color-dodgerblue {
+	color: #2196f3;
+}
+
+.color-mediumseagreen {
+	color: #4caf50;
+}
+
+.color-darkturquoise {
+	color: #00bcd4;
+}
+
+.color-darkorange {
+	color: #ff9800;
+}
+
+.color-tomato {
+	color: #f44336;
+}
+
+.color-deepskyblue {
+	color: #00b5ec
+}
+
+.color-cornflowerblue {
+	color: #448aff
+}
+
+.color-MUSIC {
+	color: #8d38c9;
+}
+
+.color-white {
+	color: #ffffff
+}
+
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.col-md-6>.row>.col-md-6 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.media {
+	margin: 2px;
+	padding: 5px;
+	background-color: white;
+}
+.media-heading {
+	margin-bottom: 0px;
+}
+
+.media:first-child {
+	margin-top: 2px;
+}
+
+.media-body {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.img-240 {
+	max-height: 240px;
+	width: 100%;
+}
+
+.img-60 {
+	max-height: 70px;
+	width: 100%;
+}
+
+.img-120 {
+	max-height: 120px;
+	width: 100%;
+}
+
+
+/*
+ * Callouts
+ *
+ * Not quite alerts, but custom and helpful notes for folks reading the docs.
+ * Requires a base and modifier class.
+ */
+
+/* Common styles for all types */
+.bs-callout {
+  padding: 10px 0px 10px 10px;
+  margin: 0 0;
+  border: 0px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+.bs-callout code {
+  border-radius: 3px;
+}
+
+/* Tighten up space between multiple callouts */
+.bs-callout + .bs-callout {
+  margin-top: -5px;
+}
+
+/* Variations */
+.bs-callout-danger {
+  border-left-color: #ce4844;
+}
+.bs-callout-danger h4 {
+  color: #ce4844;
+}
+.bs-callout-warning {
+  border-left-color: #aa6708;
+}
+.bs-callout-warning h4 {
+  color: #aa6708;
+}
+.bs-callout-info {
+  border-left-color: #1b809e;
+}
+.bs-callout-info h4 {
+  color: #1b809e;
+}
+
+.fc-event-container>.fa {
+	position: inherit;
+	display: flex;
+}
+
+.fc-unthemed .fc-today {
+	background: #fff;
+}
+
+.fc-event {
+	border: 1px solid #fff;
+	background-color: #fff;
+}
+
+.fc-event:hover, .ui-widget .fc-event {
+	color: black;
+	text-decoration: none;
+}
+
+.fc-title {
+	padding-left: 5px;
+	font-family: 'Work Sans', 'Hind Guntur', serif;
+}
+
+.fc-toolbar {
+	margin-bottom: 0px
+}
+
+.fc-toolbar h2 {
+	margin: 0;
+	font-size: inherit;
+}
+
+.fc-button-group {
+	font-size: xx-small;
+}
+.fc-row .fc-content-skeleton tbody td, .fc-row .fc-helper-skeleton tbody td {
+    border-top: 0;
+    padding: 5px;
+}
+.fc-day-grid-event .fc-content {
+   text-overflow: ellipsis;
+}
+.fc-content {
+	top: -3px;
+}
+.fc-list-item-title{
+	font-family: 'Work Sans', 'Hind Guntur', serif;
+}
+.fc-list-item-marker{
+	display: none;
+}
+
+
+.fc-list-item-time{
+	display: none;
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3,
+	.col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9,
+	.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3,
+	.col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9,
+	.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3,
+	.col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9,
+	.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3,
+	.col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+	padding: 5px;
+}
+/*
+.col-md-4:last-child, .col-md-6:last-child, .col-md-9:last-child {
+	padding-right: 0px;
+} */
+@media screen and (max-width: 768px){
+	
+	.jumbotron {
+		padding-bottom: 5px;
+		padding-top: 5px;
+	}
+	.bs-callout {
+		border: none;
+	}
+}
+

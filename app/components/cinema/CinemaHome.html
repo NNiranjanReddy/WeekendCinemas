@@ -1,0 +1,41 @@
+
+<div class="container" ng-show="!isLoading">
+    <!--<div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <form action="">
+                <input type="text" class="form-control" placeholder="Search Cinema ..." list="list" ng-model="searchKey" ng-change="searchCinema()">
+                <datalist id="list">
+                    <option value="{{item.name}}" ng-repeat="item in searchList track by $index"></option>
+                </datalist>
+            </form>
+        </div>
+    </div> -->
+    
+    <span class="badge  bg-color-darkorange margin-left-5 margin-top-5">Coming Soon</span>
+    <div class="row">
+        <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
+            <div class="card">
+                <div class="easy-block-v1">
+                    <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
+                    <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
+                </div>
+                <div class="block-grid-v2-info rounded-bottom">
+                    <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-2 col-xs-6" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true">
+            <div class="card">
+                <div class="easy-block-v1">
+                    <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
+                    <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
+                </div>
+                <div class="block-grid-v2-info rounded-bottom">
+                    <h4 class="ellipsis-text"><a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
