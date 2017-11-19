@@ -1,413 +1,142 @@
 <spinner ng-show="isLoading"></spinner>
 <div ng-show="!isLoading">
-<div class="jumbotron">
-      <div class="container">
-       <div class="row">
-        	<div class="col-md-6">
-        		<!-- Indicators -->
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<div class="item" ng-class="{active: $index == 0 }" ng-repeat="post in news">
-							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"><img
-								class="img-fixed-height-250-h img-responsive"
-								src="{{post.media.img[0]}}"></a>
-							<div class="carousel-caption">
-								<span>{{post.local.ttl}}</span>
-							</div>
-						</div>
-					</div>
-
-					<!-- Controls -->
-					<a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-
-					</a> <a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</a>
-				</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="">
-					<span class="badge  bg-color-tomato"><i class="rounded-x   fa fa-line-chart"></i> Trending</span>
-					<ul class="blog-social-shares margin-top-10">
-						<li ng-repeat="item in [1,2,3,4,5,6,7,8,9,10]"> <a class="rounded-3x" href="#">పైసా వాసుల్ టైటిల్ సాంగ్ ప్రోమో {{$index+1}}</a> </li>
-					</ul>
-				</div>
-        	</div>
-			<div class="col-md-3">
-
-				<div class="">
-					<span class="badge  bg-color-tomato">What is Next ?</span>
-					<ul class="blog-social-shares margin-top-10">
-						<li ng-repeat="item in [1,2,3,4,5,6,7,8,9]"> 
-							<a class="rounded-3x" href="#"> 
-								<i class="rounded-x color-tomato  fa fa-youtube-play"></i>
-								 Raja The Great Pre Release Event {{$index+1}}</a>
-						 </li>
-						 <li><a href="/calendar">more events</a></li>
-					</ul>
-				</div>
-			</div>
-       </div>
-      </div>
-    </div>
-
 	<div class="container">
-		<md-content>
-			<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
-				<md-tab label="IN CINEMAS">
-					<md-content class="md-padding">
-						<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ autoplay: false,items:10,dots: false, nav: false,responsive:{
-                                            0:{
-                                                items:3
-                                            },
-                                            500:{
-                                            	items:8
-                                            }
-                                    }
-                                    }">
-							<owl-carousel-item ng-repeat="cinema in recentCinemas">
-								<div class="card padding-v-5">
-									<div class="easy-block-v1">
-										<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
-											<img class="img-responsive img-fixed-height-150" src="{{cinema.general.posterUrl}}" alt="" >
-										</a>
-										<div class="easy-block-v1-badge rgba-red" ng-show="{{cinema.general.rating}}">{{cinema.general.rating}}</div>
-									</div>
-									<div class="block-grid-v2-info rounded-bottom">
-										<h4 class="ellipsis-text">
-											<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}" data-toggle="tooltip" title="{{cinema.name}}">{{cinema.name}}</a>
-										</h4>
-										<ul class="list-inline star-vote">
-											<li ng-repeat="number in [1,2,3,4,5]"><i ng-class="{'fa fa-star': (number-cinema.general.rating)<=0,'fa fa-star-o': (number-cinema.general.rating)>=1,'fa fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</owl-carousel-item>
-						</owl-carousel>
-					</md-content>
-				</md-tab>
-				<md-tab label="COMING SOON">
-					<md-content class="md-padding">
-						<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ autoplay: false,items:10,dots: false, nav: false,responsive:{
-                                        0:{
-                                            items:3
-                                        },
-                                        500:{
-                                            items:8
-                                        }
-                                    }
-                                }">
-							<owl-carousel-item ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
-								<div class="card padding-v-5">
-									<div class="easy-block-v1">
-										<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
-											<img class="img-responsive img-fixed-height-150" src="{{cinema.general.posterUrl}}" alt="" >
-										</a>
-										<div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
-									</div>
-									<div class="block-grid-v2-info">
-										<h4 class="ellipsis-text">
-											<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}" data-toggle="tooltip" title="{{cinema.name}}">{{cinema.name}}</a>
-										</h4>
-									</div>
-								</div>
-							</owl-carousel-item>
-						</owl-carousel>
-					</md-content>
-				</md-tab>
-			</md-tabs>
-		</md-content>
-	</div>
-
-<!-- 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				Indicators
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					Wrapper for slides
-					<div class="carousel-inner" role="listbox">
-						<div class="item" ng-class="{active: $index == 0 }" ng-repeat="post in news">
-							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"><img
-								class="img-fixed-height-250-h img-responsive"
-								src="{{post.media.img[0]}}"></a>
-							<div class="carousel-caption">
-								<span>{{post.local.ttl}}</span>
+			<span class="badge bg-color-TEASER">Reviews</span>
+		</div>
+		<div class="row">
+			<div class="col m12 s12">
+				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ 
+					margin:5,
+					autoplay: false,
+					items:10,
+					dots: false,
+					 nav: false,
+					 responsive:{
+							0:{
+								items:2
+							},
+							500:{
+								items:8
+							}
+					}
+					}">
+					<owl-carousel-item ng-repeat="cinema in recentCinemas">
+						<div class="card">
+							<div class="card-image">
+								<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
+									<img class="img-responsive img-fixed-height-150" src="{{cinema.general.posterUrl}}" alt="">
+								</a>
+							</div>
+							<div class="card-content">
+								<div class="card-tag bg-color-tomato" ng-show="{{cinema.general.rating}}">
+									{{cinema.general.rating}}
+								</div>
+								<h4 class="ellipsis-text">
+									<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}" data-toggle="tooltip" title="{{cinema.name}}">{{cinema.name}}</a>
+								</h4>
+								<ul class="list-inline star-vote">
+									<li ng-repeat="number in [1,2,3,4,5]">
+										<i class="material-icons small" ng-show="(number-cinema.general.rating)>=1">star_border</i>
+										<i class="material-icons small" ng-show="((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)">star_half</i>
+										<i class="material-icons small" ng-show="(number-cinema.general.rating)<=0">star</i>
+									</li>
+								</ul>
 							</div>
 						</div>
-					</div>
-
-					Controls
-					<a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-
-					</a> <a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</a>
-				</div>
+					</owl-carousel-item>
 			</div>
-			<div class="col-md-6">
-				<span class="badge  bg-color-tomato">Trending</span>
-				<div class="row">
-					<div class="col-md-6">
-						<ul>
-							<li ng-repeat="post in news">
+		</div>
+	</div>
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner" role="listbox">
+							<div class="item" ng-class="{active: $index == 0 }" ng-repeat="post in news">
 								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-									<h4>{{post.local.ttl}}</h4>
+									<img class="img-fixed-height-250-h img-responsive" src="{{post.media.img[0]}}">
 								</a>
-							</li>
-						</ul>
-					</div>
+								<div class="carousel-caption">
+									<span>{{post.local.ttl}}</span>
+								</div>
+							</div>
+							<!-- Controls -->
+							<a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 
-					<div class="col-md-6">
-						<ul>
-							<li ng-repeat="post in news">
-								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-									<h4>{{post.local.ttl}}</h4>
-								</a>
-							</li>
-						</ul>
+							</a>
+							<a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							</a>
+						</div>
 					</div>
+				</div>
+				<div class="col-md-6">
+					<span class="badge  bg-color-tomato margin-left-0">What is Next ?</span>
+					<div class="row margin-top-10">
+						<div class="chip col-md-2" ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+							<i class="material-icons small">music_note</i>
+							23/11 
+						</div>
+					</div>
+					<a href="/calendar">more events</a>
 				</div>
 			</div>
 		</div>
-	</div> -->
-	<!--=== Container Part ===-->
+	</div>
 	<div class="container">
 		<div class="row">
-			<!-- Main Content -->
-			<div class="col-md-12">
-				<md-content>
-					<md-tabs md-dynamic-height md-border-bottom md-center-tabs="true">
-						<md-tab label="ALL">
-							<md-content class="md-padding">
-								<div class="row">
-									<div class="col-sm-4" style="padding: 0">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(0,5)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(5,10)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(10,15)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-						<md-tab label="TRAILER">
-							<md-content class="md-padding">
-																<div class="row">
-									<div class="col-sm-4" style="padding: 0">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(0,5)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(5,10)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(10,15)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-						<md-tab label="TEASER">
-							<md-content class="md-padding">
-								<div class="row">
-									<div class="col-sm-4" style="padding: 0">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(0,5)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(5,10)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(10,15)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-						<md-tab label="SHORT FILM">
-							<md-content class="md-padding">
-																<div class="row">
-									<div class="col-sm-4" style="padding: 0">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(0,5)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(5,10)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4" style="padding: 0;">
-										<!-- Blog Thumb -->
-										<div class="thumb" ng-repeat="post in videos.slice(10,15)">
-											<div class="thumb-img">
-												<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-											</div>
-											<div class="thumb-desc">
-												<h5>
-													<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-												</h5>
-												<ul class="thumb-info">
-													<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-					</md-tabs>
-				</md-content>
+			<span class="badge bg-color-TEASER">Trailers/Videos</span>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="card horizontal" ng-repeat="post in videos.slice(0,5)">
+					<div class="card-img">
+						<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+					</div>
+					<div class="card-content">
+						<h5>
+							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
+						</h5>
+						<ul class="thumb-info">
+							<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<!-- End Main Content -->
-
-			<!-- End Right Sidebar -->
+			<div class="col-sm-4">
+				<div class="card horizontal" ng-repeat="post in videos.slice(5,10)">
+					<div class="card-img">
+						<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+					</div>
+					<div class="card-content">
+						<h5>
+							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
+						</h5>
+						<ul class="thumb-info">
+							<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card horizontal" ng-repeat="post in videos.slice(10,15)">
+					<div class="card-img">
+						<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+					</div>
+					<div class="card-content">
+						<h5>
+							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
+						</h5>
+						<ul class="thumb-info">
+							<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--=== End Container Part ===-->
-</div>

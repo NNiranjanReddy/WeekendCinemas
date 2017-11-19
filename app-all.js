@@ -1,6 +1,6 @@
-var app = angular.module("WcApp", ['ui.router', 'ui.calendar', 'ngMaterial']);
+var app = angular.module("WcApp", ['ui.router', 'ui.calendar']);
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'app/components/home/Home.html',
@@ -52,7 +52,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
   });
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
-  $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('pink');
+  //$mdThemingProvider.theme('default').primaryPalette('green').accentPalette('pink');
 });
 
 app.run(['$rootScope', '$state', '$stateParams', 'constants',
@@ -114,77 +114,45 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
 
   /* event source that contains custom events on the scope */
   $scope.events = {
-    events: [{
-      title: "Bahubali 2 official trailer",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-03-16')),
-      url: "/cinema/Baahubali2",
-      className: "fa fa-music color-VIDEO"
-    }, {
-      title: "Om Namo venkatesaya",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-02-10')),
-      url: "/post/tikka-teaser-1",
-      className: "fa fa-film color-mediumseagreen"
-    }, {
-      title: "Singam 3",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-02-09')),
-      url: "/post/tikka-teaser-1"
-    }, {
-      title: "Ghazi",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-02-17')),
-      url: "/post/tikka-teaser-1"
-    }, {
-      title: "Raarandoi Veduka Choodham",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-08-18')),
-      url: "/cinema/",
-      className: "fa fa-music color-MUSIC"
-    }, {
-      title: "Katamarayudu teaser",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-02-04')),
-      url: "https://www.youtube.com/watch?v=XpAaOER_6iY",
-      className: "fa fa-youtube-play color-NEWS"
-    },
-    {
-      title: "Sample Video",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-08-18')),
-      url: "/cinema/",
-      className: "fa fa-youtube-play color-VIDEO"
-    }, {
-      title: "Vijay Devarakonda",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-08-08')),
-      url: "/celebrity",
-      className: "fa fa-birthday-cake color-BIRTHDAY"
-    }, {
-      title: "Sample",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-08-18')),
-      url: "/celebrity",
-      className: "fa fa-birthday-cake color-BIRTHDAY"
-    }, {
-      title: "Sample cinema",
-      start: DateUtil.toYYYY_MM_DD(new Date('2017-08-18')),
-      url: "/post/tikka-teaser-1",
-      className: "fa fa-film color-mediumseagreen"
-    }]
+    events: []
   };
+  $scope.isLoading = true;
+  $scope.numberOfItems = 3;
+  $scope.loadedItem = 0;
 
   if ($rootScope.upcomingCinemas) {
     addCinemas($rootScope.upcomingCinemas);
-    createCalendar();
   } else {
     var GET = RestAPI.get(constants.api.url + '/upcomingCinemas');
     GET.success(function (response) {
       addCinemas((response.data ? response.data : []));
-      createCalendar();
     });
   }
-  function updateCalendar(){
+  if ($rootScope.recentCinemas) {
+    addCinemas($rootScope.recentCinemas);
+  } else {
+    var GET = RestAPI.get(constants.api.url + '/recentCinemas');
+    GET.success(function (response) {
+      addCinemas((response.data ? response.data : []));
+    });
+  }
+  var GET = RestAPI.get(constants.api.url + '/jukebox');
+  GET.success(function (response) {
+    addCinemas((response ? response : []));
+  });
 
-  };
   function createCalendar() {
     $scope.eventRender = function (event, element, view) {
       element.attr({
         'tooltip': event.title,
         'tooltip-append-to-body': true
       });
+      switch (event.type) {
+        case 'cinema': element.prepend('<i class="material-icons small color-CINEMA">panorama</i>');
+          break;
+        case 'music': element.prepend('<i class="material-icons small color-MUSIC">queue_music</i>');
+          break;
+      }
       $compile(element)($scope);
     };
     /* configuration object */
@@ -196,8 +164,8 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
         /*      defaultView:'basicWeek',*/
         header: {
           right: 'today,prev,next',
-          left: '',
-          center: 'title'
+          left: 'title',
+          center: 'Weekend Cinema Calendar'
         },
         eventRender: $scope.eventRender
       }
@@ -207,22 +175,35 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
     $scope.eventSources = [$scope.events];
 
   };
-  function addCinemas(upcomingCinemas) {
-    upcomingCinemas.forEach(function (cinema) {
-      if (cinema.general.releaseDt) {
+  function addCinemas(cinemas) {
+    cinemas.forEach(function (cinema) {
+      if (cinema.general && cinema.general.releaseDt) {
         var event = {};
         event.title = cinema.name;
         event.start = DateUtil.toYYYY_MM_DD(new Date(cinema.general.releaseDt));
         event.url = "/cinema/" + cinema.cinemaId;
-        event.className = "fa fa-film color-mediumseagreen";
+        event.type = "cinema";
+        $scope.events.events.push(event);
+      }
+      else if (cinema.songs) {
+        var event = {};
+        event.title = cinema.name;
+        event.start = DateUtil.toYYYY_MM_DD(new Date(cinema.songs.releaseDt));
+        event.url = "/cinema/" + cinema.cinemaId;
+        event.type = "music";
         $scope.events.events.push(event);
       }
     });
+    $scope.loadedItem++;
+    if ($scope.loadedItem == $scope.numberOfItems) {
+      createCalendar();
+      $scope.isLoading = false;
+    }
   }
 
   function mobilecheck() {
     var check = false;
-    (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+    (function (a) { if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true; })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
   };
 
@@ -245,7 +226,7 @@ app.controller('CelebrityHomeCtrl', [ '$scope', '$http',CelebrityHomeCtrl ]);
 
 
 function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
-	me  = $scope;
+	me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
 	me.found = true;
@@ -261,14 +242,20 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
 			}
 		}
-		me.director = me.cinema.people.crew.find(function (cel) {
+		me.director = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
+			return cel.type === 'Director';
+		}) : me.cinema.people.find(function (cel) {
 			return cel.type === 'Director';
 		});
-		me.producer = me.cinema.people.crew.find(function (cel) {
+
+		me.producer = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
+			return cel.type === 'Producer';
+		}) : me.cinema.people.find(function (cel) {
 			return cel.type === 'Producer';
 		});
-		me.people = me.cinema.people.cast.concat(me.cinema.people.crew);
+		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
 		me.isLoading = false;
+		$('.tabs').tabs();
 	}).error(function () {
 		me.cinema = null;
 		me.isLoading = false;
@@ -637,6 +624,8 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   me.loaderTotalCount = 3;
   me.loaderCount = 0;
 
+ 
+
   var GET = RestAPI.get(constants.api.url + '/posts');
   GET.success(function(response) {
     me.posts = response ? response : [];
@@ -715,6 +704,7 @@ function PostCtrl($scope, $http, $stateParams, $location,constants,$window) {
 			$scope.found = true;
 			$scope.isLoading = false;
 			$scope.url =  $location.absUrl();
+			$('.materialboxed').materialbox();
 		});
 		GET.error(function() {
 			$scope.article = null;

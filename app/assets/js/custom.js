@@ -1,6 +1,9 @@
-/* Write here your custom javascript codes */
-$(function(){
-    $('.carousel').carousel({
-      interval: 2000
-    });
-});
+(function($){
+  $(function(){
+
+    $('.sidenav').sidenav();
+    $('.tabs').tabs();
+    $('.carousel').carousel();
+
+  }); // end of document ready
+})(jQuery); // end of jQuery name space

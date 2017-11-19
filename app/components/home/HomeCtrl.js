@@ -7,6 +7,8 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   me.loaderTotalCount = 3;
   me.loaderCount = 0;
 
+ 
+
   var GET = RestAPI.get(constants.api.url + '/posts');
   GET.success(function(response) {
     me.posts = response ? response : [];

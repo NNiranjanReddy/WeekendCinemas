@@ -1,6 +1,6 @@
-var app = angular.module("WcApp", ['ui.router', 'ui.calendar', 'ngMaterial']);
+var app = angular.module("WcApp", ['ui.router', 'ui.calendar']);
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'app/components/home/Home.html',
@@ -52,7 +52,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
   });
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
-  $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('pink');
+  //$mdThemingProvider.theme('default').primaryPalette('green').accentPalette('pink');
 });
 
 app.run(['$rootScope', '$state', '$stateParams', 'constants',

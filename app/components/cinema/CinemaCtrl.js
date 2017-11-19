@@ -1,5 +1,5 @@
 function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
-	me  = $scope;
+	me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
 	me.found = true;
@@ -15,14 +15,20 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
 			}
 		}
-		me.director = me.cinema.people.crew.find(function (cel) {
+		me.director = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
+			return cel.type === 'Director';
+		}) : me.cinema.people.find(function (cel) {
 			return cel.type === 'Director';
 		});
-		me.producer = me.cinema.people.crew.find(function (cel) {
+
+		me.producer = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
+			return cel.type === 'Producer';
+		}) : me.cinema.people.find(function (cel) {
 			return cel.type === 'Producer';
 		});
-		me.people = me.cinema.people.cast.concat(me.cinema.people.crew);
+		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
 		me.isLoading = false;
+		$('.tabs').tabs();
 	}).error(function () {
 		me.cinema = null;
 		me.isLoading = false;

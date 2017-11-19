@@ -2,205 +2,123 @@
 <html lang="en" ng-app="WcApp" ng-cloak>
 
 <head>
-    <base href="/">
-    <title>Weekend Cinema | Weekend Cinema is one stop for all telugu cinema updates, news, trailers, teaser, events, birthdays,
-        short films and many more ...</title>
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<base href="/">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<meta property="og:title" content="My Title" />
+	<meta property="og:description" content="description" />
+	<meta property="og:image" content="postImage" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+	<title>Weekend Cinema | One stop for all telugu cinema updates</title>
 
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+	<!-- CSS  	-->
 
-    <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="assets/css/headers/header-v8.css">
-    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/animate.css">
-	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/sliding-panel/style.css">
 
-    <link rel="stylesheet" href="bower_components/owl.carousel/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="bower_components/owl.carousel/dist/assets/owl.theme.default.min.css">
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bower_components/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
+	<link href="bower_components/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
-	
-	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/weekendcinema.css">
+	<link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet">
+
+
+	<link href="assets/css/weekendcinema.css" rel="stylesheet">
+	<link href="assets/css/custom.css" rel="stylesheet">
+	<link href="assets/css/material-custom.css" rel="stylesheet">
+
 </head>
 
-<body class="header-fixed header-fixed-space-v2 sliding-panel-ini sliding-panel-flag-right">
-    <div class="wrapper">
-       <!--=== Header v8 ===-->
-	<div class="header-v8 header-sticky">
-		<!-- Topbar blog -->
-		<div class="blog-topbar">
-			<div class="topbar-search-block">
-				<div class="container">
-					<form action="">
-						<input type="text" class="form-control" placeholder="Search">
-						<div class="search-close"><i class="icon-close"></i></div>
-					</form>
-				</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-xs-11">
-						<div class="topbar-time">{{date| date:'fullDate'}} | పైసా వాసుల్ టైటిల్ సాంగ్ ప్రోమో 1</div>
-					</div>
-					<div class="col-sm-4 col-xs-1 clearfix">
-						<i class="fa fa-search search-btn pull-right"></i>
-					</div>
-				</div><!--/end row-->
-			</div><!--/end container-->
-		</div>
-		<!-- End Topbar blog -->
+<body>
+	<nav class="bg-color-royalblue " role="navigation">
+		<div class="nav-wrapper container">
+			<a id="logo-container" href="/" class="brand-logo">
+				<img src="" alt="myLogo">
+			</a>
 
-		<!-- Navbar -->
-		<div class="navbar mega-menu" role="navigation">
-			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="res-container">
-					<button type="button" class="navbar-toggle sliding-panel__btn sliding-panel__btn--dark" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-
-					<div class="navbar-brand">
-						<a href="index.html">
-							<img src="assets/img/logo.png" alt="Logo">
-						</a>
-					</div>
-				</div><!--/end responsive container-->
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse">
-					<div class="res-container">
-						 <ul class="nav navbar-nav">
-                                <!-- Cinema -->
-                                <li class="dropdown mega-menu-fullwidth">
-                                    <a href="/cinemas" class="dropdown-toggle" data-toggle="dropdown">
-                                   <i class="fa fa-film" aria-hidden="true"></i>  Cinemas
-                                </a>
-                                </li>
-                                <!-- End Cinema -->
-
-                                <!-- Celebrity -->
-                                <li class="dropdown mega-menu-fullwidth">
-                                    <a href="/celebrities" class="dropdown-toggle" data-toggle="dropdown">
-                                  <i class="fa fa-user" aria-hidden="true"></i> Celebrity
-                                </a>
-                                </li>
-                                <!-- End Celebrity -->
-
-                                <!-- Juke Box -->
-                                <li class="dropdown mega-menu-fullwidth">
-                                    <a href="/jukebox" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-music" aria-hidden="true"></i> Juke Box
-                                </a>
-                                </li>
-                                <!-- End Juke Box -->
-
-                                <!-- Calendar -->
-                                <li class="dropdown mega-menu-fullwidth">
-                                    <a href="/calendar" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i> Calendar
-                                </a>
-                                </li>
-                                <!-- End Calendar -->
-
-                                <!-- Short Films -->
-                                <li class="dropdown mega-menu-fullwidth">
-                                    <a href="/shortfilms" class="dropdown-toggle" data-toggle="dropdown">
-										<i class="fa fa-youtube-play" aria-hidden="true"></i> Short Films
-                                </a>
-                                </li>
-                                <!-- End Short Films -->
-                            </ul>
-					</div><!--/responsive container-->
-				</div><!--/navbar-collapse-->
-			</div><!--/end contaoner-->
-		</div>
-		<!-- End Navbar -->
-	</div>
-	<!--=== End Header v8 ===-->
-        <div class="main-view margin-top-2" ui-view></div>
-        <div ng-include src="'app/components/common/footer/Footer.html'"></div>
-    </div>
-    <!--/wrapper-->
-    	<!-- Sliding Panel -->
-	<div class="sliding-panel bg-color-darker">
-		<div class="sliding-panel-inner sliding-panel-scrollable fullscreen">
-			<ul class="sliding-navigation">
-				<li><a href="/cinemas">Cinemas</a></li>
-				<li><a href="/celebrity">Celebrity</a></li>
-				<li><a href="/jukebox">Jukebox</a></li>
-				<li><a href="/calendar">Calendar</a></li>
-				<li><a href="/shortfilms">Short Films</a></li>
+			<ul class="right hide-on-med-and-down">
+				<li>
+					<a href="/cinemas">
+						Cinemas
+						<i class="material-icons left">panorama</i>
+					</a>
+				</li>
+				<li>
+					<a href="/celebrities">
+						Celebrity
+						<i class="material-icons left">person</i>
+					</a>
+				</li>
+				<li>
+					<a href="/jukebox">
+						Jukebox
+						<i class="material-icons left">queue_music</i>
+					</a>
+				</li>
+				<li>
+					<a href="/calendar">
+						Calendar
+						<i class="material-icons left">date_range</i>
+					</a>
+				</li>
 			</ul>
 
-			<h4>Contacts</h4>
-			<address>
-				Email: <a href="mailto:#">info@weekendcinema.in</a><br>
-			</address>
+			<ul id="nav-mobile" class="sidenav">
+				<li>
+					<a href="/cinemas">
+						Cinemas
+						<i class="material-icons left">panorama</i>
+					</a>
+				</li>
 
-			<ul class="list-inline social-icons-v1 social-icons-v1--dark">
-				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="/fb.com/weekendcinema.in"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-				<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+				<li>
+					<a href="/celebrities">
+						Celebrity
+						<i class="material-icons left">person</i>
+					</a>
+				</li>
+				<li>
+					<a href="/jukebox">
+						Jukebox
+						<i class="material-icons left">queue_music</i>
+					</a>
+				</li>
+				<li>
+					<a href="/calendar">
+						<i class="material-icons left">date_range</i> Calendar</a>
+				</li>
 			</ul>
+			<a href="#" data-target="nav-mobile" class="sidenav-trigger button-collapse">
+				<i class="material-icons">menu</i>
+			</a>
 		</div>
+	</nav>
 
-		<a href="javascript:void(0);" class="sliding-panel__close">Close</a>
-	</div>
-	<!-- End Sliding Panel -->
-    <!-- JS Global Compulsory -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components//bootstrap/dist/js/bootstrap.min.js"></script>
-    
-       <!-- JS Implementing Plugins -->
-    <script src="assets/plugins/back-to-top.js"></script>
-    <script src="assets/plugins/smoothScroll.js"></script>
-    
-    <script src="bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
-    <script src="bower_components/moment/min/moment.min.js"></script>
+	<div ng-include src="'app/components/common/header/Header.html'"></div>
+	<div class="main-view" ui-view></div>
+	<div ng-include src="'app/components/common/footer/Footer.html'"></div>
 
-    <script src="assets/plugins/sliding-panel/jquery.sliding-panel.js"></script>
+	<!--  Scripts-->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components//bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script src="assets/js/app.js"></script>
+	<script src="assets/js/materialize.min.js"></script>
+	<script src="assets/js/custom.js"></script>
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
+	<script src="bower_components/moment/min/moment.min.js"></script>
 
-    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+
+	<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
 	<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-	
-		<!-- Angular Material requires Angular.js Libraries -->
-	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
-	<script src="bower_components/angular-messages/angular-messages.min.js"></script>
-	<!-- Angular Material Library -->
-	<script src="bower_components/angular-material/angular-material.min.js"></script>
 
-    <script src="weekendcinema.min.js"></script>
 
-    <script type="text/javascript">
-		jQuery(document).ready(function() {
-			App.init();
-		});
-	</script>
+
+	<script src="weekendcinema.min.js"></script>
+
 </body>
 
 </html>

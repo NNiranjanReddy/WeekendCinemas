@@ -1,54 +1,36 @@
 <spinner ng-show="isLoading"></spinner>
 <div class="container" ng-show="!isLoading">
-	<div class="row">
-		<div class="col-md-9">
-			<div class="card">  
-
-			                <!-- Indicators -->
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" ng-if="article.type == 'News'">
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item" ng-class="{active: $index ==0 }" ng-repeat="img in article.media.img">
-                            <img class="img-fixed-height-350 img-responsive" src="{{img}}">
-                        </div>
-                    </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                    <a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-                </div>							
-				<my-youtube class="youtube-320" code="article.media.video[0]"
-					ng-if="postVideoType.indexOf(article.type)!=-1"></my-youtube>
-            </div>
-            <div class="card-block">
-                    <small class="text-muted"> 
-                            By Admin / Posted on  {{article.lstMntDT | date:'medium'}}
-                          <!--  <time-diff date="article.lstMntDT"></time-diff> ago -->
-                      </small> 
-                    <br>
-                    <h2 class="color-{{article.type}}">{{article.local.ttl}} 
-                    </h2>
-                    <h4 class=""><text text="article.local.text"></text></h4>
-                    <a href="whatsapp://send?text={{url}}" data-action="share/whatsapp/share">
-                        <i class="fa fa-3x fa-whatsapp" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://twitter.com/share?url={{url}}" target="_blank">
-                        
-                        <i class="fa fa-3x fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="http://www.facebook.com/sharer.php?u={{url}}" target="_blank">
-                        <i class="fa fa-3x fa-facebook-official" aria-hidden="true"></i>
-                    </a>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <img class="img-fixed-height-350 img-responsive materialboxed" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
+                <div class="video-container" ng-show="article.type != 'News'">
+                    <my-youtube class="youtube-320" code="article.media.video[0]" ng-if="postVideoType.indexOf(article.type)!=-1"></my-youtube>
                 </div>
-		</div>
-		<div class="col-md-3">
-		 
-		</div>
-	</div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">
+                By Admin / Posted on {{article.lstMntDT | date:'medium'}}
+                <!--  <time-diff date="article.lstMntDT"></time-diff> ago -->
+            </small>
+            <h3 class="color-{{article.type}}">{{article.local.ttl}} </h3>
+            <div class="card-block">
+                <h4 class="">
+                    <text text="article.local.text"></text>
+                </h4>
+                <a href="whatsapp://send?text={{url}}" data-action="share/whatsapp/share">
+                    <i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i>
+                </a>
+                <a href="https://twitter.com/share?url={{url}}" target="_blank">
+
+                    <i class="fa fa-2x fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="http://www.facebook.com/sharer.php?u={{url}}" target="_blank">
+                     <i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

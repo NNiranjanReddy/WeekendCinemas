@@ -2,11 +2,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-3" ng-repeat="cinema in jukeBox">
-			<div class="card padding-v-5">
-				<div class="easy-block-v1">
-					<my-youtube class="" code="cinema.songs.youtubeUrl" options={showInfo:false}></my-youtube>
-					<div class="easy-block-v1-badge bg-color-darkturquoise">{{cinema.songs.releaseDt | date : 'mediumDate'}}</div>
-				</div>
+			<div class="card">
+				<a class="card-image" ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
+					<img class="img-responsive"src="https://i.ytimg.com/vi/{{cinema.songs.youtubeUrl}}/mqdefault.jpg" alt="">
+				</a>
+				<div class="card-tag bg-color-tomato">{{cinema.songs.releaseDt | date : 'mediumDate'}}</div>
+				<!--<my-youtube class="" code="cinema.songs.youtubeUrl" options={showInfo:false}></my-youtube>-->
+				<div class="card-content">{{cinema.name}}</div>
 			</div>
 		</div>
 	</div>

@@ -17,6 +17,8 @@ app.use('/weekendcinema.min.js', express.static(__dirname + '/app-all.js'));
 var port = process.env.PORT || config.http.port;
 var url = config.db.hostName + ':' + config.db.port + '/' + config.db.databaseName;
 
+//var url = config.local.hostName + ':' + config.local.port + '/' + config.local.databaseName;
+
 mongoClient.connect(url, function (err, db) {
   "use strict";
   if (err) throw err;

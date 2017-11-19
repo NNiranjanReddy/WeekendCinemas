@@ -15,9 +15,12 @@ function CinemaDAO(db) {
   this.getCinema = function (id, callback) {
 
     var query = {
-      '_id': id
+      'cinemaId': id
     };
-    cinemaCollection.findOne(query, function (err, cinemaData) {
+    var projection = {
+      "_id": false
+    };
+    cinemaCollection.findOne(query, projection,function (err, cinemaData) {
       if (err) {
         return callback(err, '{}');
       }

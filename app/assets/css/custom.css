@@ -68,10 +68,6 @@
     position: absolute;
 }
 
-.easy-block-v1 .easy-block-v1-badge {
-    top: 0px;
-}
-
 .header-v8 .navbar-brand img{
     max-height: 40px;
 }
@@ -122,8 +118,6 @@
 .fc-event-container a{
     color:none;
 }
-
-
 @media (min-width:960px){
     .md-padding{
         padding:8px;
@@ -133,12 +127,14 @@
 
 @media screen and (min-width: 768px){
 .jumbotron {
+	background-color: #fff;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 }
 @media screen and (min-width: 768px){
 	.jumbotron {
+		background-color: #fff;
 		padding-top: 10px;
 		padding-bottom: 10px;
 	}

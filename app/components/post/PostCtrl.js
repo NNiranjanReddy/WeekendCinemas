@@ -18,6 +18,7 @@ function PostCtrl($scope, $http, $stateParams, $location,constants,$window) {
 			$scope.found = true;
 			$scope.isLoading = false;
 			$scope.url =  $location.absUrl();
+			$('.materialboxed').materialbox();
 		});
 		GET.error(function() {
 			$scope.article = null;

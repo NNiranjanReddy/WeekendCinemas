@@ -1,0 +1,94 @@
+nav ul a {
+    font-size: 1.25rem;
+}
+
+thead > tr {
+    border-bottom: none;
+}
+
+.row {
+    margin-bottom: 0
+}    
+.card{
+    margin: .5rem 0 .5rem 0;
+}
+
+.carousel {
+    height: 100%;
+}
+span.badge {
+    min-width: 3rem;
+    padding: 0 6px;
+    margin: 5px;
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 22px;
+    height: 22px;
+    color: #fff;
+    float: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.card .card-content {
+    padding: 5px;
+    border-radius: 0 0 2px 2px;
+}
+
+.card-img img {
+    width: 120px;
+    height: auto;
+}
+.card .card-tag{
+left: 0px;
+top: 10px;
+z-index: 1;
+color: #fff;
+padding: 4px 10px;
+position: absolute;
+}
+
+i.small {
+    font-size: 1.6rem;
+}
+.tabs {
+    overflow-x: hidden;
+}
+.tabs .tab{
+    color: #000;
+}
+.fc button {
+    padding: 0 .6em;
+    font-size: 1.25em;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    background-color:#1976d2;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.row .col {
+    padding: 0px .25rem;
+}
+@media screen and (max-width: 768px){
+    .container{
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    footer > .container{
+        display: none;
+    }
+    .fc-list-item .material-icons {
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+    .footer-copyright .container{
+        padding: 0px 10px;
+    }
+}
