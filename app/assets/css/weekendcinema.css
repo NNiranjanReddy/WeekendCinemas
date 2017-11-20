@@ -222,7 +222,11 @@ blockquote {
 }
 
 .youtube-320 {
-	height: 320px;
+	height: 300px;
+	width: 100%;
+}
+.y-scroll{
+	overflow-y: scroll;
 }
 
 .youtube-180 {
@@ -235,8 +239,8 @@ blockquote {
 	}
 
 	.img-fixed-height-250-h{
-		max-height: 150px;
-		min-height: 150px;
+		max-height: 200px;
+		min-height: 200px;
 		width: 100%;
 	}
 	.img-fixed-height-350{
@@ -309,6 +313,9 @@ blockquote {
 	background-color: #ff015d
 }
 
+.bgc-darkslategray{
+	background-color: #363739;
+}
 
 .bg-color-TEASER {
 	background-color: #2196f3;

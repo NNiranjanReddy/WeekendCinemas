@@ -1,6 +1,6 @@
 <spinner ng-show="isLoading"></spinner>
-
-<div class="container" ng-show="!isLoading">
+<div ng-if="!isLoading">
+	<div class="container">
 	<div class="row">
 		<div class="col-md-2 col-xs-6">
 			<div class="card">
@@ -74,32 +74,40 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<ul class="tabs tabs-fixed-width tab-demo z-depth-1">
-			<li class="tab active">
-				<a href="#about" class="active">About</a>
-			</li>
-			<li class="tab">
-				<a href="#songs">Songs</a>
-			</li>
-			<li class="tab">
-				<a href="#test4">Trailers</a>
-			</li>
-			<li class="tab">
-				<a href="#test0">Images</a>
-			</li>
-		</ul>
-		<div id="about" class="col s12">
-			<p>About</p>
+</div>
+<div class="container" ng-if="cinema.videos[0]">
+		<div class="row">
+		<span class="badge bg-color-tomato">Review</span>
 		</div>
-		<div id="songs" class="col s12">
-			<div ng-show="cinema.songs.list.length || cinema.songs.releaseDt">
-				<div class="col  m6" ng-show="currentSong">
-					<my-youtube class="youtube-320" code="currentSong"></my-youtube>
+	<div class="row">
+			
+			<div class="col m6">
+				<h4>Story</h4>
+				<h4>Performances</h4>
+				<h4>Director</h4>
+				<h4>Music</h4>
+			</div>	
+			<div class="col m6">
+			<h4>
+					<i class="material-icons">thumb_up</i>
+				</h4>
+				<h4>
+					<i class="material-icons">thumb_down</i>
+				</h4>
 				</div>
+	</div>
+</div>
+	<div class="container" ng-if="cinema.songs.list.length || cinema.songs.releaseDt">
+	<div class="row">
 				<div class="col  m6">
-					<span class="badge bg-color-MUSIC">Songs</span>
-					<a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">All Songs</a>
+						<div class="card">
+					<my-youtube class="youtube-320" code="currentSong"></my-youtube>
+					</div>
+				</div>
+				<div class="col  m6 youtube-320 y-scroll">
+					<a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">
+					<span class="badge bg-color-MUSIC" >All Songs</span>
+				</a>
 					<ol>
 						<li ng-repeat="song in cinema.songs.list">
 							<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
@@ -114,35 +122,6 @@
 						</li>
 					</ol>
 				</div>
-			</div>
-		</div>
-		<div id="test4" class="col s12">
-			<div class="col-md-12">
-				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{autoplay:false,nav:true,dots:false,video:true,responsive:{
-							0:{
-								items:1
-							},
-							500:{
-							items:2
-							}
-								}}">
-					<owl-carousel-item ng-repeat="video in cinema.videos">
-						<my-youtube class="youtube-320" code="video.url"></my-youtube>
-					</owl-carousel-item>
-				</owl-carousel>
-			</div>
-		</div>
-		<div id="test0" class="col s12">
-			<div ng-show="cinema.images.length">
-				<span class="badge bg-color-tomato">Images</span>
-				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{nav:false,dots:true}">
-					<owl-carousel-item ng-repeat="img in cinema.general.photos">
-						<div class="card">
-							<img class="card-img-top img-responsive" src="{{img}}" alt="Card image cap">
-						</div>
-					</owl-carousel-item>
-				</owl-carousel>
-			</div>
-		</div>
 	</div>
+</div>
 </div>

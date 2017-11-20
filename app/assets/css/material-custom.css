@@ -5,7 +5,9 @@ nav ul a {
 thead > tr {
     border-bottom: none;
 }
-
+.container{
+    width:1024px;
+}
 .row {
     margin-bottom: 0
 }    
@@ -19,7 +21,7 @@ thead > tr {
 span.badge {
     min-width: 3rem;
     padding: 0 6px;
-    margin: 5px;
+    margin: 5px 5px 0px 5px; 
     text-align: center;
     font-size: 1.25rem;
     line-height: 22px;
@@ -73,13 +75,17 @@ i.small {
 }
 
 .row .col {
-    padding: 0px .25rem;
+    padding: .25rem;
 }
 @media screen and (max-width: 768px){
+    
     .container{
         width: 100%;
         padding-right: 0;
         padding-left: 0;
+    }
+    .row .col {
+        float: none;
     }
     footer > .container{
         display: none;

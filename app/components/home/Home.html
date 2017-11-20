@@ -1,15 +1,17 @@
 <spinner ng-show="isLoading"></spinner>
-<div ng-show="!isLoading">
+<div ng-if="!isLoading">
 	<div class="container">
 		<div class="row">
-			<span class="badge bg-color-TEASER">Reviews</span>
+			<span class="badge bg-color-tomato">Reviews</span>
 		</div>
 		<div class="row">
 			<div class="col m12 s12">
 				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ 
 					margin:5,
-					autoplay: false,
+					autoplay: true,
 					items:10,
+					autoplayTimeout:3000,
+					autoplayHoverPause:true,
 					dots: false,
 					 nav: false,
 					 responsive:{
@@ -17,7 +19,7 @@
 								items:2
 							},
 							500:{
-								items:8
+								items:7
 							}
 					}
 					}">
@@ -48,42 +50,40 @@
 			</div>
 		</div>
 	</div>
-	<div class="jumbotron">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-						<!-- Wrapper for slides -->
-						<div class="carousel-inner" role="listbox">
-							<div class="item" ng-class="{active: $index == 0 }" ng-repeat="post in news">
-								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-									<img class="img-fixed-height-250-h img-responsive" src="{{post.media.img[0]}}">
-								</a>
-								<div class="carousel-caption">
-									<span>{{post.local.ttl}}</span>
-								</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item" ng-class="{active: $index == 0 }" ng-repeat="post in news">
+							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
+								<img class="img-fixed-height-250-h img-responsive" src="{{post.media.img[0]}}">
+							</a>
+							<div class="carousel-caption">
+								<span>{{post.local.ttl}}</span>
 							</div>
-							<!-- Controls -->
-							<a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
-								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						</div>
+						<!-- Controls -->
+						<a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 
-							</a>
-							<a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
-								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							</a>
-						</div>
+						</a>
+						<a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						</a>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<span class="badge  bg-color-tomato margin-left-0">What is Next ?</span>
-					<div class="row margin-top-10">
-						<div class="chip col-md-2" ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
-							<i class="material-icons small">music_note</i>
-							23/11 
-						</div>
+			</div>
+			<div class="col-md-6">
+				<span class="badge  bg-color-upcoming margin-left-0">What is Next ?</span>
+				<div class="row margin-top-10">
+					<div class="chip col-md-2" ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+						<i class="material-icons small">music_note</i>
+						23/11
 					</div>
-					<a href="/calendar">more events</a>
 				</div>
+				<a href="/calendar">more events</a>
 			</div>
 		</div>
 	</div>
@@ -92,8 +92,8 @@
 			<span class="badge bg-color-TEASER">Trailers/Videos</span>
 		</div>
 		<div class="row">
-			<div class="col-sm-4">
-				<div class="card horizontal" ng-repeat="post in videos.slice(0,5)">
+			<div class="col-sm-6">
+				<div class="card horizontal" ng-repeat="post in videos.slice(0,8)">
 					<div class="card-img">
 						<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</div>
@@ -107,23 +107,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4">
-				<div class="card horizontal" ng-repeat="post in videos.slice(5,10)">
-					<div class="card-img">
-						<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-					</div>
-					<div class="card-content">
-						<h5>
-							<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">{{post.local.ttl}}</a>
-						</h5>
-						<ul class="thumb-info">
-							<li ng-bind="post.lstMntDT| date:'mediumDate'"></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card horizontal" ng-repeat="post in videos.slice(10,15)">
+			<div class="col-sm-6">
+				<div class="card horizontal" ng-repeat="post in videos.slice(8,16)">
 					<div class="card-img">
 						<img src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</div>
