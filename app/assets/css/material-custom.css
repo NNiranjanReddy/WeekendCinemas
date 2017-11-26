@@ -40,12 +40,12 @@ span.badge {
     height: auto;
 }
 .card .card-tag{
-left: 0px;
-top: 10px;
-z-index: 1;
-color: #fff;
-padding: 4px 10px;
-position: absolute;
+    left: 0px;
+    top: 10px;
+    z-index: 1;
+    color: #fff;
+    padding: 4px 10px;
+    position: absolute;
 }
 
 i.small {
@@ -73,10 +73,13 @@ i.small {
 }
 
 .row .col {
-    padding: .25rem;
+    padding:0 .5rem;
+}
+
+.col-md-3 span.badge {
+    margin: 5px 5px 0px 0px;
 }
 @media screen and (max-width: 768px){
-    
     .container{
         width: 100%;
         padding-right: 0;

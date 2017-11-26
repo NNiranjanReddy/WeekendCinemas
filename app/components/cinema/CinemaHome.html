@@ -1,28 +1,15 @@
 <div class="container" ng-show="!isLoading">
-    <!--<div class="row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-8">
-            <form action="">
-                <input type="text" class="form-control" placeholder="Search Cinema ..." list="list" ng-model="searchKey" ng-change="searchCinema()">
-                <datalist id="list">
-                    <option value="{{item.name}}" ng-repeat="item in searchList track by $index"></option>
-                </datalist>
-            </form>
-        </div>
-    </div> -->
     <div class="row">
         <span class="badge  bg-color-darkorange margin-left-5 margin-top-5">Coming Soon</span>
     </div>
     <div class="row">
-        <div class="col s6 m2" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
+        <div class="col m2" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
             <div class="card">
                 <div class="card-image">
                     <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
                         <img class="img-responsive img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="">
                     </a>
                 </div>
-
                 <div class="card-content">
                     <div class="card-tag bg-color-tomato" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
                     <h4 class="ellipsis-text">
@@ -33,7 +20,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s6 m2" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true">
+        <div class="col m2" ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt' : true">
             <div class="card">
                 <div class="card-image">
                     <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
@@ -41,7 +28,7 @@
                     </a>
                 </div>
                 <div class="card-content">
-                    <div class="easy-block-v1-badge rgba-red" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
+                    <div class="card-tag bg-color-tomato" ng-if="cinema.general.releaseDt">{{cinema.general.releaseDt | date : 'mediumDate'}}</div>
                     <h4 class="ellipsis-text">
                         <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
                     </h4>
