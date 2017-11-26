@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <img class="img-fixed-height-350 img-responsive materialboxed" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
+                <img class="img-fixed-height-350 img-responsive" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
                 <div class="video-container" ng-show="article.type != 'News'">
                     <my-youtube class="youtube-320" code="article.media.video[0]" ng-if="postVideoType.indexOf(article.type)!=-1"></my-youtube>
                 </div>

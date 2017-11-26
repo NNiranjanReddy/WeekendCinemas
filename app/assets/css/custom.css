@@ -127,14 +127,14 @@
 
 @media screen and (min-width: 768px){
 .jumbotron {
-	background-color: #fff;
+	background-color: #363739;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 }
 @media screen and (min-width: 768px){
 	.jumbotron {
-		background-color: #fff;
+		background-color: #363739;
 		padding-top: 10px;
 		padding-bottom: 10px;
 	}
