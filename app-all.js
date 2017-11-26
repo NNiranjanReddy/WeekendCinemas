@@ -688,7 +688,7 @@ function JukeBoxCtrl($scope, $http, $stateParams, constants,RestAPI, $window ) {
 }
 
 app.controller('JukeBoxCtrl', ['$scope', '$http', '$stateParams', 'constants', 'RestAPI', '$window', JukeBoxCtrl]);
-function PostCtrl($scope, $http, $stateParams, $location,constants,$window) {
+function PostCtrl($scope, $http, $stateParams, $location,constants,$window,$rootScope) {
 	$scope.found = true;
 	$scope.isLoading = true;
 	if($scope.$parent.posts && $scope.$parent.posts.length>0){
@@ -707,8 +707,11 @@ function PostCtrl($scope, $http, $stateParams, $location,constants,$window) {
 			$scope.article = response ? response : null;
 			$scope.found = true;
 			$scope.isLoading = false;
-			$('.materialboxed').materialbox();
 			$scope.url =  $location.absUrl();
+			$rootScope.pageTitle = response.local.ttl;
+			$rootScope.pageDesc = response.local.text;
+			$rootScope.pageImg = response.type == 'News' ? response.media.img[0]:
+			'https://i.ytimg.com/vi/'+response.media.video[0]+'/mqdefault.jpg';
 		});
 		GET.error(function() {
 			$scope.article = null;
@@ -719,7 +722,7 @@ function PostCtrl($scope, $http, $stateParams, $location,constants,$window) {
 	$window.scrollTo(0, 0);
 }
 
-app.controller('PostCtrl',['$scope','$http', '$stateParams','$location', 'constants','$window',PostCtrl]);
+app.controller('PostCtrl',['$scope','$http', '$stateParams','$location', 'constants','$window','$rootScope',PostCtrl]);
 function PrivacyCtrl($scope, $http) {
 }
 
