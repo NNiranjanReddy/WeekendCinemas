@@ -1,53 +1,51 @@
 <spinner ng-show="isLoading"></spinner>
 <div ng-if="!isLoading">
 	<div class="container">
-	<div class="row">
-		<div class="col-md-2 col-xs-6">
-			<div class="card">
-				<img class="img-fixed-height-250" src="{{cinema.general.posterUrl}}" alt="Card image cap">
+		<div class="row">
+			<div class="col-md-2 col-xs-6">
+				<div class="card">
+					<img class="img-fixed-height-250" src="{{poster}}" alt="Card image cap">
+				</div>
 			</div>
-		</div>
-		<div class="col-md-4 col-xs-6">
-			<div class="padding-left-10">
-				<h3>{{cinema.name}}</h3>
-				<ul>
-					<li ng-if="cinema.lng">Language : {{cinema.lng}}</li>
-					<li ng-if="cinema.general.banner.length">Banner :
-						<and list="cinema.general.banner"></and>
-					</li>
-					<li ng-if="cinema.general.genre.length">Genre :
+			<div class="col-md-4 col-xs-6">
+				<div class="padding-left-10">
+					<h3>{{cinema.name}}</h3>
+					<ul>
+						<li ng-if="cinema.lng">Language : {{cinema.lng}}</li>
+						<li ng-if="cinema.general.banner.length">Banner :
+							<and list="cinema.general.banner"></and>
+						</li>
+						<li ng-if="cinema.general.genre.length">Genre :
+							<and list="cinema.general.genre"></and>
+						</li>
+						<li ng-if="cinema.general.releaseDt">Release : {{ releaseDt ? (releaseDt | date :'yyyy') : releaseYear}}
+						</li>
+						<li ng-if="cinema.general.duration">Duration : {{cinema.general.duration}}
+						</li>
+						<li ng-if="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
+						</li>
+						<li ng-if="cinema.general.rating">Rating : {{cinema.general.rating}}
+							<ul class="list-inline star-vote">
+								<li ng-repeat="number in [1,2,3,4,5]">
+									<i class="material-icons" ng-show="(number-cinema.general.rating)>=1">star_border</i>
+									<i class="material-icons" ng-show="((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)">star_half</i>
+									<i class="material-icons" ng-show="(number-cinema.general.rating)<=0">star</i>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-6 col-xs-12">
+				<div class="bs-callout bs-callout-info">
+					<h4>Synopsis</h4>
+					<p>
+						{{cinema.name}} is a {{ releaseDt | date :'meduimDate'}} Indian Telugu language
 						<and list="cinema.general.genre"></and>
-					</li>
-					<li ng-if="cinema.general.releaseDt">Release : {{cinema.general.releaseDt | date :'mediumDate'}}
-					</li>
-					<li ng-if="cinema.general.duration">Duration : {{cinema.general.duration}}
-					</li>
-					<li ng-if="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
-					</li>
-					<li ng-if="cinema.general.rating">Rating : {{cinema.general.rating}}
-						<ul class="list-inline star-vote">
-							<li ng-repeat="number in [1,2,3,4,5]">
-								<i class="material-icons" ng-show="(number-cinema.general.rating)>=1">star_border</i>
-								<i class="material-icons" ng-show="((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)">star_half</i>
-								<i class="material-icons" ng-show="(number-cinema.general.rating)<=0">star</i>
-							</li>
-						</ul>
-					</li>
-					<!-- <li> Watch trailer here <i class="fa fa-2x fa-youtube-play color-tomato" aria-hidden="true"></i>
-					</li> -->
-				</ul>
-			</div>
-		</div>
-		<div class="col-md-6 col-xs-12">
-			<div class="bs-callout bs-callout-info">
-				<h4>Synopsis</h4>
-				<p>
-					{{cinema.name}} is a {{cinema.general.releaseDt | date :'yyyy'}} Indian Telugu-language
-					<and list="cinema.general.genre"></and>
-					cinema directed by {{director.name}} and produced by {{producer.name}} under the banner of
-					<and list="cinema.general.banner"></and>.
-				</p>
-				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{    autoplay:true,
+						cinema directed by {{director.name}} and produced by {{producer.name}} under the banner of
+						<and list="cinema.general.banner"></and>.
+					</p>
+					<owl-carousel class="owl-carousel carousel owl-theme" data-options="{    autoplay:true,
 					autoplayTimeout:1000,
 					autoplayHoverPause:true,nav:false,dots:false,margin:5,responsive:{
 											0:{
@@ -57,71 +55,71 @@
 											items:5
 											}
 										}}">
-					<owl-carousel-item ng-repeat="item in people">
-						<div class="card">
-							<div class="card-imgage">
-								<img class="img-responsive img-fixed-height-100" src="{{item.img}}" alt="No Image found" ui-sref="celebrity({celebrityName:item.celebrityId})"
-								 href="#/celebrity/{{item.celebrityId}}">
+						<owl-carousel-item ng-repeat="item in people">
+							<div class="card">
+								<div class="card-image">
+									<img class="img-responsive img-fixed-height-100" src="{{item.img}}" alt="No Image found" ui-sref="celebrity({celebrityId:item.celebrityId})"
+									 href="#/celebrity/{{item.celebrityId}}">
+								</div>
+								<div class="card-content">
+									<h4 class="ellipsis-text">
+										<a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}" data-toggle="tooltip" title="{{item.name}}">{{item.name}}</a>
+									</h4>
+								</div>
 							</div>
-							<div class="card-content">
-								<h4 class="ellipsis-text">
-									<a ui-sref="celebrity({celebrityName:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}" data-toggle="tooltip" title="{{item.name}}">{{item.name}}</a>
-								</h4>
-							</div>
-						</div>
-					</owl-carousel-item>
-				</owl-carousel>
+						</owl-carousel-item>
+					</owl-carousel>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="container" ng-if="cinema.videos[0]">
+	<div class="container" ng-if="cinema.videos[0]">
 		<div class="row">
-		<span class="badge bg-color-tomato">Review</span>
+			<span class="badge bg-color-tomato">Review</span>
 		</div>
-	<div class="row">
-			
+		<div class="row">
 			<div class="col m6">
-				<h4>Story</h4>
-				<h4>Performances</h4>
-				<h4>Director</h4>
-				<h4>Music</h4>
-			</div>	
+				<h5>Story</h5>
+				<h5>Screenplay</h5>
+				<h5>Actors</h5>
+				<h5>Director</h5>
+				<h5>Music</h5>
+			</div>
 			<div class="col m6">
-			<h4>
+				<h4>
 					<i class="material-icons">thumb_up</i>
 				</h4>
 				<h4>
 					<i class="material-icons">thumb_down</i>
 				</h4>
-				</div>
+			</div>
+		</div>
 	</div>
-</div>
 	<div class="container" ng-if="cinema.songs.list.length || cinema.songs.releaseDt">
-	<div class="row">
-				<div class="col  m6">
-						<div class="card">
+		<div class="row">
+			<div class="col  m6">
+				<div class="card">
 					<my-youtube class="youtube-320" code="currentSong"></my-youtube>
-					</div>
 				</div>
-				<div class="col  m6 youtube-320 y-scroll">
-					<a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">
-					<span class="badge bg-color-MUSIC" >All Songs</span>
+			</div>
+			<div class="col  m6 youtube-320 scrollbar" id="style-5">
+				<a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">
+					<span class="badge bg-color-MUSIC">All Songs</span>
 				</a>
-					<ol>
-						<li ng-repeat="song in cinema.songs.list">
-							<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
-								<h4 class="color-MUSIC">{{song.name}}</h4>
-							</a>Lyrics :
-							<span n>
-								<and list="song.lyricist"></and>
-							</span> | Singers:
-							<span>
-								<and list="song.singers"></and>
-							</span>
-						</li>
-					</ol>
-				</div>
+				<ol>
+					<li ng-repeat="song in cinema.songs.list">
+						<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
+							<h4 class="color-MUSIC">{{song.name}}</h4>
+						</a>Lyrics :
+						<span n>
+							<and list="song.lyricist"></and>
+						</span> | Singers:
+						<span>
+							<and list="song.singers"></and>
+						</span>
+					</li>
+				</ol>
+			</div>
+		</div>
 	</div>
-</div>
 </div>

@@ -9,6 +9,9 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
+		me.releaseDt = angular.isDate(me.cinema.general.releaseDt) ? me.cinema.general.releaseDt : null;
+		me.releaseYear = me.releaseDt ? null : me.cinema.general.releaseDt;
+		me.poster = me.cinema.general.posterUrl ? me.cinema.general.posterUrl : me.cinema.general.coverPic;
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
 				me.currentSong = me.cinema.songs.youtubeUrl;
@@ -16,9 +19,9 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
 			}
 		}
-		me.currentVideo = me.cinema.videos ? me.cinema.videos.find(function(video){
+		me.currentVideo = me.cinema.videos ? me.cinema.videos.find(function (video) {
 			video.type === 'Trailer';
-		}): null;
+		}) : null;
 		me.director = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
 			return cel.type === 'Director';
 		}) : me.cinema.people.find(function (cel) {

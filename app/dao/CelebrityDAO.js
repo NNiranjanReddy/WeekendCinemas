@@ -7,18 +7,40 @@ function CelebrityDAO(db) {
    */
   if (false === (this instanceof CelebrityDAO)) { return new CelebrityDAO(db); }
 
-  var celebrityCollection = db.collection("celebrity");
+  var celebrityCollection = db.collection("cinema");
 
-  this.getCelebrity = function(id, callback) {
+  this.getCelebrity = function (id, callback) {
     "use strict";
 
     var query = {
-      '_id': id
+      "people":
+      {
+        $elemMatch: {
+          "celebrityId": id
+        }
+
+      }
     };
-    celebrityCollection.findOne(query, function(err, celebrityData) {
-      "use strict";
-      if (err) return callback(err, '{}');
-      callback(err, celebrityData);
+
+    var projection = {
+      "cinemaId": true,
+      "name": true,
+      "general.releaseDt": true,
+      "lang": true,
+      "type": "cinema",
+      "_id": false,
+      "people":true
+    }
+
+    var sort = {
+      'general.releaseDt': -1
+    }
+    celebrityCollection.find(query, projection).sort(sort).toArray(function (err, data) {
+      if (err) {
+        return callback(null, '{}');
+      } else {
+        callback(err, data);
+      }
     });
   }
 

@@ -1,55 +1,78 @@
 <spinner ng-show="isLoading"></spinner>
-<div class="container" ng-if="!isLoading">
-<div class="row">
-        <div class="col-md-2 col-xs-6">
-            <div class="card">
-                <img class="card-img-top img-240" src="http://res.cloudinary.com/dmsupizyd/image/upload/v1493564545/celebrity/samantha/sam.jpg"
-                    alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Samantha Ruth Prabhu</h4>
+<div ng-if="!isLoading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-xs-6">
+                <div class="card">
+                    <img class="card-img-top img-240" src="http://res.cloudinary.com/dmsupizyd/image/upload/v1493564545/celebrity/samantha/sam.jpg"
+                        alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Celebrity Name</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2 col-xs-6">
-            <span class="badge  bg-color-mediumseagreen">Profile</span>
-            <ul>
-                <li>Age : 62 </li>
-                <li>Height : </li>
-                <li>Born : 22 August 1955</li>
-                <li>Spouse : </li>
-                <li>Siblings : </li>
-                <li>Children : </li>
-            </ul>
-        </div>
-        <div class="col-md-8">
-            
+            <div class="col-md-2 col-xs-6">
+                <span class="badge  bg-color-mediumseagreen">Profile</span>
+                <ul>
+                    <li>Age : 62 </li>
+                    <li>Height : </li>
+                    <li>Born : 22 August 1955</li>
+                    <li>Spouse : </li>
+                    <li>Siblings : </li>
+                    <li>Children : </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                No of Cinemas : {{filmography.length}}
+            </div>
         </div>
     </div>
- 
-</div>
-
-<div class="container">
-    <span class="badge bg-color-MUSIC">Filmography Timeline</span>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="container">
+        <span class="badge bg-color-MUSIC">Filmography</span>
+        <div class="row">
+            <div class="col-md-12">
                 <ul class="timeline-v2">
-                        <li class="equal-height-columns" ng-repeat="item in [1,2,3,4,5,6,7,8,9]">
-                            <div class="cbp_tmtime equal-height-column" style="height: 162px;"><span>Sep 17,2017</span> <span>Cinema Name {{item}}</span></div>
-                            <i class="cbp_tmicon rounded-x hidden-xs"></i>
-                            <div class="cbp_tmlabel equal-height-column" style="height: 192px;">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img class="img-responsive" src="assets/ig/profile.jpg" alt="Profile Img">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape.</p>
-                                        <p>Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok choy squash cress potato.</p>
-                                    </div>
-                                </div>
+                    <li class="equal-height-columns" ng-repeat="cinema in filmography">
+                        <div class="cbp_tmtime equal-height-column" style="height: 162px;">
+                            <span>{{cinema.general.releaseDt}}</span>
+                            <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
+                                <span>{{cinema.name}}</span>
+                            </a>
+                        </div>
+                        <i class="cbp_tmicon rounded-x hidden-xs"></i>
+                        <div class="cbp_tmlabel equal-height-column" style="height: 192px;">
+                            <div class="row">
+                                <owl-carousel class="owl-carousel carousel owl-theme" data-options="{    autoplay:true,
+                                        autoplayTimeout:1000,
+                                        autoplayHoverPause:true,nav:false,dots:false,margin:5,responsive:{
+                                                                0:{
+                                                                    items:3
+                                                                },
+                                                                500:{
+                                                                items:7
+                                                                }
+                                                            }}">
+                                    <owl-carousel-item ng-repeat="item in cinema.people">
+                                        <div class="card">
+                                            <div class="card-image">
+                                                <img class="img-responsive img-fixed-height-100" src="{{item.img}}" alt="No Image found" ui-sref="celebrity({celebrityId:item.celebrityId})"
+                                                    href="#/celebrity/{{item.celebrityId}}">
+                                            </div>
+                                            <div class="card-content">
+                                                <h4 class="ellipsis-text">
+                                                    <a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}" data-toggle="tooltip" title="{{item.name}}">{{item.name}}</a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </owl-carousel-item>
+                                </owl-carousel>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    
 </div>

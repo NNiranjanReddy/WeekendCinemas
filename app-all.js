@@ -30,7 +30,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     templateUrl: 'app/components/celebrity/CelebrityHome.html',
     controller: 'CelebrityHomeCtrl'
   }).state('celebrity', {
-    url: '/celebrity/:celebrityName',
+    url: '/celebrity/:celebrityId',
     templateUrl: 'app/components/celebrity/Celebrity.html',
     controller: 'CelebrityCtrl'
   }).state('calendar', {
@@ -74,7 +74,8 @@ app.constant('constants', {
     searchCinema: '/v1/searchCinema/',
     upcomingCinema: '/v1/upcomingCinemas',
     jukeBox: '/v1/jukeBox',
-    post: '/v1/post/'
+    post: '/v1/post/',
+    getCelebrity: '/v1/celebrity/'
   },
   postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song']
 });
@@ -212,12 +213,18 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
 app.controller('CalendarHomeCtrl', ['$rootScope', '$scope', 'RestAPI', 'constants', '$compile', 'uiCalendarConfig',
   'DateUtil', CalendarHomeCtrl]);
 
-app.controller('CelebrityCtrl',['$scope',CelebrityCtrl]);
 
-function CelebrityCtrl($scope) 
-{ 
-	$scope.message = "Welcome to Celebrity page";
+function CelebrityCtrl($scope, RestAPI,$stateParams,constants) {
+	var me = $scope;
+	me.isLoading = true;
+	me.celebrityId = $stateParams.celebrityId;
+	RestAPI.get(constants.endpoints.getCelebrity+me.celebrityId).success(function (response) {
+		me.filmography = response;
+		me.isLoading = false;
+	});
+
 }
+app.controller('CelebrityCtrl', ['$scope', 'RestAPI','$stateParams','constants', CelebrityCtrl]);
 
 function CelebrityHomeCtrl($scope, $http) {
 }
@@ -236,6 +243,9 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
+		me.releaseDt = angular.isDate(me.cinema.general.releaseDt) ? me.cinema.general.releaseDt : null;
+		me.releaseYear = me.releaseDt ? null : me.cinema.general.releaseDt;
+		me.poster = me.cinema.general.posterUrl ? me.cinema.general.posterUrl : me.cinema.general.coverPic;
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
 				me.currentSong = me.cinema.songs.youtubeUrl;
@@ -243,9 +253,9 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
 			}
 		}
-		me.currentVideo = me.cinema.videos ? me.cinema.videos.find(function(video){
+		me.currentVideo = me.cinema.videos ? me.cinema.videos.find(function (video) {
 			video.type === 'Trailer';
-		}): null;
+		}) : null;
 		me.director = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
 			return cel.type === 'Director';
 		}) : me.cinema.people.find(function (cel) {
@@ -593,6 +603,36 @@ app.service('DateUtil',[function(){
 		this.toYYYY_MM_DD = function(date){
 			return date.toISOString().split('T')[0];
 		};
+		this.getMonth = function (month) {
+			var monthStr = ""
+			switch (month) {
+				case 0: monthStr = 'Jan';
+					break;
+				case 1: monthStr = 'Feb';
+					break;
+				case 2: monthStr = 'Mar';
+					break;
+				case 3: monthStr = 'Apr';
+					break;
+				case 4: monthStr = 'May';
+					break;
+				case 5: monthStr = 'Jun';
+					break;
+				case 6: monthStr = 'Jul';
+					break;
+				case 7: monthStr = 'Aug';
+					break;
+				case 8: monthStr = 'Sep';
+					break;
+				case 9: monthStr = 'Oct';
+					break;
+				case 10: monthStr = 'Nov';
+					break;
+				case 11: monthStr = 'Dec';
+					break;
+			}
+			return monthStr;
+		};
 	};
 	return new DateUtil();
 }]);
@@ -625,42 +665,6 @@ app.service('StringUtil', [function () {
 		this.generateId = function (str) {
 			return angular.lowercase(str.split(' ').join('-'));
 		}
-	};
-	return new StringUtil();
-}]);
-
-app.service('DateUtil', [function () {
-	var StringUtil = function () {
-		this.getMonth = function (month) {
-			var monthStr = ""
-			switch (month) {
-				case 0: monthStr = 'Jan';
-					break;
-				case 1: monthStr = 'Feb';
-					break;
-				case 2: monthStr = 'Mar';
-					break;
-				case 3: monthStr = 'Apr';
-					break;
-				case 4: monthStr = 'May';
-					break;
-				case 5: monthStr = 'Jun';
-					break;
-				case 6: monthStr = 'Jul';
-					break;
-				case 7: monthStr = 'Aug';
-					break;
-				case 8: monthStr = 'Sep';
-					break;
-				case 9: monthStr = 'Oct';
-					break;
-				case 10: monthStr = 'Nov';
-					break;
-				case 11: monthStr = 'Dec';
-					break;
-			}
-			return monthStr;
-		};
 	};
 	return new StringUtil();
 }]);

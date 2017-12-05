@@ -13,6 +13,11 @@ thead > tr {
     margin: .5rem 0 .5rem 0;
 }
 
+.card-panel {
+    padding: 5px;
+    margin: 0px;
+}
+
 .carousel {
     height: 100%;
 }

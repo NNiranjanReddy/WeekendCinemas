@@ -30,7 +30,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     templateUrl: 'app/components/celebrity/CelebrityHome.html',
     controller: 'CelebrityHomeCtrl'
   }).state('celebrity', {
-    url: '/celebrity/:celebrityName',
+    url: '/celebrity/:celebrityId',
     templateUrl: 'app/components/celebrity/Celebrity.html',
     controller: 'CelebrityCtrl'
   }).state('calendar', {
@@ -74,7 +74,8 @@ app.constant('constants', {
     searchCinema: '/v1/searchCinema/',
     upcomingCinema: '/v1/upcomingCinemas',
     jukeBox: '/v1/jukeBox',
-    post: '/v1/post/'
+    post: '/v1/post/',
+    getCelebrity: '/v1/celebrity/'
   },
   postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song']
 });
