@@ -84,6 +84,8 @@ function AdminCtrl($scope, $rootScope, constants, StringUtil, RestAPI) {
     scope.media = {};
     scope.media.video = [];
     scope.media.img = [];
+    $('.modal').modal();
+    $('select').select();
     scope.createId = function (name) {
         return name ? StringUtil.generateId(name) : name;
     }
@@ -282,10 +284,13 @@ app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'con
 function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
     var me = $scope;
     me.searchList = [];
+    me.isLoading = true;
     RestAPI.get(constants.endpoints.upcomingCinema).success(function(response) {
         me.upcomingCinemas = response.data ? response.data : [];
+        me.isLoading = false;
     }).error(function() {
         me.upcomingCinemas = [];
+        me.isLoading = false;
     });
     me.searchCinema = function(){
         RestAPI.get(constants.endpoints.searchCinema+me.searchKey).success(function(response){
@@ -327,10 +332,10 @@ function And($sce) {
               copy.forEach(function (element) {
                 copyName.push(element.name);
               }, this);
-              elm.text(copyName.join().concat(" and ").concat(lastElm.name));
+              elm.text(copyName.join(', ').concat(" and ").concat(lastElm.name));
             }
             else {
-              elm.text(copy.join().concat(" and ").concat(lastElm));
+              elm.text(copy.join(', ').concat(" and ").concat(lastElm));
             }
 
           }
@@ -724,11 +729,13 @@ app.controller('HomeCtrl', ['$scope', '$rootScope', 'RestAPI', '$window',
 
 function JukeBoxCtrl($scope, $http, $stateParams, constants,RestAPI, $window ) {
 	var me = $scope;
-
+	me.isLoading = true;
 	RestAPI.get(constants.endpoints.jukeBox).success(function (response) {
 		me.jukeBox  = response;
+		me.isLoading = false;
 	}).error(function () {
 		me.jukeBox = null;
+		me.isLoading = false;
 	});
 
 	$window.scrollTo(0, 0);

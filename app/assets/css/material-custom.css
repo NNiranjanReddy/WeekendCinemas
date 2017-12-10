@@ -1,23 +1,56 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
 nav ul a {
     font-size: 1.25rem;
 }
 
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    width: 88%;
+}
+nav ul a {
+    font-size: 1rem;
+}
+nav .brand-logo {
+    font-size: 1rem;
+}
+nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 thead > tr {
     border-bottom: none;
 }
 
 .row {
     margin-bottom: 0
-}    
+} 
+.container{
+    width: 88%;
+}   
 .card{
     margin: .5rem 0 .5rem 0;
 }
-
 .card-panel {
     padding: 5px;
     margin: 0px;
 }
 
+h5 {
+    font-size: 1rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
 .carousel {
     height: 100%;
 }
@@ -26,7 +59,7 @@ span.badge {
     padding: 0 6px;
     margin: 5px 5px 0px 5px; 
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 22px;
     height: 22px;
     color: #fff;
@@ -41,8 +74,7 @@ span.badge {
 }
 
 .card-img img {
-    width: 120px;
-    height: auto;
+    height: 100%;
 }
 .card .card-tag{
     left: 0px;
@@ -85,6 +117,11 @@ i.small {
     margin: 5px 5px 0px 0px;
 }
 @media screen and (max-width: 768px){
+    nav .nav-wrapper {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
     .container{
         width: 100%;
         padding-right: 0;

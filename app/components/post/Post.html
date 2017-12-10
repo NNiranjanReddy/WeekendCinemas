@@ -1,7 +1,7 @@
 <spinner ng-show="isLoading"></spinner>
 <div class="container" ng-if="!isLoading">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col m6">
             <div class="card">
                 <img class="img-fixed-height-350 img-responsive" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
                 <div class="video-container" ng-show="article.type != 'News'">
@@ -10,16 +10,16 @@
             </div>
 
         </div>
-        <div class="col-md-6">
+        <div class="col m6">
             <small class="text-muted">
                 By Admin / Posted on {{article.lstMntDT | date:'medium'}}
                 <!--  <time-diff date="article.lstMntDT"></time-diff> ago -->
             </small>
-            <h3 class="color-{{article.type}}">{{article.local.ttl}} </h3>
+            <h4 class="color-{{article.type}}">{{article.local.ttl}} </h4>
             <div class="card-block">
-                <h4 class="">
+                <h5 class="">
                     <text text="article.local.text"></text>
-                </h4>
+                </h5>
                 <a href="whatsapp://send?text={{url}}" data-action="share/whatsapp/share">
                     <i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i>
                 </a>

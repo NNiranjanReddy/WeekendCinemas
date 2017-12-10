@@ -5,9 +5,7 @@ var CelebrityController = require(__dirname + '/app/controller/CelebrityControll
 module.exports = function (app, db, express, path) {
 
   var cinemaController = new CinemaController(db);
-
   var postController = new PostController(db);
-
   var celebrityController = new CelebrityController(db);
 
   app.use(function (req, res, next) {

@@ -16,10 +16,10 @@ function And($sce) {
               copy.forEach(function (element) {
                 copyName.push(element.name);
               }, this);
-              elm.text(copyName.join().concat(" and ").concat(lastElm.name));
+              elm.text(copyName.join(', ').concat(" and ").concat(lastElm.name));
             }
             else {
-              elm.text(copy.join().concat(" and ").concat(lastElm));
+              elm.text(copy.join(', ').concat(" and ").concat(lastElm));
             }
 
           }

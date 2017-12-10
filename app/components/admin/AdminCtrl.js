@@ -3,6 +3,8 @@ function AdminCtrl($scope, $rootScope, constants, StringUtil, RestAPI) {
     scope.media = {};
     scope.media.video = [];
     scope.media.img = [];
+    $('.modal').modal();
+    $('select').select();
     scope.createId = function (name) {
         return name ? StringUtil.generateId(name) : name;
     }
