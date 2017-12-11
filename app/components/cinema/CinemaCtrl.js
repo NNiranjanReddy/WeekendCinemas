@@ -1,4 +1,4 @@
-function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
+function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) {
 	me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
@@ -7,11 +7,15 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	me.setCurrentSong = function (val) {
 		me.currentSong = val;
 	};
+	me.getName = function(id){
+		return StringUtil.generateName(id);
+	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
-		me.releaseDt = angular.isDate(me.cinema.general.releaseDt) ? me.cinema.general.releaseDt : null;
-		me.releaseYear = me.releaseDt ? null : me.cinema.general.releaseDt;
-		me.poster = me.cinema.general.posterUrl ? me.cinema.general.posterUrl : me.cinema.general.coverPic;
+		me.banners = [];
+		me.cinema.general.banner.forEach(function(element) {
+			me.banners.push(me.getName(element.bannerId));
+		});
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
 				me.currentSong = me.cinema.songs.youtubeUrl;
@@ -42,5 +46,5 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 

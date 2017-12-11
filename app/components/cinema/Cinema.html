@@ -4,7 +4,8 @@
 		<div class="row">
 			<div class="col m2 col s12">
 				<div class="card">
-					<img class="img-fixed-height-250" src="{{poster}}" alt="Card image cap">
+					<img class="img-fixed-height-250" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-profile.jpg"
+					 alt="">
 				</div>
 			</div>
 			<div class="col m4 col s12">
@@ -12,8 +13,8 @@
 					<h4>{{cinema.name}}</h4>
 					<ul>
 						<li ng-if="cinema.lng">Language : {{cinema.lng}}</li>
-						<li ng-if="cinema.general.banner.length">Banner :
-							<and list="cinema.general.banner"></and>
+						<li ng-if="banners.length">Banner :
+							<and list="banners"></and>
 						</li>
 						<li ng-if="cinema.general.genre.length">Genre :
 							<and list="cinema.general.genre"></and>
@@ -43,7 +44,7 @@
 						{{cinema.name}} is a {{ cinema.general.releaseDt | date :'yyyy'}} Indian Telugu language
 						<and list="cinema.general.genre"></and>
 						cinema directed by {{director.name}} and produced by {{producer.name}} under the banner of
-						<and list="cinema.general.banner"></and>.
+						<and list="banners"></and>.
 					</p>
 					<owl-carousel class="owl-carousel carousel owl-theme" data-options="{    autoplay:true,
 					autoplayTimeout:1000,
@@ -58,12 +59,14 @@
 						<owl-carousel-item ng-repeat="item in people">
 							<div class="card">
 								<div class="card-image">
-									<img class="img-responsive img-fixed-height-100" src="{{item.img}}" alt="No Image found" ui-sref="celebrity({celebrityId:item.celebrityId})"
-									 href="#/celebrity/{{item.celebrityId}}">
+									<a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}">
+										<img class="img-responsive img-fixed-height-100" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/celebrity/{{item.celebrityId}}-profile.jpg"
+										 alt="" ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}">
+									</a>
 								</div>
 								<div class="card-content">
 									<h5 class="ellipsis-text">
-										<a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}" data-toggle="tooltip" title="{{item.name}}">{{item.name}}</a>
+										<a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}" data-toggle="tooltip" title="{{item.name}}">{{getName(item.celebrityId)}}</a>
 									</h5>
 								</div>
 							</div>

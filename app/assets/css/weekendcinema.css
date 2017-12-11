@@ -57,6 +57,9 @@ hr {
 .container{
 	padding: 0 5px;
 }
+.list-inline>li {
+	display: inline-block;
+}
 .margin-top-5{
 	margin-top: 5px;
 }

@@ -216,17 +216,22 @@ app.controller('CalendarHomeCtrl', ['$rootScope', '$scope', 'RestAPI', 'constant
   'DateUtil', CalendarHomeCtrl]);
 
 
-function CelebrityCtrl($scope, RestAPI,$stateParams,constants) {
+function CelebrityCtrl($scope, RestAPI,$stateParams,constants,StringUtil) {
 	var me = $scope;
 	me.isLoading = true;
 	me.celebrityId = $stateParams.celebrityId;
+	
+	me.getName = function(id){
+		return StringUtil.generateName(id);
+	}
+	me.celebrityName = me.getName (me.celebrityId );
 	RestAPI.get(constants.endpoints.getCelebrity+me.celebrityId).success(function (response) {
 		me.filmography = response;
 		me.isLoading = false;
 	});
 
 }
-app.controller('CelebrityCtrl', ['$scope', 'RestAPI','$stateParams','constants', CelebrityCtrl]);
+app.controller('CelebrityCtrl', ['$scope', 'RestAPI','$stateParams','constants','StringUtil', CelebrityCtrl]);
 
 function CelebrityHomeCtrl($scope, $http) {
 }
@@ -234,7 +239,7 @@ function CelebrityHomeCtrl($scope, $http) {
 app.controller('CelebrityHomeCtrl', [ '$scope', '$http',CelebrityHomeCtrl ]);
 
 
-function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
+function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) {
 	me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
@@ -243,11 +248,15 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	me.setCurrentSong = function (val) {
 		me.currentSong = val;
 	};
+	me.getName = function(id){
+		return StringUtil.generateName(id);
+	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
-		me.releaseDt = angular.isDate(me.cinema.general.releaseDt) ? me.cinema.general.releaseDt : null;
-		me.releaseYear = me.releaseDt ? null : me.cinema.general.releaseDt;
-		me.poster = me.cinema.general.posterUrl ? me.cinema.general.posterUrl : me.cinema.general.coverPic;
+		me.banners = [];
+		me.cinema.general.banner.forEach(function(element) {
+			me.banners.push(me.getName(element.bannerId));
+		});
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
 				me.currentSong = me.cinema.songs.youtubeUrl;
@@ -278,7 +287,7 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants) {
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 
 
 function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
@@ -669,6 +678,12 @@ app.service('StringUtil', [function () {
 	var StringUtil = function () {
 		this.generateId = function (str) {
 			return angular.lowercase(str.split(' ').join('-'));
+		},
+		this.capitalize = function(str) {
+			return str.charAt(0).toUpperCase() + str.slice(1);
+		},
+		this.generateName = function(str){
+			return this.capitalize(str.replace("-", " "));
 		}
 	};
 	return new StringUtil();
