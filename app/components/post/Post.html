@@ -1,37 +1,44 @@
 <spinner ng-show="isLoading"></spinner>
-<div class="container" ng-if="!isLoading">
-    <div class="row">
-        <div class="col m6">
-            <div class="card">
-                <img class="img-fixed-height-350 img-responsive" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
-                <div class="video-container" ng-show="article.type != 'News'">
-                    <my-youtube class="youtube-320" code="article.media.video[0]" ng-if="postVideoType.indexOf(article.type)!=-1"></my-youtube>
+<div ng-if="!isLoading">
+    <div class="container">
+        <div class="row">
+            <div class="col m6">
+                <div class="card">
+                    <img class="img-fixed-height-350 img-responsive" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
+                    <div class="video-container" ng-show="article.type != 'News'">
+                        <my-youtube class="youtube-320" code="article.media.video[0]" ng-if="postVideoType.indexOf(article.type)!=-1"></my-youtube>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col m6">
+                <small class="text-muted">
+                    By Admin / Posted on {{article.lstMntDT | date:'medium'}}
+                    <!--  <time-diff date="article.lstMntDT"></time-diff> ago -->
+                </small>
+                <h4 class="color-{{article.type}}">{{article.local.ttl}} </h4>
+                <div class="card-block">
+                    <h5 class="">
+                        <text text="article.local.text"></text>
+                    </h5>
+                    <a href="whatsapp://send?text={{url}}" data-action="share/whatsapp/share">
+                        <i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://twitter.com/share?url={{url}}" target="_blank">
+
+                        <i class="fa fa-2x fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="http://www.facebook.com/sharer.php?u={{url}}" target="_blank">
+                        <i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
-
-        </div>
-        <div class="col m6">
-            <small class="text-muted">
-                By Admin / Posted on {{article.lstMntDT | date:'medium'}}
-                <!--  <time-diff date="article.lstMntDT"></time-diff> ago -->
-            </small>
-            <h4 class="color-{{article.type}}">{{article.local.ttl}} </h4>
-            <div class="card-block">
-                <h5 class="">
-                    <text text="article.local.text"></text>
-                </h5>
-                <a href="whatsapp://send?text={{url}}" data-action="share/whatsapp/share">
-                    <i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i>
-                </a>
-                <a href="https://twitter.com/share?url={{url}}" target="_blank">
-
-                    <i class="fa fa-2x fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="http://www.facebook.com/sharer.php?u={{url}}" target="_blank">
-                     <i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i>
-                </a>
+            <div ng-if="fbComments">
+                    <div class="fb-comments">
+                        <fb-comments page-href="{{fbComments}}" numposts="5" colorscheme="light" width="100%"></fb-comments>
+                    </div>
             </div>
         </div>
     </div>
-    
+
 </div>

@@ -239,12 +239,13 @@ function CelebrityHomeCtrl($scope, $http) {
 app.controller('CelebrityHomeCtrl', [ '$scope', '$http',CelebrityHomeCtrl ]);
 
 
-function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) {
-	me = $scope;
+function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,StringUtil) {
+	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
 	me.currentSong = null;
 	me.found = true;
+	me.fbLikes =$location.absUrl();
 	me.setCurrentSong = function (val) {
 		me.currentSong = val;
 	};
@@ -254,9 +255,11 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) 
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
 		me.banners = [];
-		me.cinema.general.banner.forEach(function(element) {
-			me.banners.push(me.getName(element.bannerId));
-		});
+		if(me.cinema.general.banner){
+			me.cinema.general.banner.forEach(function(element) {
+				me.banners.push(me.getName(element.bannerId));
+			});
+		}
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
 				me.currentSong = me.cinema.songs.youtubeUrl;
@@ -279,7 +282,6 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) 
 			return cel.type === 'Producer';
 		});
 		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
-		$('.tabs').tabs();
 		me.isLoading = false;
 	}).error(function () {
 		me.cinema = null;
@@ -287,7 +289,7 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) 
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 
 
 function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
@@ -405,6 +407,57 @@ app.directive("owlCarousel", function () {
     }
   };
 }]);
+
+
+app.directive('fbComments', function() {
+    function createHTML(href, numposts, colorscheme, width) {
+      return '<div class="fb-comments" ' +
+        'data-href="' + href + '" ' +
+        'data-numposts="' + numposts + '" ' +
+        'data-colorsheme="' + colorscheme + '" ' +
+        'data-width="' + width + '">' +
+        '</div>';
+    }
+    return {
+      restrict: 'E',
+      scope: {},
+      link: function postLink(scope, elem, attrs) {
+        attrs.$observe('pageHref', function(newValue) {
+          var href = newValue;
+          var numposts = attrs.numposts || 5;
+          var colorscheme = attrs.colorscheme || 'light';
+          var width = attrs.width || '100%';
+          elem.html(createHTML(href, numposts, colorscheme, width));
+        });
+      }
+    };
+  });
+
+
+  
+app.directive('fbLikes', function() {
+  function createHTML(href) {
+    return  '<div class="fb-like"'+ 
+    'data-href="' + href + '" ' +
+    'data-layout="button_count"' +
+    'data-action="like" data-size="small"'+
+    'data-show-faces="true"'+
+    'data-share="true">'+
+    '</div>';
+  }
+  return {
+    restrict: 'E',
+    scope: {},
+    link: function postLink(scope, elem, attrs) {
+      attrs.$observe('pageHref', function(newValue) {
+        var href = newValue;
+        elem.html(createHTML(href));
+      });
+    }
+  };
+});
+
+
 
 app.directive('spinner', [function() {
     return {
@@ -680,10 +733,14 @@ app.service('StringUtil', [function () {
 			return angular.lowercase(str.split(' ').join('-'));
 		},
 		this.capitalize = function(str) {
-			return str.charAt(0).toUpperCase() + str.slice(1);
+			var arr = [];
+			str.split('-').forEach(function(element) {
+				arr.push((element.charAt(0).toUpperCase()+element.slice(1)));
+			});
+			return arr.join(' ');
 		},
 		this.generateName = function(str){
-			return this.capitalize(str.replace("-", " "));
+			return this.capitalize(str);
 		}
 	};
 	return new StringUtil();
@@ -757,41 +814,35 @@ function JukeBoxCtrl($scope, $http, $stateParams, constants,RestAPI, $window ) {
 }
 
 app.controller('JukeBoxCtrl', ['$scope', '$http', '$stateParams', 'constants', 'RestAPI', '$window', JukeBoxCtrl]);
-function PostCtrl($scope, $http, $stateParams, $location,constants,$window,$rootScope) {
-	$scope.found = true;
-	$scope.isLoading = true;
-	if($scope.$parent.posts && $scope.$parent.posts.length>0){
-		$scope.$parent.posts.forEach(function (item, index) {
-			if(item._id === $stateParams.postName){
-				$scope.article = item;
-				$scope.isLoading = false;
-			}
-		});
-	}else{
-		var GET = $http({
-			method : 'GET',
-			url : constants.api.url + '/post/' + $stateParams.postName
-		});	
-		GET.success(function(response) {
-			$scope.article = response ? response : null;
-			$scope.found = true;
-			$scope.isLoading = false;
-			$scope.url =  $location.absUrl();
-			$rootScope.pageTitle = response.local.ttl;
-			$rootScope.pageDesc = response.local.text;
-			$rootScope.pageImg = response.type == 'News' ? response.media.img[0]:
-			'https://i.ytimg.com/vi/'+response.media.video[0]+'/mqdefault.jpg';
-		});
-		GET.error(function() {
-			$scope.article = null;
-			$scope.found = false;
-			$scope.isLoading = false;
-		});
-	}
+function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $rootScope) {
+	var me = $scope;
+	me.found = true;
+	me.isLoading = true;
+	me.fbComments =$location.absUrl();
+	var GET = $http({
+		method: 'GET',
+		url: constants.api.url + '/post/' + $stateParams.postName
+	});
+	GET.success(function (response) {
+		me.article = response ? response : null;
+		me.found = true;
+		me.isLoading = false;
+		me.url = $location.absUrl();
+		$rootScope.pageTitle = response.local.ttl;
+		$rootScope.pageDesc = response.local.text;
+		$rootScope.pageImg = response.type == 'News' ? response.media.img[0] :
+			'https://i.ytimg.com/vi/' + response.media.video[0] + '/mqdefault.jpg';
+	});
+	GET.error(function () {
+		me.article = null;
+		me.found = false;
+		me.isLoading = false;
+	});
+
 	$window.scrollTo(0, 0);
 }
 
-app.controller('PostCtrl',['$scope','$http', '$stateParams','$location', 'constants','$window','$rootScope',PostCtrl]);
+app.controller('PostCtrl', ['$scope', '$http', '$stateParams', '$location', 'constants', '$window', '$rootScope', PostCtrl]);
 function PrivacyCtrl($scope, $http) {
 }
 

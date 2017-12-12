@@ -36,7 +36,7 @@
                 <ul class="timeline-v2">
                     <li class="equal-height-columns" ng-repeat="cinema in filmography">
                         <div class="cbp_tmtime equal-height-column" style="height: 162px;">
-                            <span>{{cinema.general.releaseDt|date:'mediumDate'}}</span>
+                            <span>{{ (angular.isDate(cinema.general.releaseDt) ? (cinema.general.releaseDt|date:'mediumDate'):cinema.general.releaseDt) }}</span>
                             <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
                                 <span>{{cinema.name}}</span>
                             </a>

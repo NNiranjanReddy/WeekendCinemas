@@ -4,10 +4,14 @@ app.service('StringUtil', [function () {
 			return angular.lowercase(str.split(' ').join('-'));
 		},
 		this.capitalize = function(str) {
-			return str.charAt(0).toUpperCase() + str.slice(1);
+			var arr = [];
+			str.split('-').forEach(function(element) {
+				arr.push((element.charAt(0).toUpperCase()+element.slice(1)));
+			});
+			return arr.join(' ');
 		},
 		this.generateName = function(str){
-			return this.capitalize(str.replace("-", " "));
+			return this.capitalize(str);
 		}
 	};
 	return new StringUtil();

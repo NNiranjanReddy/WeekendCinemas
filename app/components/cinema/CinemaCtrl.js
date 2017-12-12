@@ -1,9 +1,10 @@
-function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) {
-	me = $scope;
+function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,StringUtil) {
+	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
 	me.currentSong = null;
 	me.found = true;
+	me.fbLikes =$location.absUrl();
 	me.setCurrentSong = function (val) {
 		me.currentSong = val;
 	};
@@ -13,9 +14,11 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) 
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
 		me.banners = [];
-		me.cinema.general.banner.forEach(function(element) {
-			me.banners.push(me.getName(element.bannerId));
-		});
+		if(me.cinema.general.banner){
+			me.cinema.general.banner.forEach(function(element) {
+				me.banners.push(me.getName(element.bannerId));
+			});
+		}
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
 				me.currentSong = me.cinema.songs.youtubeUrl;
@@ -38,7 +41,6 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) 
 			return cel.type === 'Producer';
 		});
 		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
-		$('.tabs').tabs();
 		me.isLoading = false;
 	}).error(function () {
 		me.cinema = null;
@@ -46,5 +48,5 @@ function CinemaCtrl($scope, $http, $stateParams, RestAPI, constants,StringUtil) 
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 

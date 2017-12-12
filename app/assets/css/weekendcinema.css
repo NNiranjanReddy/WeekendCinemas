@@ -116,6 +116,11 @@ hr {
 	min-height: 100px;
 	width: 100%;
 }
+.img-fixed-height-120{
+	max-height: 120px;
+	min-height: 120px;
+	width: 100%;
+}
 
 .img-fixed-height-350{
 	max-height: 350px;
