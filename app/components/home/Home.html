@@ -35,24 +35,24 @@
 
 				</div>
 				<div class="col m3">
-					<div class="card-panel">
+					<div class="card-panel scrollbar-305" id="style-5">
 						<div class="margin-left-0">
 							<span class="badge bg-color-tomato">Trending</span>
 						</div>
 						<ol>
-							<li ng-repeat="post in videos.slice(0,7)">
+							<li ng-repeat="post in videos.slice(0,10)">
 								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"> {{post.local.ttl}}</a>
 							</li>
 						</ol>
 					</div>
 				</div>
 				<div class="col m3">
-					<div class="card-panel">
-						<div class=" margin-left-0">
+					<div class="card-panel scrollbar-305" id="style-5">
+						<div class="margin-left-0">
 							<span class="badge bg-color-dodgerblue">What is Next ?</span>
 						</div>
 						<ol>
-							<li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'| limitTo :10">
+							<li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'| limitTo :15">
 								<a class="ellipsis-text" ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
 									{{cinema.general.releaseDt|shortDate2}} : {{cinema.name}}
 								</a>

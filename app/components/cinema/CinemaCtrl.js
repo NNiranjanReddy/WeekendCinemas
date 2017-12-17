@@ -41,6 +41,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 			return cel.type === 'Producer';
 		});
 		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
+		$('.tooltipped').tooltip();
 		me.isLoading = false;
 	}).error(function () {
 		me.cinema = null;

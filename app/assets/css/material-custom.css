@@ -57,7 +57,7 @@ h4 {
 span.badge {
     min-width: 3rem;
     padding: 0 6px;
-    margin: 5px 5px 0px 5px; 
+    margin: 0px; 
     text-align: center;
     font-size: 1rem;
     line-height: 22px;
@@ -66,6 +66,15 @@ span.badge {
     float: none;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.card-panel {
+    padding: 5px;
+    margin: 3px 0px;
+}
+.jumbotron .card{
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .card .card-content {
@@ -85,8 +94,23 @@ span.badge {
     position: absolute;
 }
 
+.card .card-tag-small{
+    left: 0px;
+    top: 70px;
+    z-index: 1;
+    color: #fff;
+    position: absolute;
+    padding: 0px;
+}
+.card-tag-small span{
+    font-size: 10px;
+}
 i.small {
     font-size: 1.6rem;
+}
+i.left {
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .tabs {
     overflow-x: hidden;

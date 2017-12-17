@@ -1,5 +1,4 @@
-@import
-	url(https://fonts.googleapis.com/css?family=Work+Sans|Ramabhadra);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans|Ramabhadra);
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak] {
 	display: none !important;
@@ -57,6 +56,9 @@ hr {
 .container{
 	padding: 0 5px;
 }
+.align-right{
+	text-align: right;
+}
 .list-inline>li {
 	display: inline-block;
 }
@@ -79,6 +81,9 @@ hr {
 	margin-left: 5px;
 }
 .margin-top-100{
+	margin-top:100px
+}
+.margin-bottom-5{
 	margin-top:100px
 }
 .padding-v-5{
@@ -104,6 +109,11 @@ hr {
 .img-fixed-height-250{
 	max-height: 250px;
 	min-height: 250px;
+	width: 100%;
+}
+.img-fixed-height-275{
+	max-height: 275px;
+	min-height: 275px;
 	width: 100%;
 }
 .img-fixed-height-250-h{
@@ -631,8 +641,13 @@ blockquote {
 {
 	margin-left: 30px;
 	float: left;
-	height: 300px;
+	height: 320px;
 	width: 65px;
+	overflow-y: scroll;
+}
+
+.scrollbar-305{
+	max-height: 305px;
 	overflow-y: scroll;
 }
 

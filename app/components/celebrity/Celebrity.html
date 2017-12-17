@@ -2,29 +2,23 @@
 <div ng-if="!isLoading">
     <div class="container">
         <div class="row">
-            <div class="col m2 col s12">
-                <div class="card">
-                    <img class="card-img-top img-240" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/celebrity/{{celebrityId}}-profile.jpg"
-                        alt="">
-                    <div class="card-block">
-                        <h4 class="card-title">{{getName(celebrityId)}}</h4>
-                    </div>
-                </div>
+            <div class="col m5 col s12 align-right">
+                    <h4 class="bg-color-mediumseagreen">{{getName(celebrityId)}}</h4>
+                    <ul>
+                        
+                        <li>Height : 5.10</li>
+                        <li>Born : 22 August 1955</li>
+                        <li>Age : 62 </li>
+                    </ul>
             </div>
-            <div class="col m2 col s12">
-                <span class="badge  bg-color-mediumseagreen">Profile</span>
-                <ul>
-                    <li>Age : 62 </li>
-                    <li>Height : </li>
-                    <li>Born : 22 August 1955</li>
-                    <li>Spouse : </li>
-                    <li>Siblings : </li>
-                    <li>Children : </li>
-                </ul>
+            <div class="col m2 s12">
+                    <div class="card img-fixed-height-250">
+                            <img class="img-fixed-height-250" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/celebrity/{{celebrityId}}-profile.jpg"
+                                alt="">
+                          
+                        </div>
             </div>
-            <div class="col m4">
-            </div>
-            <div class="col m4">
+            <div class="col m5">
                 No of Cinemas : {{filmography.length}}
             </div>
         </div>
@@ -36,7 +30,7 @@
                 <ul class="timeline-v2">
                     <li class="equal-height-columns" ng-repeat="cinema in filmography">
                         <div class="cbp_tmtime equal-height-column" style="height: 162px;">
-                            <span>{{ (angular.isDate(cinema.general.releaseDt) ? (cinema.general.releaseDt|date:'mediumDate'):cinema.general.releaseDt) }}</span>
+                            <span>{{ cinema.general.releaseDt|date:'mediumDate' }}</span>
                             <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
                                 <span>{{cinema.name}}</span>
                             </a>

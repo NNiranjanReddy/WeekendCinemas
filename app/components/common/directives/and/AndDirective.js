@@ -2,7 +2,8 @@ function And($sce) {
   return {
     restrict: 'E',
     scope: {
-      list: '='
+      list: '=',
+      type:'='
     },
     replace: true,
     link: function (scope, elm) {
@@ -14,9 +15,9 @@ function And($sce) {
             if (angular.isObject(lastElm)) {
               var copyName = [];
               copy.forEach(function (element) {
-                copyName.push(element.name);
+                copyName.push(element.name||element.celebrityId);
               }, this);
-              elm.text(copyName.join(', ').concat(" and ").concat(lastElm.name));
+              elm.text(copyName.join(', ').concat(" and ").concat(lastElm.name||lastElm.celebrityId));
             }
             else {
               elm.text(copy.join(', ').concat(" and ").concat(lastElm));
@@ -25,7 +26,7 @@ function And($sce) {
           }
           else {
             if (newList && angular.isObject(newList[0])) {
-              elm.text(newList[0].name);
+              elm.text(newList[0].name||newList[0].celebrityId);
             }
             else {
               elm.text(newList.join());

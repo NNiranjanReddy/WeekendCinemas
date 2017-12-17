@@ -282,6 +282,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 			return cel.type === 'Producer';
 		});
 		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
+		$('.tooltipped').tooltip();
 		me.isLoading = false;
 	}).error(function () {
 		me.cinema = null;
@@ -329,7 +330,8 @@ function And($sce) {
   return {
     restrict: 'E',
     scope: {
-      list: '='
+      list: '=',
+      type:'='
     },
     replace: true,
     link: function (scope, elm) {
@@ -341,9 +343,9 @@ function And($sce) {
             if (angular.isObject(lastElm)) {
               var copyName = [];
               copy.forEach(function (element) {
-                copyName.push(element.name);
+                copyName.push(element.name||element.celebrityId);
               }, this);
-              elm.text(copyName.join(', ').concat(" and ").concat(lastElm.name));
+              elm.text(copyName.join(', ').concat(" and ").concat(lastElm.name||lastElm.celebrityId));
             }
             else {
               elm.text(copy.join(', ').concat(" and ").concat(lastElm));
@@ -352,7 +354,7 @@ function And($sce) {
           }
           else {
             if (newList && angular.isObject(newList[0])) {
-              elm.text(newList[0].name);
+              elm.text(newList[0].name||newList[0].celebrityId);
             }
             else {
               elm.text(newList.join());
@@ -408,64 +410,47 @@ app.directive("owlCarousel", function () {
   };
 }]);
 
-
-app.directive('fbComments', function () {
-  function createHTML(href, numposts, colorscheme, width) {
-    return '<div id="fb-root"></div>' +
-    '<script>(function(d, s, id) {' +
-    'var js, fjs = d.getElementsByTagName(s)[0];' +
-    'if (d.getElementById(id)) return;' +
-    'js = d.createElement(s); js.id = id;' +
-    'js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11";' +
-    'fjs.parentNode.insertBefore(js, fjs);' +
-    '}(document, "script", "facebook-jssdk"));</script>'+ 
-      '<div class="fb-comments" ' +
-      'data-href="' + href + '" ' +
-      'data-numposts="' + numposts + '" ' +
-      'data-colorsheme="' + colorscheme + '" ' +
-      'data-width="' + width + '">' +
-      '</div>';
-  }
-  return {
-    restrict: 'E',
-    scope: {},
-    link: function postLink(scope, elem, attrs) {
-      attrs.$observe('pageHref', function (newValue) {
-        var href = newValue;
-        var numposts = attrs.numposts || 5;
-        var colorscheme = attrs.colorscheme || 'light';
-        var width = attrs.width || '100%';
-        elem.html(createHTML(href, numposts, colorscheme, width));
-      });
+app.directive('fbComments', function() {
+    function createHTML(href, numposts, colorscheme, width) {
+      return '<div class="fb-comments" ' +
+        'data-href="' + href + '" ' +
+        'data-numposts="' + numposts + '" ' +
+        'data-colorsheme="' + colorscheme + '" ' +
+        'data-width="' + width + '">' +
+        '</div>';
     }
-  };
-});
+    return {
+      restrict: 'E',
+      scope: {},
+      link: function postLink(scope, elem, attrs) {
+        attrs.$observe('pageHref', function(newValue) {
+          var href = newValue;
+          var numposts = attrs.numposts || 5;
+          var colorscheme = attrs.colorscheme || 'light';
+          var width = attrs.width || '100%';
+          elem.html(createHTML(href, numposts, colorscheme, width));
+        });
+      }
+    };
+  });
 
 
-
-app.directive('fbLikes', function () {
+  
+app.directive('fbLikes', function() {
   function createHTML(href) {
-    return '<div id="fb-root"></div>' +
-    '<script>(function(d, s, id) {' +
-    'var js, fjs = d.getElementsByTagName(s)[0];' +
-    'if (d.getElementById(id)) return;' +
-    'js = d.createElement(s); js.id = id;' +
-    'js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11";' +
-    'fjs.parentNode.insertBefore(js, fjs);' +
-    '}(document, "script", "facebook-jssdk"));</script>'+
-    '<div class="fb-like"' +
-      'data-href="' + href + '" ' +
-      'data-layout="button_count"' +
-      'data-action="like" data-size="small"' +
-      'data-show-faces="true"' +
-      'data-share="true">' +
-      '</div>';
+    return  '<div class="fb-like"'+ 
+    'data-href="' + href + '" ' +
+    'data-layout="button_count"' +
+    'data-action="like" data-size="small"'+
+    'data-show-faces="true"'+
+    'data-share="true">'+
+    '</div>';
   }
   return {
     restrict: 'E',
     scope: {},
     link: function postLink(scope, elem, attrs) {
-      attrs.$observe('pageHref', function (newValue) {
+      attrs.$observe('pageHref', function(newValue) {
         var href = newValue;
         elem.html(createHTML(href));
       });
