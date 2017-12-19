@@ -158,33 +158,28 @@
 	</div>
 	<div class="container" ng-if="cinema.songs.list.length || cinema.songs.releaseDt">
 		<div class="row">
-			<div class="col  m6 s12">
-				<div class="card">
-					<div class="video-container">
-						<my-youtube class="youtube-320" code="currentSong"></my-youtube>
-					</div>
-				</div>
+			<div class="col m6 s12">
+				<my-youtube class="youtube-320" code="currentSong"></my-youtube>
 			</div>
-			<div class="col  m6 s12 youtube-320 scrollbar" id="style-5">
+			<div class="col  m6 s12  scrollbar row-height-320" id="style-5">
 				<a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">
-					Play All <i class="material-icons left">queue_music</i>
+					JUKE BOX
+					<i class="material-icons left">queue_music</i>
 				</a>
-				<div class="col s12 m12" ng-repeat="song in cinema.songs.list">
-					<div class="card-panel grey lighten-5 z-depth-1">
-						<div class="row valign-wrapper">
-							<span>
-								<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
-									<i class="material-icons left">music_video</i>
-								</a>
-							</span>
-							<span class="black-text">
-								<h5 class="color-MUSIC">{{song.name}}</h5>
-								Lyrics :
-								<span ng-repeat="item in song.lyricist">{{getName(item.celebrityId)}} </span>
-								| Singers :
-								<span ng-repeat="item in song.singers">{{getName(item.celebrityId)}} </span>
-							</span>
-						</div>
+				<div class="card-panel grey lighten-5 z-depth-1" ng-repeat="song in cinema.songs.list">
+					<div class="row valign-wrapper">
+						<span>
+							<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
+								<i class="material-icons left">music_video</i>
+							</a>
+						</span>
+						<span class="black-text">
+							<h5 class="color-MUSIC">{{song.name}}</h5>
+							Lyrics :
+							<span ng-repeat="item in song.lyricist">{{getName(item.celebrityId)}} </span>
+							| Singers :
+							<span ng-repeat="item in song.singers">{{getName(item.celebrityId)}} </span>
+						</span>
 					</div>
 				</div>
 			</div>

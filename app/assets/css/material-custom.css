@@ -37,7 +37,7 @@ thead > tr {
     width: 88%;
 }   
 .card{
-    margin: .5rem 0 .5rem 0;
+    margin: 0;
 }
 .card-panel {
     padding: 5px;
@@ -134,7 +134,7 @@ i.left {
 }
 
 .row .col {
-    padding:0 .5rem;
+    padding:.5rem;
 }
 footer .row .col:first-child {
     padding-left: 0px;

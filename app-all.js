@@ -247,7 +247,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	me.found = true;
 	me.fbLikes =$location.absUrl();
 	me.setCurrentSong = function (val) {
-		me.currentSong = val;
+		me.currentSong = val+'?autoplay=1';
 	};
 	me.getName = function(id){
 		return StringUtil.generateName(id);
