@@ -77,7 +77,7 @@ app.constant('constants', {
     post: '/v1/post/',
     getCelebrity: '/v1/celebrity/'
   },
-  postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song']
+  postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song','Video']
 });
 function AdminCtrl($scope, $rootScope, constants, StringUtil, RestAPI) {
     var scope = $scope;

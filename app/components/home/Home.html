@@ -28,7 +28,7 @@
 									</a>
 								</div>
 								<div class="card-action">
-									<span>{{post.local.ttl}}</span>
+									<span>{{post.eng.ttl}}</span>
 								</div>
 							</div>
 						</owl-carousel-item>
@@ -41,7 +41,7 @@
 						</div>
 						<ol>
 							<li ng-repeat="post in videos.slice(0,10)">
-								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"> {{post.local.ttl}}</a>
+								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"> {{post.eng.ttl}}</a>
 							</li>
 						</ol>
 					</div>
@@ -109,7 +109,7 @@
 
 	<div class="container">
 		<div class="row">
-			<span class="badge bg-color-TEASER">Trailers</span>
+			<span class="badge bg-color-TEASER">Trending Videos</span>
 		</div>
 		<div class="row">
 			<div class="col m3" ng-repeat="post in videos.slice(0,4)">
@@ -118,7 +118,7 @@
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
-						<h5>{{post.local.ttl}} -
+						<h5>{{post.eng.ttl}} -
 							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
 						</h5>
 					</div>
@@ -132,7 +132,7 @@
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
-						<h5>{{post.local.ttl}} -
+						<h5>{{post.eng.ttl}} -
 							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
 						</h5>
 					</div>
@@ -146,7 +146,7 @@
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
-						<h5>{{post.local.ttl}} -
+						<h5>{{post.eng.ttl}} -
 							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
 						</h5>
 					</div>

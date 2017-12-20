@@ -77,5 +77,5 @@ app.constant('constants', {
     post: '/v1/post/',
     getCelebrity: '/v1/celebrity/'
   },
-  postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song']
+  postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song','Video']
 });
