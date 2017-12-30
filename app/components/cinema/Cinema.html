@@ -118,8 +118,8 @@
 				</div>
 				
 				<h5 class="color-tomato">{{cinema.review.finalWords}}</h5>
-				<div class="fb-like" data-href="{{fbLikes}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-				<div class="fb-comments" data-href="{{fbLikes}}" data-numposts="5" data-colorscheme="light"></div>
+				<div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{likesUrl}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+				<div ng-if="pluginOn" onrender="rendered()" class="fb-comments" data-href="{{likeUrl}}" data-numposts="5" data-colorscheme="light"></div>
 			</div>
 		</div>
 	</div>

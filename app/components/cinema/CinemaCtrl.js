@@ -4,7 +4,21 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	me.isLoading = true;
 	me.currentSong = "";
 	me.found = true;
-	me.fbLikes =$location.absUrl();
+	me.likesUrl =$location.absUrl();
+
+	me.pluginOn = true;
+	me.rendering = false;
+	me.rendered = function () {
+	  me.rendering = false;
+	};
+	me.$watch('pluginOn', function (newVal, oldVal) { 
+	  if (newVal !== oldVal) {
+		me.rendering = true;
+	  }
+	});
+	me.$on('$routeChangeSuccess', function () {
+	  me.rendering = true;
+	});
 	me.setCurrentSong = function (val) {
 		me.currentSong = val+'?autoplay=1';
 	};

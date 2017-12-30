@@ -5,9 +5,6 @@
 	<base href="/">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-	<meta property="og:title" content="{{pageTitle}}" />
-	<meta property="og:description" content="{{pageDesc}}" />
-	<meta property="og:image" content="{{pageImg}}" />
 	<title>Weekend Cinema | One stop for all telugu cinema updates</title>
 	<!-- CSS  	-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,6 +28,19 @@
 </head>
 <main>	
 	<body>
+			<div id="fb-root"></div>
+			<script>
+			  window.fbAsyncInit = function() {
+				  FB.init({appId: '409415706076752', status: true, cookie: true,
+				  xfbml: true});
+			  };
+			  (function() {
+				  var e = document.createElement('script'); e.async = true;
+				  e.src = document.location.protocol +
+				  '//connect.facebook.net/en_US/all.js';
+				  document.getElementById('fb-root').appendChild(e);
+			  }());
+			</script>
 		<div class="navbar-fixed">
 			<nav class="bg-color-royalblue" role="navigation">
 				<div class="nav-wrapper container">

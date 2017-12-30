@@ -34,7 +34,9 @@
                     </a>
                 </div>
             </div>
-            <div  class="fb-comments" data-href="{{commentsUrl}}" data-numposts="5" data-colorscheme="light"></div>
+            <button ng-click="share(post)">SHARE</button>
+            <div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{commentsUrl}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            <div ng-if="pluginOn" onrender="rendered()" class="fb-comments" data-href="{{commentsUrl}}" data-numposts="5" data-colorscheme="light"></div>
             </div>
         </div>
     </div>

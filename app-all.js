@@ -50,7 +50,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider,ezfbP
   $locationProvider.html5Mode(true);
   ezfbProvider.setInitParams({
     appId: '409415706076752',
-    version: 'v2.3'
+    version: 'v2.6'
   });  
 });
 
@@ -210,7 +210,21 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	me.isLoading = true;
 	me.currentSong = "";
 	me.found = true;
-	me.fbLikes =$location.absUrl();
+	me.likesUrl =$location.absUrl();
+
+	me.pluginOn = true;
+	me.rendering = false;
+	me.rendered = function () {
+	  me.rendering = false;
+	};
+	me.$watch('pluginOn', function (newVal, oldVal) { 
+	  if (newVal !== oldVal) {
+		me.rendering = true;
+	  }
+	});
+	me.$on('$routeChangeSuccess', function () {
+	  me.rendering = true;
+	});
 	me.setCurrentSong = function (val) {
 		me.currentSong = val+'?autoplay=1';
 	};
@@ -736,6 +750,31 @@ function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $r
 	me.found = true;
 	me.isLoading = true;
 	me.commentsUrl =$location.absUrl();
+	me.pluginOn = true;
+	me.rendering = false;
+	me.rendered = function () {
+	  me.rendering = false;
+	};
+	me.$watch('pluginOn', function (newVal, oldVal) { 
+	  if (newVal !== oldVal) {
+		me.rendering = true;
+	  }
+	});
+	me.$on('$routeChangeSuccess', function () {
+	  me.rendering = true;
+	});
+	$scope.share = function(){
+		FB.ui(
+		{
+			method: 'feed',
+			name: 'This is the content of the "name" field.',
+			link: 'myLink',
+			picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
+			caption: "caption",
+			description: 'This is the content of the "description" field, below the caption.',
+			message: ''
+		});
+	  }
 	var GET = $http({
 		method: 'GET',
 		url: constants.api.url + '/post/' + $stateParams.postName
