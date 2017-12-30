@@ -20,11 +20,11 @@
 								}
 						}
 						}">
-						<owl-carousel-item ng-repeat="post in news">
+						<owl-carousel-item ng-repeat="post in weekendcinemaPosts">
 							<div class="card">
 								<div class="card-image">
 									<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-										<img class="img-fixed-height-250-h img-responsive" src="{{post.media.img[0]}}">
+										<img class="img-fixed-height-250-h img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg">
 									</a>
 								</div>
 								<div class="card-action">
@@ -109,7 +109,7 @@
 
 	<div class="container">
 		<div class="row">
-			<span class="badge bg-color-TEASER">Trending Videos</span>
+			<span class="badge bg-color-TEASER">Youtube Trending</span>
 		</div>
 		<div class="row">
 			<div class="col m3 s12" ng-repeat="post in videos.slice(0,4)">

@@ -32,9 +32,7 @@
 						<li ng-if="cinema.general.rating">Rating : {{cinema.general.rating}}
 							<ul class="list-inline star-vote">
 								<li ng-repeat="number in [1,2,3,4,5]">
-									<i class="material-icons" ng-show="(number-cinema.general.rating)>=1">star_border</i>
-									<i class="material-icons" ng-show="((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)">star_half</i>
-									<i class="material-icons" ng-show="(number-cinema.general.rating)<=0">star</i>
+									<i ng-class="{'fa fa-2x fa-star': (number-cinema.general.rating)<=0,'fa fa-2x fa-star-o': (number-cinema.general.rating)>=1,'fa fa-2x fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
 								</li>
 							</ul>
 						</li>
@@ -89,7 +87,7 @@
 		</div>
 		<div class="row">
 			<div class="col m6">
-					<h5>{{cinema.review.intro}}</h5>
+				<h5>{{cinema.review.intro}}</h5>
 				<span class="badge bg-color-MUSIC">కథ-కథనం</span>
 				<h5>{{cinema.review.story}}</h5>
 				<span class="badge bg-color-MUSIC">నటీనటులు</span>
@@ -103,23 +101,25 @@
 			<div class="col m6">
 				<div class="row">
 					<div class="col m6">
-						<i class="material-icons">thumb_up</i>
+						<i class="fa fa-3x fa-thumbs-up" aria-hidden="true"></i>
 						<h5>
 							<li ng-repeat="plus in cinema.review.plus">{{plus}}</li>
 						</h5>
 					</div>
 
 					<div class="col m6">
-						<i class="material-icons">thumb_down</i>
+						<i class="fa fa-3x fa-thumbs-down" aria-hidden="true"></i>
 						<h5>
 							<li ng-repeat="minus in cinema.review.minus">{{minus}}</li>
 						</h5>
 					</div>
 				</div>
-				
+
 				<h5 class="color-tomato">{{cinema.review.finalWords}}</h5>
-				<div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{likesUrl}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-				<div ng-if="pluginOn" onrender="rendered()" class="fb-comments" data-href="{{likeUrl}}" data-numposts="5" data-colorscheme="light"></div>
+				<div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{likesUrl}}" data-layout="standard" data-action="like"
+				 data-show-faces="true" data-share="true"></div>
+				<div ng-if="pluginOn" onrender="rendered()"  img = "http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-cover.jpg"
+				class="fb-comments" data-href="{{likeUrl}}" data-numposts="3" data-colorscheme="light"></div>
 			</div>
 		</div>
 	</div>
@@ -127,19 +127,19 @@
 		<div class="row">
 			<div class="col m6 s12">
 				<div class="video-container">
-					<my-youtube class="youtube-300" code="currentSong"></my-youtube>
+					<my-youtube class="youtube-320" code="currentSong"></my-youtube>
 				</div>
 			</div>
-			<div class="col  m6 s12  scrollbar row-height-320" id="style-5">
+			<div class="col  m6 s12">
 				<a href="" ng-click="setCurrentSong(cinema.songs.youtubeUrl)">
 					JUKE BOX
-					<i class="material-icons left">queue_music</i>
+					<i class="fa fa-music left" aria-hidden="true"></i>
 				</a>
 				<div class="card-panel grey lighten-5 z-depth-1" ng-repeat="song in cinema.songs.list">
 					<div class="row valign-wrapper">
 						<span>
 							<a href="" ng-click="setCurrentSong(song.youtubeUrl)">
-								<i class="material-icons left">music_video</i>
+								<i class="fa fa-music left" aria-hidden="true"></i>
 							</a>
 						</span>
 						<span class="black-text">

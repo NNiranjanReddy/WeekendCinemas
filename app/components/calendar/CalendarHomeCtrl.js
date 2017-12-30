@@ -36,9 +36,9 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
         'tooltip-append-to-body': true
       });
       switch (event.type) {
-        case 'cinema': element.prepend('<i class="material-icons small color-CINEMA">panorama</i>');
+        case 'cinema': element.prepend('<i class="fa fa-picture-o left color-CINEMA" aria-hidden="true"></i>');
           break;
-        case 'music': element.prepend('<i class="material-icons small color-MUSIC">queue_music</i>');
+        case 'music': element.prepend('<i class="fa fa-music left color-MUSIC" aria-hidden="true"></i>');
           break;
       }
       $compile(element)($scope);

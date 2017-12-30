@@ -25,11 +25,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider,ezfbP
     url: '/cinema/:cinemaName',
     templateUrl: 'app/components/cinema/Cinema.html',
     controller: 'CinemaCtrl'
-  }).state('celebrities', {
-    url: '/celebrities',
-    templateUrl: 'app/components/celebrity/CelebrityHome.html',
-    controller: 'CelebrityHomeCtrl'
-  }).state('celebrity', {
+  // }).state('celebrities', {
+  //   url: '/celebrities',
+  //   templateUrl: 'app/components/celebrity/CelebrityHome.html',
+  //   controller: 'CelebrityHomeCtrl'
+   }).state('celebrity', {
     url: '/celebrity/:celebrityId',
     templateUrl: 'app/components/celebrity/Celebrity.html',
     controller: 'CelebrityCtrl'
@@ -116,9 +116,9 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
         'tooltip-append-to-body': true
       });
       switch (event.type) {
-        case 'cinema': element.prepend('<i class="material-icons small color-CINEMA">panorama</i>');
+        case 'cinema': element.prepend('<i class="fa fa-picture-o left color-CINEMA" aria-hidden="true"></i>');
           break;
-        case 'music': element.prepend('<i class="material-icons small color-MUSIC">queue_music</i>');
+        case 'music': element.prepend('<i class="fa fa-music left color-MUSIC" aria-hidden="true"></i>');
           break;
       }
       $compile(element)($scope);
@@ -680,7 +680,7 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   var me = $scope;
   me.posts = [];
   me.videos = [];
-  me.news = [];
+  me.weekendcinemaPosts = [];
   me.isLoading = true;
   me.loaderTotalCount = 3;
   me.loaderCount = 0;
@@ -691,8 +691,8 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
     me.posts.forEach(function(post, index, array) {
       if (constants.postVideoType.indexOf(post.type) != -1) {
         me.videos.push(post);
-      } else if (['News'].indexOf(post.type) != -1) {
-        me.news.push(post);
+      } else if (['weekendcinema'].indexOf(post.type) != -1) {
+        me.weekendcinemaPosts.push(post);
       }
     });
     me.showOrHideLoader();

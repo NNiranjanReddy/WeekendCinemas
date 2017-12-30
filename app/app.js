@@ -25,11 +25,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider,ezfbP
     url: '/cinema/:cinemaName',
     templateUrl: 'app/components/cinema/Cinema.html',
     controller: 'CinemaCtrl'
-  }).state('celebrities', {
-    url: '/celebrities',
-    templateUrl: 'app/components/celebrity/CelebrityHome.html',
-    controller: 'CelebrityHomeCtrl'
-  }).state('celebrity', {
+  // }).state('celebrities', {
+  //   url: '/celebrities',
+  //   templateUrl: 'app/components/celebrity/CelebrityHome.html',
+  //   controller: 'CelebrityHomeCtrl'
+   }).state('celebrity', {
     url: '/celebrity/:celebrityId',
     templateUrl: 'app/components/celebrity/Celebrity.html',
     controller: 'CelebrityCtrl'

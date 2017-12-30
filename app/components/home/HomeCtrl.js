@@ -2,7 +2,7 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   var me = $scope;
   me.posts = [];
   me.videos = [];
-  me.news = [];
+  me.weekendcinemaPosts = [];
   me.isLoading = true;
   me.loaderTotalCount = 3;
   me.loaderCount = 0;
@@ -13,8 +13,8 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
     me.posts.forEach(function(post, index, array) {
       if (constants.postVideoType.indexOf(post.type) != -1) {
         me.videos.push(post);
-      } else if (['News'].indexOf(post.type) != -1) {
-        me.news.push(post);
+      } else if (['weekendcinema'].indexOf(post.type) != -1) {
+        me.weekendcinemaPosts.push(post);
       }
     });
     me.showOrHideLoader();
