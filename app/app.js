@@ -50,7 +50,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider,ezfbP
   $locationProvider.html5Mode(true);
   ezfbProvider.setInitParams({
     appId: '409415706076752',
-    version: 'v2.6'
+    version: 'v2.8'
   });  
 });
 

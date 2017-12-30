@@ -16,18 +16,6 @@ function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $r
 	me.$on('$routeChangeSuccess', function () {
 	  me.rendering = true;
 	});
-	$scope.share = function(){
-		FB.ui(
-		{
-			method: 'feed',
-			name: 'This is the content of the "name" field.',
-			link: 'myLink',
-			picture: 'http://www.hyperarts.com/external-xfbml/share-image.gif',
-			caption: "caption",
-			description: 'This is the content of the "description" field, below the caption.',
-			message: ''
-		});
-	  }
 	var GET = $http({
 		method: 'GET',
 		url: constants.api.url + '/post/' + $stateParams.postName
