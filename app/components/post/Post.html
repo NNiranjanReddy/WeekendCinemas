@@ -13,10 +13,11 @@
             </div>
             <div class="col m6">
                 <small class="text-muted">
-                    By Admin / Posted on {{article.lstMntDT | date:'medium'}}
+                    By Admin / Posted on {{article.lstmntDt | date:'medium'}}
                     <!--  <time-diff date="article.lstMntDT"></time-diff> ago -->
                 </small>
                 <h4 class="color-{{article.type}}">{{article.eng.ttl}} </h4>
+            
                 <div class="card-block">
                     <h5 class="">
                         <text text="article.eng.text"></text>
@@ -33,10 +34,7 @@
                     </a>
                 </div>
             </div>
-            <div ng-show="fbComments">
-                    <div class="fb-comments">
-                        <fb-comments page-href="{{fbComments}}" numposts="5" colorscheme="light" width="100%"></fb-comments>
-                    </div>
+            <div  class="fb-comments" data-href="{{commentsUrl}}" data-numposts="5" data-colorscheme="light"></div>
             </div>
         </div>
     </div>

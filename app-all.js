@@ -1,6 +1,6 @@
-var app = angular.module("WcApp", ['ui.router', 'ui.calendar']);
+var app = angular.module("WcApp", ['ui.router', 'ui.calendar','ezfb']);
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider,ezfbProvider) {
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'app/components/home/Home.html',
@@ -45,14 +45,13 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     url: '/terms',
     templateUrl: 'app/components/terms/Terms.html',
     controller: 'TermsCtrl'
-  }).state('admin', {
-    url: '/admin',
-    templateUrl: 'app/components/admin/Admin.html',
-    controller: 'AdminCtrl'
   });
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
-  //$mdThemingProvider.theme('default').primaryPalette('green').accentPalette('pink');
+  ezfbProvider.setInitParams({
+    appId: '409415706076752',
+    version: 'v2.3'
+  });  
 });
 
 app.run(['$rootScope', '$state', '$stateParams', 'constants',
@@ -79,40 +78,6 @@ app.constant('constants', {
   },
   postVideoType: ['Teaser', 'Trailer', 'Stumper', 'Prelude','Promo Song','Video']
 });
-function AdminCtrl($scope, $rootScope, constants, StringUtil, RestAPI) {
-    var scope = $scope;
-    scope.media = {};
-    scope.media.video = [];
-    scope.media.img = [];
-    $('.modal').modal();
-    $('select').select();
-    scope.createId = function (name) {
-        return name ? StringUtil.generateId(name) : name;
-    }
-    scope.submitPost = function (form) {
-        form.media = scope.media;
-        form._id = scope.createId(scope.name);
-        var jsonData = angular.toJson(form)
-        var url = constants.endpoints.post + form._id;
-        RestAPI.post(url, jsonData).success(function (response) {
-            scope.postSuccess = response;
-            window.location = '/post/'+form._id;
-        }).error(function () {
-            console.log('error');
-        });
-    }
-    scope.addPostMedia = function (media) {
-        if ($rootScope.postVideoType.indexOf(scope.post.type) != -1 && scope.media.video.indexOf(media) == -1) {
-            scope.media.video.push(media);
-        } else if (scope.media.img.indexOf(media) == -1) {
-            scope.media.img.push(media);
-        }
-    }
-}
-
-app.controller('AdminCtrl', ['$scope', '$rootScope', 'constants', 'StringUtil', 'RestAPI', AdminCtrl]);
-
-
 function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCalendarConfig, DateUtil) {
 
   /* event source that contains custom events on the scope */
@@ -243,7 +208,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
-	me.currentSong = null;
+	me.currentSong = "";
 	me.found = true;
 	me.fbLikes =$location.absUrl();
 	me.setCurrentSong = function (val) {
@@ -262,7 +227,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 		}
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
-				me.currentSong = me.cinema.songs.youtubeUrl;
+				me.currentSong = me.cinema.songs.youtubeUrl || "";
 			} else if (me.cinema.songs.list.length) {
 				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
 			}
@@ -409,55 +374,6 @@ app.directive("owlCarousel", function () {
     }
   };
 }]);
-
-app.directive('fbComments', function() {
-    function createHTML(href, numposts, colorscheme, width) {
-      return '<div class="fb-comments" ' +
-        'data-href="' + href + '" ' +
-        'data-numposts="' + numposts + '" ' +
-        'data-colorsheme="' + colorscheme + '" ' +
-        'data-width="' + width + '">' +
-        '</div>';
-    }
-    return {
-      restrict: 'E',
-      scope: {},
-      link: function postLink(scope, elem, attrs) {
-        attrs.$observe('pageHref', function(newValue) {
-          var href = newValue;
-          var numposts = attrs.numposts || 5;
-          var colorscheme = attrs.colorscheme || 'light';
-          var width = attrs.width || '100%';
-          elem.html(createHTML(href, numposts, colorscheme, width));
-        });
-      }
-    };
-  });
-
-
-  
-app.directive('fbLikes', function() {
-  function createHTML(href) {
-    return  '<div class="fb-like"'+ 
-    'data-href="' + href + '" ' +
-    'data-layout="button_count"' +
-    'data-action="like" data-size="small"'+
-    'data-show-faces="true"'+
-    'data-share="true">'+
-    '</div>';
-  }
-  return {
-    restrict: 'E',
-    scope: {},
-    link: function postLink(scope, elem, attrs) {
-      attrs.$observe('pageHref', function(newValue) {
-        var href = newValue;
-        elem.html(createHTML(href));
-      });
-    }
-  };
-});
-
 
 
 app.directive('spinner', [function() {
@@ -819,7 +735,7 @@ function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $r
 	var me = $scope;
 	me.found = true;
 	me.isLoading = true;
-	me.fbComments =$location.absUrl();
+	me.commentsUrl =$location.absUrl();
 	var GET = $http({
 		method: 'GET',
 		url: constants.api.url + '/post/' + $stateParams.postName

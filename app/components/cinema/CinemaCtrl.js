@@ -2,7 +2,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
-	me.currentSong = null;
+	me.currentSong = "";
 	me.found = true;
 	me.fbLikes =$location.absUrl();
 	me.setCurrentSong = function (val) {
@@ -21,7 +21,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 		}
 		if (me.cinema.songs) {
 			if (me.cinema.songs.youtubeUrl) {
-				me.currentSong = me.cinema.songs.youtubeUrl;
+				me.currentSong = me.cinema.songs.youtubeUrl || "";
 			} else if (me.cinema.songs.list.length) {
 				me.currentSong = me.cinema.songs.list[0].youtubeUrl;
 			}

@@ -2,7 +2,7 @@ function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $r
 	var me = $scope;
 	me.found = true;
 	me.isLoading = true;
-	me.fbComments =$location.absUrl();
+	me.commentsUrl =$location.absUrl();
 	var GET = $http({
 		method: 'GET',
 		url: constants.api.url + '/post/' + $stateParams.postName

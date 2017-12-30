@@ -7,7 +7,7 @@ function PostDAO(db) {
 
   this.getPosts = function (callback) {
     postCollection.find().sort({
-      'lstMntDT': -1
+      'lstmntDt': -1
     }).toArray(function (err, data) {
       if (err) return callback(null, '{}');
       callback(err, data);

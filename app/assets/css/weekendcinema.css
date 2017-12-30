@@ -131,7 +131,11 @@ hr {
 	min-height: 120px;
 	width: 100%;
 }
-
+.img-fixed-height-200{
+	max-height: 200px;
+	min-height: 200px;
+	width: 100%;
+}
 .img-fixed-height-350{
 	max-height: 350px;
 	min-height: 350px;
@@ -248,6 +252,12 @@ blockquote {
 .youtube-320 {
 	height: 320px;
 	max-height: 320px;
+	width: 100%;
+}
+
+.youtube-300 {
+	height: 300px;
+	max-height: 300px;
 	width: 100%;
 }
 .y-scroll{
@@ -609,9 +619,6 @@ blockquote {
 }
 .fc-day-grid-event .fc-content {
    text-overflow: ellipsis;
-}
-.fc-content {
-	top: -3px;
 }
 .fc-list-item-title{
 	font-family: 'Work Sans', 'Ramabhadra', serif;

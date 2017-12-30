@@ -1,6 +1,6 @@
-var app = angular.module("WcApp", ['ui.router', 'ui.calendar']);
+var app = angular.module("WcApp", ['ui.router', 'ui.calendar','ezfb']);
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider,ezfbProvider) {
   $stateProvider.state('home', {
     url: '/',
     templateUrl: 'app/components/home/Home.html',
@@ -45,14 +45,13 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     url: '/terms',
     templateUrl: 'app/components/terms/Terms.html',
     controller: 'TermsCtrl'
-  }).state('admin', {
-    url: '/admin',
-    templateUrl: 'app/components/admin/Admin.html',
-    controller: 'AdminCtrl'
   });
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
-  //$mdThemingProvider.theme('default').primaryPalette('green').accentPalette('pink');
+  ezfbProvider.setInitParams({
+    appId: '409415706076752',
+    version: 'v2.3'
+  });  
 });
 
 app.run(['$rootScope', '$state', '$stateParams', 'constants',

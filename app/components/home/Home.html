@@ -40,8 +40,8 @@
 							<span class="badge bg-color-tomato">Trending</span>
 						</div>
 						<ol>
-							<li ng-repeat="post in videos.slice(0,10)">
-								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"> {{post.eng.ttl}}</a>
+							<li ng-repeat="post in news | limitTo:10">
+								<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}"> {{post.local.ttl}}</a>
 							</li>
 						</ol>
 					</div>
@@ -70,7 +70,7 @@
 		<div class="row">
 			<div class="col m12 s12">
 				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ 
-					margin:5,
+					margin:10,
 					autoplay: flase,
 					items:10,
 					autoplayTimeout:3000,
@@ -112,70 +112,70 @@
 			<span class="badge bg-color-TEASER">Trending Videos</span>
 		</div>
 		<div class="row">
-			<div class="col m3" ng-repeat="post in videos.slice(0,4)">
+			<div class="col m3 s12" ng-repeat="post in videos.slice(0,4)">
 				<div class="card">
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
 						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
+							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
 						</h5>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col m3" ng-repeat="post in videos.slice(4,8)">
+			<div class="col m3 s12" ng-repeat="post in videos.slice(4,8)">
 				<div class="card">
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
 						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
+							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
 						</h5>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col m3" ng-repeat="post in videos.slice(8,12)">
+			<div class="col m3 s12" ng-repeat="post in videos.slice(8,12)">
 				<div class="card">
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
 						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
+							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
 						</h5>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col m3" ng-repeat="post in videos.slice(12,16)">
+			<div class="col m3 s12" ng-repeat="post in videos.slice(12,16)">
 				<div class="card">
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
 						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
+							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
 						</h5>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col m3" ng-repeat="post in videos.slice(16,20)">
+			<div class="col m3 s12" ng-repeat="post in videos.slice(16,20)">
 				<div class="card">
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
 					<div class="card-content">
 						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstMntDT| date:'mediumDate'"></span>
+							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
 						</h5>
 					</div>
 				</div>

@@ -15,16 +15,17 @@
     "url": ""
   },
   "dependencies": {
-    "express": "~4.x",
-    "mongodb": "~2.2",
+    "angular-easyfb": "1.5.2",
     "body-parser": "~1.5.2",
+    "express": "^4.16.2",
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
-    "grunt-contrib-uglify": "3.0.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-uglify": "3.0.1",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-express-server": "^0.5.3"
+    "grunt-express-server": "^0.5.3",
+    "mongodb": "^2.2.33"
   },
   "preferGlobal": true,
   "private": true,
