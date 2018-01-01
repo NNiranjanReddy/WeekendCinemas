@@ -9,7 +9,8 @@
                         <my-youtube class="youtube-320" code="article.media.video[0]"></my-youtube>
                     </div>
                 </div>
-
+                <div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{commentsUrl}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div ng-if="pluginOn" onrender="rendered()" class="fb-comments" data-href="{{commentsUrl}}" data-numposts="5" data-colorscheme="light"></div>
             </div>
             <div class="col m6">
                 <small class="text-muted">
@@ -22,18 +23,9 @@
                     <h5 class="">
                         <text text="article.eng.text"></text>
                     </h5>
-                    <a href="whatsapp://send?text={{url}}" data-action="share/whatsapp/share">
-                        <i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://twitter.com/share?url={{url}}" target="_blank">
-
-                        <i class="fa fa-2x fa-twitter" aria-hidden="true"></i>
-                    </a>
-                   
                 </div>
             </div>
-            <div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{commentsUrl}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            <div ng-if="pluginOn" onrender="rendered()" class="fb-comments" data-href="{{commentsUrl}}" data-numposts="5" data-colorscheme="light"></div>
+          
             </div>
         </div>
     </div>
