@@ -1,4 +1,4 @@
-function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,StringUtil) {
+function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, constants,StringUtil) {
 	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
@@ -23,10 +23,13 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 		me.currentSong = val+'?autoplay=1';
 	};
 	me.getName = function(id){
-		return StringUtil.generateName(id);
+		return id ? StringUtil.generateName(id) : id ;
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
+		$rootScope.title = me.cinema.name+' Cinema Details | '+me.cinema.name+' Review | '+me.cinema.name + ' Teaser | '+ me.cinema.name+' Trailer';
+		$rootScope.description = $rootScope.title;
+		$rootScope.keywords = $rootScope.title;
 		me.banners = [];
 		if(me.cinema.general.banner){
 			me.cinema.general.banner.forEach(function(element) {
@@ -63,5 +66,5 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope','$rootScope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 

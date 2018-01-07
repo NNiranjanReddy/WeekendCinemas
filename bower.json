@@ -22,11 +22,11 @@
     "angular-messages": "1.4.8",
     "angular-aria": "1.4.8",
     "angular-animate": "1.4.8",
-    "angular-material":"1.1.4",
     "angular-ui-calendar": "1.0.1",
     "fullcalendar": "3.5.1",
     "ui-router":"0.4.2",
-    "owl.carousel":"2.2.1"
+    "owl.carousel":"2.2.1",
+    "materialize":"1.0.0-alpha.3"
   },
   "resolutions": {
     "jquery": "1.11.3",

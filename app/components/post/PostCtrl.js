@@ -16,6 +16,19 @@ function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $r
 	me.$on('$routeChangeSuccess', function () {
 	  me.rendering = true;
 	});
+
+	me.sharePost = function(){
+		FB.ui(
+			{
+					method: 'feed',
+					name: $rootScope.pageTitle,
+					link: me.commentsUrl,
+					picture: $rootScope.pageImg,
+					caption: $rootScope.pageTitle,
+					description: $rootScope.pageDesc,
+					message: ''
+			});
+	};
 	var GET = $http({
 		method: 'GET',
 		url: constants.api.url + '/post/' + $stateParams.postName

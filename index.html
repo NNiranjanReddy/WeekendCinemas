@@ -5,14 +5,14 @@
 	<base href="/">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-	<meta name="fragment" content="!"> 
-	<meta name="description" content="Weekend Cinema is one stop for all telugu cinema review updates, news, trailers, teaser, events, birthdays, short films and
-	many more ...">
-	<title>Weekend Cinema | One stop for all telugu cinema updates</title>
+	<meta name="fragment" content="!">
+	<meta name="keywords" content="{{keywords}}">
+	<meta name="description" content="{{description}}">
+	<title>{{title}}</title>
 	<!-- CSS  	-->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="bower_components/materialize/dist/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"
+	/>
 
 	<link href="bower_components/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
 	<link href="bower_components/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
@@ -28,66 +28,75 @@
 			enable_page_level_ads: true
 		});
 	</script>
-
 </head>
-<main>	
+<main>
 	<body>
-		<div class="">
-			<nav class="bg-color-royalblue" role="navigation">
-				<div class="nav-wrapper container">
-					<img class="margin-top-5" src="assets/img/logo-n.png">
-					<a href="/" class="brand-logo margin-left-5">
-						WEEKEND CINEMA </a>
-					<ul class="right hide-on-med-and-down">
-						<li>
-							<a href="/cinemas">
-								CINEMAS
-								<i class="fa fa-picture-o left" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a href="/jukebox">
-								JUKEBOX
-								<i class="fa fa-music left" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a href="/calendar">
-								CALENDAR
-								<i class="fa fa-calendar left" aria-hidden="true"></i>
-							</a>
-						</li>
-					</ul>
-					<ul id="nav-mobile" class="sidenav">
-						<li>
-							<a href="/cinemas">
-								Cinemas
-								<i class="fa fa-picture-o left" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a href="/jukebox">
-								Jukebox
-								<i class="fa fa-music left" aria-hidden="true"></i>
-							</a>
-						</li>
-						<li>
-							<a href="/calendar">calendar
-								<i class="fa fa-calendar left" aria-hidden="true"></i>
-						</li>
-					</ul>
-					<a href="#" data-target="nav-mobile" class="sidenav-trigger button-collapse">
-						<i class="material-icons">menu</i>
-					</a>
-				</div>
-			</nav>
-		</div>
+		<nav class="bg-color-royalblue" role="navigation">
+			<div class="nav-wrapper container">
+				<img class="margin-top-5" src="assets/img/logo-n.png">
+				<a href="/" class="brand-logo margin-left-5">
+					WEEKEND CINEMA </a>
+				<ul class="right hide-on-med-and-down">
+					<li>
+						<a href="/cinemas">
+							CINEMAS
+							<i class="fa fa-picture-o left" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li>
+						<a href="/jukebox">
+							JUKEBOX
+							<i class="fa fa-music left" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li>
+						<a href="/calendar">
+							CALENDAR
+							<i class="fa fa-calendar left" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+				<ul id="nav-mobile" class="sidenav">
+					<li>
+						<a href="/cinemas">
+							Cinemas
+							<i class="fa fa-picture-o left" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li>
+						<a href="/jukebox">
+							Jukebox
+							<i class="fa fa-music left" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li>
+						<a href="/calendar">calendar
+							<i class="fa fa-calendar left" aria-hidden="true"></i>
+					</li>
+				</ul>
+				<a href="#" data-target="nav-mobile" class="sidenav-trigger button-collapse">
+					<i class="fa fa-bars left" aria-hidden="true"></i>
+				</a>
+			</div>
+		</nav>
 
 		<div class="main-view" ui-view></div>
-
+		<div id="fb-root"></div>
+		<script>
+		  window.fbAsyncInit = function() {
+			  FB.init({appId: '409415706076752', status: true, cookie: true,
+			  xfbml: true});
+		  };
+		  (function() {
+			  var e = document.createElement('script'); e.async = true;
+			  e.src = document.location.protocol +
+			  '//connect.facebook.net/en_US/all.js';
+			  document.getElementById('fb-root').appendChild(e);
+		  }());
+		</script>
 		<!--  Scripts-->
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="assets/js/materialize.min.js"></script>
+		<script src="bower_components/materialize/dist/js/materialize.min.js"></script>
 		<script src="assets/js/custom.js"></script>
 
 		<script src="bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
@@ -100,44 +109,29 @@
 		<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 		<script src="assets/js/angular-easyfb.min.js"></script>
 		<script src="weekendcinema.min.js"></script>
+		
+	</body>
 </main>
+
+
 <footer class="page-footer bgc-darkslategray">
 	<div class="container">
 		<div class="row">
-			<div class="margin-left-0">
-				<div class="col m6 s12">
-					<p class="grey-text text-lighten-4">Weekend Cinema is one stop for all telugu cinema updates, news, trailers, teaser, events, birthdays, short films and
-						many more ...</p>
-				</div>
+			<div class="col l6 s12">
+				<h5 class="white-text">WEEKEND CINEMA</h5>
+				<p class="grey-text text-lighten-4">Weekend Cinema is one stop for all telugu cinema updates, news, trailers, teaser, events, birthdays, short films and
+					many more ...</p>
 			</div>
-			<div class="col m3 s12">
+			<div class="col l4 offset-l2 s12">
 				<ul>
 					<li>
 						<a class="color-darkorange" href="/terms">Terms</a>
 					</li>
-
-
 					<li>
-						<a class="color-darkorange" href="/Contact Us">Contact</a>
-					</li>
-					<li>
-						<a class="color-darkorange" href="/about">About Us</a>
-					</li>
-					<li>
-						
-					</li>
-				</ul>
-			</div>
-			<div class="col m3 s12">
-				<ul>
-					<li>
-						<a class="color-darkorange" href="#!">Twitter</a>
+						<a class="color-darkorange" href="/about">About</a>
 					</li>
 					<li>
 						<a class="color-darkorange" href="https://www.youtube.com/c/weekendcinema">Youtube</a>
-					</li>
-					<li>
-						<a class="color-darkorange" href="#!">Instagram</a>
 					</li>
 					<li>
 						<a class="color-darkorange" href="https://www.facebook.com/weekendcinema.in/">Facebook</a>
@@ -148,8 +142,8 @@
 	</div>
 	<div class="footer-copyright">
 		<div class="container">
-			<p> Made with
-				<i class="fa fa-heart c-pink" aria-hidden="true"></i> by Weekend Cinema Team</p>
+			© Weekend Cinema - Made with
+			<i class="fa fa-heart c-pink" aria-hidden="true"></i> by Weekend Cinema Team
 		</div>
 	</div>
 </footer>

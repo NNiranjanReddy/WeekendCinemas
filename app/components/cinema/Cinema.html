@@ -83,7 +83,7 @@
 	</div>
 	<div class="container" ng-show="cinema.review">
 		<div class="row">
-			<span class="badge bg-color-tomato">{{cinema.name}} Review</span>
+			<span class="badge bg-color-tomato">Review</span>
 		</div>
 		<div class="row">
 			<div class="col m6">
@@ -118,8 +118,8 @@
 				<h5 class="color-tomato">{{cinema.review.finalWords}}</h5>
 				<div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{likesUrl}}" data-layout="standard" data-action="like"
 				 data-show-faces="true" data-share="true"></div>
-				<div ng-if="pluginOn" onrender="rendered()"  img = "http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-cover.jpg"
-				class="fb-comments" data-href="{{likeUrl}}" data-numposts="3" data-colorscheme="light"></div>
+				<div ng-if="pluginOn" onrender="rendered()" img="http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-cover.jpg"
+				 class="fb-comments" data-href="{{likeUrl}}" data-numposts="3" data-colorscheme="light"></div>
 			</div>
 		</div>
 	</div>

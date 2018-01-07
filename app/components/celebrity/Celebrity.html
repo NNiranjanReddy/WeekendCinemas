@@ -3,16 +3,15 @@
     <div class="container">
         <div class="row">
             <div class="col m5 col s12 align-right">
-                    <h4 class="bg-color-mediumseagreen">{{getName(celebrityId)}}</h4>
-                    <ul>
-                    </ul>
+                <h4 class="bg-color-mediumseagreen">{{getName(celebrityId)}}</h4>
+                <ul>
+                </ul>
             </div>
             <div class="col m2 s12">
-                    <div class="card img-fixed-height-250">
-                            <img class="img-fixed-height-250" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/celebrity/{{celebrityId}}-profile.jpg"
-                                alt="">
-                          
-                        </div>
+                <div class="card img-fixed-height-250">
+                    <img class="img-fixed-height-250" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/celebrity/{{celebrityId}}-profile.jpg"
+                        alt="">
+                </div>
             </div>
             <div class="col m5">
                 No of Cinemas : {{filmography.length}}
@@ -49,14 +48,13 @@
                                             <div class="card-image">
                                                 <a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}">
                                                     <img class="img-responsive img-fixed-height-150" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/celebrity/{{item.celebrityId}}-profile.jpg"
-                                                        alt="" ui-sref="celebrity({celebrityId:item.celebrityId})"
-                                                        href="#/celebrity/{{item.celebrityId}}">
+                                                        alt="" ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}">
                                                 </a>
                                             </div>
                                             <div class="card-content">
-                                                	<div class="card-tag-small bg-color-tomato">
-                                                            <span>{{item.type}}</span>
-                                                        </div>
+                                                <div class="card-tag-small bg-color-tomato">
+                                                    <span>{{item.type}}</span>
+                                                </div>
                                                 <h5 class="ellipsis-text">
                                                     <a ui-sref="celebrity({celebrityId:item.celebrityId})" href="#/celebrity/{{item.celebrityId}}" data-toggle="tooltip" title="{{item.name}}">{{getName(item.celebrityId)}}</a>
                                                 </h5>

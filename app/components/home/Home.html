@@ -1,5 +1,5 @@
 <spinner ng-show="isLoading"></spinner>
-<div ng-if="!isLoading">
+<div ng-show="!isLoading">
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
@@ -24,7 +24,7 @@
 							<div class="card">
 								<div class="card-image">
 									<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-										<img class="img-fixed-height-250-h img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg">
+										<img class="img-fixed-height-250-h img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/maxresdefault.jpg">
 									</a>
 								</div>
 								<div class="card-action">
@@ -32,7 +32,6 @@
 								</div>
 							</div>
 						</owl-carousel-item>
-
 				</div>
 				<div class="col m3">
 					<div class="card-panel scrollbar-305" id="style-5">
@@ -90,7 +89,8 @@
 						<div class="card">
 							<div class="card-image">
 								<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
-									<img class="img-responsive img-fixed-height-150" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-profile.jpg" alt="">
+									<img class="img-responsive img-fixed-height-150" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-profile.jpg"
+									 alt="">
 								</a>
 							</div>
 							<div class="card-content">
@@ -106,7 +106,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="container">
 		<div class="row">
 			<span class="badge bg-color-TEASER">Youtube Trending</span>
@@ -117,11 +116,7 @@
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -131,11 +126,6 @@
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -145,11 +135,6 @@
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -159,11 +144,6 @@
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -173,11 +153,6 @@
 					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
 						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
 					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
 				</div>
 			</div>
 		</div>

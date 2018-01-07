@@ -62,6 +62,9 @@ app.run(['$rootScope', '$state', '$stateParams', 'constants',
     $rootScope.postType = angular.copy($rootScope.postVideoType);
     $rootScope.postType.push('News');
     $rootScope.date = new Date();
+    $rootScope.title = "Weekend Cinema | weekendcinema";
+    $rootScope.description = "weekendcinema | Weekend Cinema is one stop for all telugu cinema review updates, news, trailers, teaser, events, birthdays, short films and many more ...";
+    $rootScope.keywords = "weekendcinema, Weekend Cinema, telugu review, cinema review, moview review"
   }]);
 
 app.constant('constants', {
@@ -204,7 +207,7 @@ function CelebrityHomeCtrl($scope, $http) {
 app.controller('CelebrityHomeCtrl', [ '$scope', '$http',CelebrityHomeCtrl ]);
 
 
-function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,StringUtil) {
+function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, constants,StringUtil) {
 	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
 	me.isLoading = true;
@@ -229,10 +232,13 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 		me.currentSong = val+'?autoplay=1';
 	};
 	me.getName = function(id){
-		return StringUtil.generateName(id);
+		return id ? StringUtil.generateName(id) : id ;
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
+		$rootScope.title = me.cinema.name+' Cinema Details | '+me.cinema.name+' Review | '+me.cinema.name + ' Teaser | '+ me.cinema.name+' Trailer';
+		$rootScope.description = $rootScope.title;
+		$rootScope.keywords = $rootScope.title;
 		me.banners = [];
 		if(me.cinema.general.banner){
 			me.cinema.general.banner.forEach(function(element) {
@@ -269,7 +275,7 @@ function CinemaCtrl($scope, $http, $stateParams,$location, RestAPI, constants,St
 	});
 
 }
-app.controller('CinemaCtrl', ['$scope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope','$rootScope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 
 
 function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
@@ -763,6 +769,19 @@ function PostCtrl($scope, $http, $stateParams, $location, constants, $window, $r
 	me.$on('$routeChangeSuccess', function () {
 	  me.rendering = true;
 	});
+
+	me.sharePost = function(){
+		FB.ui(
+			{
+					method: 'feed',
+					name: $rootScope.pageTitle,
+					link: me.commentsUrl,
+					picture: $rootScope.pageImg,
+					caption: $rootScope.pageTitle,
+					description: $rootScope.pageDesc,
+					message: ''
+			});
+	};
 	var GET = $http({
 		method: 'GET',
 		url: constants.api.url + '/post/' + $stateParams.postName
