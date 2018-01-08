@@ -62,9 +62,9 @@ app.run(['$rootScope', '$state', '$stateParams', 'constants',
     $rootScope.postType = angular.copy($rootScope.postVideoType);
     $rootScope.postType.push('News');
     $rootScope.date = new Date();
-    $rootScope.title = "Weekend Cinema | weekendcinema";
-    $rootScope.description = "weekendcinema | Weekend Cinema is one stop for all telugu cinema review updates, news, trailers, teaser, events, birthdays, short films and many more ...";
-    $rootScope.keywords = "weekendcinema, Weekend Cinema, telugu review, cinema review, moview review"
+    $rootScope.title = "";
+    $rootScope.description = "weekendcinema.in | Weekend Cinema is one stop for all telugu cinema review updates, news, trailers, teaser, events, birthdays, short films and many more ...";
+    $rootScope.keywords = "weekendcinema.in, Weekend Cinema, telugu review, cinema review, moview review"
   }]);
 
 app.constant('constants', {
@@ -236,9 +236,9 @@ function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, c
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
-		$rootScope.title = me.cinema.name+' Cinema Details | '+me.cinema.name+' Review | '+me.cinema.name + ' Teaser | '+ me.cinema.name+' Trailer';
-		$rootScope.description = $rootScope.title;
-		$rootScope.keywords = $rootScope.title;
+		$rootScope.title =   me.cinema.name + ' Telugu Movie Review | '+ me.cinema.name + ' Review and Rating | '  + me.cinema.name + ' telugu Review and Rating | ' + me.cinema.name + ' Telugu Cinema Review | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Movie Review in Telugu | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Telugu Review | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Movie Review in Telugu | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Telugu Review | '  + me.cinema.name + ' Review | '  + me.cinema.name + ' Cinema Review | '  + me.cinema.name + ' Review | '  + me.cinema.name + ' Movie Review | '+me.cinema.name+ ' Teaser | '+ me.cinema.name+' Trailer';
+		$rootScope.description = me.cinema.name + ' Telugu Movie Review , '+ me.cinema.name + ' Review and Rating , '  + me.cinema.name + ' telugu Review and Rating , ' + me.cinema.name + ' Telugu Cinema Review , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Movie Review in Telugu , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Telugu Review , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Movie Review in Telugu , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Telugu Review , '  + me.cinema.name + ' Review , '  + me.cinema.name + ' Cinema Review , '  + me.cinema.name + ' Review , '  + me.cinema.name + ' Movie Review , '+me.cinema.name+ ' Teaser , '+ me.cinema.name+' Trailer';
+		$rootScope.keywords = $rootScope.description;
 		me.banners = [];
 		if(me.cinema.general.banner){
 			me.cinema.general.banner.forEach(function(element) {

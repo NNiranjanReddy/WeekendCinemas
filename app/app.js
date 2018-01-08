@@ -62,9 +62,9 @@ app.run(['$rootScope', '$state', '$stateParams', 'constants',
     $rootScope.postType = angular.copy($rootScope.postVideoType);
     $rootScope.postType.push('News');
     $rootScope.date = new Date();
-    $rootScope.title = "Weekend Cinema | weekendcinema";
-    $rootScope.description = "weekendcinema | Weekend Cinema is one stop for all telugu cinema review updates, news, trailers, teaser, events, birthdays, short films and many more ...";
-    $rootScope.keywords = "weekendcinema, Weekend Cinema, telugu review, cinema review, moview review"
+    $rootScope.title = "";
+    $rootScope.description = "weekendcinema.in | Weekend Cinema is one stop for all telugu cinema review updates, news, trailers, teaser, events, birthdays, short films and many more ...";
+    $rootScope.keywords = "weekendcinema.in, Weekend Cinema, telugu review, cinema review, moview review"
   }]);
 
 app.constant('constants', {

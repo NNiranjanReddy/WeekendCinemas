@@ -27,9 +27,9 @@ function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, c
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
-		$rootScope.title = me.cinema.name+' Cinema Details | '+me.cinema.name+' Review | '+me.cinema.name + ' Teaser | '+ me.cinema.name+' Trailer';
-		$rootScope.description = $rootScope.title;
-		$rootScope.keywords = $rootScope.title;
+		$rootScope.title =   me.cinema.name + ' Telugu Movie Review | '+ me.cinema.name + ' Review and Rating | '  + me.cinema.name + ' telugu Review and Rating | ' + me.cinema.name + ' Telugu Cinema Review | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Movie Review in Telugu | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Telugu Review | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Movie Review in Telugu | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Telugu Review | '  + me.cinema.name + ' Review | '  + me.cinema.name + ' Cinema Review | '  + me.cinema.name + ' Review | '  + me.cinema.name + ' Movie Review | '+me.cinema.name+ ' Teaser | '+ me.cinema.name+' Trailer';
+		$rootScope.description = me.cinema.name + ' Telugu Movie Review , '+ me.cinema.name + ' Review and Rating , '  + me.cinema.name + ' telugu Review and Rating , ' + me.cinema.name + ' Telugu Cinema Review , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Movie Review in Telugu , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Telugu Review , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Movie Review in Telugu , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Telugu Review , '  + me.cinema.name + ' Review , '  + me.cinema.name + ' Cinema Review , '  + me.cinema.name + ' Review , '  + me.cinema.name + ' Movie Review , '+me.cinema.name+ ' Teaser , '+ me.cinema.name+' Trailer';
+		$rootScope.keywords = $rootScope.description;
 		me.banners = [];
 		if(me.cinema.general.banner){
 			me.cinema.general.banner.forEach(function(element) {
