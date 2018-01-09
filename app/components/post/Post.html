@@ -3,15 +3,12 @@
     <div class="container">
         <div class="row">
             <div class="col m6">
-                <div class="card">
+                
                     <img class="img-fixed-height-350 img-responsive" src="{{article.media.img[0]}}" ng-show="article.type == 'News'">
                     <div class="video-container" ng-show="article.type != 'News'">
                         <my-youtube class="youtube-320" code="article.media.video[0]"></my-youtube>
                     </div>
-                </div>
-                <div ng-show="pluginOn" onrender="rendered()" class="fb-like" data-href="{{commentsUrl}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-                <div ng-show="pluginOn" onrender="rendered()" class="fb-comments" data-href="{{commentsUrl}}" data-numposts="5" data-colorscheme="light"></div>
-                <a  ng-click="sharePost()">Share</a>
+ 
             </div>
             <div class="col m6">
                 <small class="text-muted">

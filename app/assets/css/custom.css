@@ -1,46 +1,3 @@
-.md-fab.docs-scroll-fab {
-  position: fixed !important;
-
-  -webkit-transform: scale(0);
-
-          transform: scale(0);
-  -webkit-transition: -webkit-transform 0.2s;
-  transition: -webkit-transform 0.2s;
-  transition: transform 0.2s;
-  transition: transform 0.2s, -webkit-transform 0.2s;
-}
-
-.docs-scroll-fab.scrolling {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-
-.content-sm {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.tab-v4 .tab-content {
-    padding: 5px 0 5px #3498db;
-}
-.tab-v1 .nav-tabs {
-    border-bottom: solid 2px #72c02c;
-}
-.tab-v1 .nav-tabs > .active > a, .tab-v1 .nav-tabs > .active > a:hover, .tab-v1 .nav-tabs > .active > a:focus {
-    background: #3498db;
-}
-.tab-v1 .nav-tabs > li > a,.tab-v1 .nav-tabs > li > a:hover {
-    background: #3498db;
-}
-.tab-v1 .nav-tabs {
-    border-bottom:none;
-}
-
-.tab-v1 .tab-content img {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
 
 .blog-thumb-v2 .blog-thumb-desc {
     overflow: hidden;
@@ -128,17 +85,11 @@
 @media screen and (min-width: 768px){
 .jumbotron {
 	background-color: #363739 !important;
-    padding: 5px 0;
+    padding: 0px 0;
 }
 .jumbotron .container{
 	background-color: #363739 !important;
 }
-}
-@media screen and (min-width: 768px){
-	.jumbotron {
-		background-color:#363739 !important;
-		padding:5px 0
-	}
 }
 
 

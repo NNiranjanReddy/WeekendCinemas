@@ -85,9 +85,10 @@ function CinemaDAO(db) {
     });
   };
   this.recentCinemas = function (callback) {
+    var date = new Date(new Date().toDateString());
     var query = {
       "general.releaseDt": {
-        "$lte": new Date()
+        "$lte": date
       }
     };
     var projection = {
