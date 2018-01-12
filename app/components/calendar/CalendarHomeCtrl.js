@@ -1,4 +1,4 @@
-function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCalendarConfig, DateUtil) {
+function CalendarHomeCtrl($rootScope, $scope,RestAPI, constants, $compile, uiCalendarConfig, DateUtil) {
 
   /* event source that contains custom events on the scope */
   $scope.events = {
@@ -55,6 +55,7 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
           left: 'title',
           center: 'Weekend Cinema Calendar'
         },
+        height: 'auto',
         eventRender: $scope.eventRender
       }
     };
@@ -97,5 +98,5 @@ function CalendarHomeCtrl($rootScope, $scope, RestAPI, constants, $compile, uiCa
 
 }
 
-app.controller('CalendarHomeCtrl', ['$rootScope', '$scope', 'RestAPI', 'constants', '$compile', 'uiCalendarConfig',
+app.controller('CalendarHomeCtrl', ['$rootScope', '$scope','RestAPI', 'constants', '$compile', 'uiCalendarConfig',
   'DateUtil', CalendarHomeCtrl]);
