@@ -36,12 +36,13 @@
 							<span class="badge bg-color-dodgerblue">What is Next ?</span>
 						</div>
 						<ul>
-							<li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'| limitTo :15">
+							<li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'| limitTo :9">
 								<a class="ellipsis-text" ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
 									{{cinema.general.releaseDt|shortDate2}} : {{cinema.name}}
 								</a>
 							</li>
 						</ul>
+						<a href="/calendar">more</a>
 					</div>
 				</div>
 			</div>
