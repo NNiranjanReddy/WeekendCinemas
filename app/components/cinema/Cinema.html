@@ -1,6 +1,7 @@
 <spinner ng-show="isLoading"></spinner>
-<div ng-if="!isLoading">
+<div ng-show="!isLoading">
 	<div class="container">
+			<jsonld data-json="jsonLd"></jsonld>
 		<div class="row">
 			<div class="col m2 col s12">
 				<div class="card img-fixed-height-275 hide-on-small-only">
@@ -16,20 +17,20 @@
 				<div class="padding-left-10">
 					<h4>{{cinema.name}}</h4>
 					<ul>
-						<li ng-if="cinema.lng">Language : {{cinema.lng}}</li>
-						<li ng-if="banners.length">Banner :
+						<li ng-show="cinema.lng">Language : {{cinema.lng}}</li>
+						<li ng-show="banners.length">Banner :
 							<and list="banners"></and>
 						</li>
-						<li ng-if="cinema.general.genre.length">Genre :
+						<li ng-show="cinema.general.genre.length">Genre :
 							<and list="cinema.general.genre"></and>
 						</li>
-						<li ng-if="cinema.general.releaseDt">Release : {{ cinema.general.releaseDt | date :'mediumDate'}}
+						<li ng-show="cinema.general.releaseDt">Release : {{ cinema.general.releaseDt | date :'mediumDate'}}
 						</li>
-						<li ng-if="cinema.general.duration">Duration : {{cinema.general.duration}}
+						<li ng-show="cinema.general.duration">Duration : {{cinema.general.duration}}
 						</li>
-						<li ng-if="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
+						<li ng-show="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
 						</li>
-						<li ng-if="cinema.general.rating">Rating : {{cinema.general.rating}}
+						<li ng-show="cinema.general.rating">Rating : {{cinema.general.rating}}
 							<ul class="list-inline star-vote">
 								<li ng-repeat="number in [1,2,3,4,5]">
 									<i ng-class="{'fa fa-2x fa-star': (number-cinema.general.rating)<=0,'fa fa-2x fa-star-o': (number-cinema.general.rating)>=1,'fa fa-2x fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
@@ -43,12 +44,12 @@
 				<div class="bs-callout bs-callout-info">
 					<h4>Synopsis</h4>
 					<p>
-						{{cinema.name}} is a {{ cinema.general.releaseDt | date :'yyyy'}} Indian Telugu language
+						{{cinema.name}} is a {{ cinema.general.releaseDt | date :'yyyy'}} Indian Telugu
 						<and list="cinema.general.genre"></and>
 						cinema directed by {{getName(director.celebrityId)}} and produced by {{getName(producer.celebrityId)}} under the banner of
 						<and list="banners"></and>.
 					</p>
-					<owl-carousel class="owl-carousel carousel owl-theme" data-options="{   autoplay:true,
+					<owl-carousel class="owl-carousel carousel owl-theme" data-options="{   autoplay:false,
 					autoplayTimeout:1000,
 					autoplayHoverPause:true,nav:false,dots:false,margin:5,responsive:{
 											0:{
@@ -88,7 +89,7 @@
 		<div class="row">
 			<div class="col m6">
 				<h5>{{cinema.review.intro}}</h5>
-				<span class="badge bg-color-MUSIC">కథ-కథనం</span>
+				<span class="badge bg-color-MUSIC">కథ</span>
 				<h5>{{cinema.review.story}}</h5>
 				<span class="badge bg-color-MUSIC">నటీనటులు</span>
 				<h5>{{cinema.review.actors}}</h5>
@@ -116,10 +117,10 @@
 				</div>
 
 				<h5 class="color-tomato">{{cinema.review.finalWords}}</h5>
-				<div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{likesUrl}}" data-layout="standard" data-action="like"
+				<div ng-if="pluginOn" onrender="rendered()" class="fb-like" data-href="{{cinemaUrl}}" data-layout="standard" data-action="like"
 				 data-show-faces="true" data-share="true"></div>
 				<div ng-if="pluginOn" onrender="rendered()" img="http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-cover.jpg"
-				 class="fb-comments" data-href="{{likeUrl}}" data-numposts="3" data-colorscheme="light"></div>
+				 class="fb-comments" data-href="{{cinemaUrl}}" data-numposts="3" data-colorscheme="light"></div>
 			</div>
 		</div>
 	</div>

@@ -1,10 +1,12 @@
 function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, constants,StringUtil) {
 	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
+	me.cast  = [];
 	me.isLoading = true;
 	me.currentSong = "";
 	me.found = true;
-	me.likesUrl =$location.absUrl();
+	me.cinemaUrl =$location.absUrl();
+	me.jsonLd = {};
 
 	me.pluginOn = true;
 	me.rendering = false;
@@ -46,25 +48,59 @@ function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, c
 		me.currentVideo = me.cinema.videos ? me.cinema.videos.find(function (video) {
 			video.type === 'Trailer';
 		}) : null;
-		me.director = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
-			return cel.type === 'Director';
-		}) : me.cinema.people.find(function (cel) {
+
+		me.director =  me.cinema.people.find(function (cel) {
 			return cel.type === 'Director';
 		});
 
-		me.producer = me.cinema.people.crew ? me.cinema.people.crew.find(function (cel) {
-			return cel.type === 'Producer';
-		}) : me.cinema.people.find(function (cel) {
+		me.producer = me.cinema.people.find(function (cel) {
 			return cel.type === 'Producer';
 		});
+
+		me.cinema.people.forEach(function(cel){
+			 if(cel.type == 'Actor'){
+				 me.cast.push(cel);
+			 }
+		});
+
 		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
-		$('.tooltipped').tooltip();
+		me.jsonLd = {
+			"@context": "http://schema.org",
+			"@type": "Movie",
+			"dateCreated":me.cinema.general.releaseDt,
+			"name": me.cinema.name,
+			"url":me.cinemaUrl,
+			"image":"https://res.cloudinary.com/weekendcinema/image/upload/v1515773285/cinema/"+me.cinema.cinemaId+"-cover.jpg",
+			"description": "",
+			"review":{
+					"@type": "Review",
+					"description": "",
+					"author":"weekendcinema.in",
+					"reviewRating": {
+						"@type": "Rating",
+						"ratingValue":me.cinema.general.rating
+					}
+			},
+			"director": {
+			"@type": "Person",
+			"name": me.getName(me.director ? me.director.celebrityId:"")
+			},
+			"actor": [
+			 ]
+		};
+		me.cast.forEach(function(cel){
+			var person  = {
+				"@type": "Person",
+				"name": ""
+			};
+			person.name = me.getName(cel.celebrityId);
+			me.jsonLd.actor.push(person);
+		});
 		me.isLoading = false;
 	}).error(function () {
 		me.cinema = null;
 		me.isLoading = false;
 	});
-
 }
 app.controller('CinemaCtrl', ['$scope','$rootScope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
 
