@@ -1,170 +1,87 @@
 <spinner ng-show="isLoading"></spinner>
 <div ng-show="!isLoading">
-	<div class="jumbotron">
-		<div class="container">
-			<div class="row">
-				<div class="col m6">
-					<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ 
-						autoplay: true,
-						items:10,
-						autoplayTimeout:2000,
-						autoplayHoverPause:true,
-						dots: false,
-						nav: false,
-						responsive:{
-								0:{
-									items:1
-								},
-								500:{
-									items:1
-								}
-						}
-						}">
-						<owl-carousel-item ng-repeat="post in weekendcinemaPosts">
-							<div class="card">
-								<div class="card-image">
-									<a ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-										<img class="img-fixed-height-250-h img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/maxresdefault.jpg">
-									</a>
-								</div>
-							</div>
-						</owl-carousel-item>
-				</div>
-				<div class="col m6">
-					<div class="card-panel">
-						<div class="margin-left-0">
-							<span class="badge bg-color-dodgerblue">What is Next ?</span>
-						</div>
-						<ul>
-							<li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'| limitTo :9">
-								<a class="ellipsis-text" ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
-									{{cinema.general.releaseDt|shortDate2}} : {{cinema.name}}
-								</a>
-							</li>
-						</ul>
-						<a href="/calendar">more</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="container">
 		<div class="row">
-			<span class="badge bg-color-tomato">Reviews</span>
-		</div>
-		<div class="row">
-			<div class="col m12 s12">
-				<owl-carousel class="owl-carousel carousel owl-theme" data-options="{ 
-					margin:10,
-					autoplay: flase,
-					items:10,
-					autoplayTimeout:3000,
-					autoplayHoverPause:true,
-					dots: false,
-					nav: false,
-					responsive:{
-							0:{
-								items:2
-							},
-							500:{
-								items:8
-							}
-					}
-					}">
-					<owl-carousel-item ng-repeat="cinema in recentCinemas">
+			<div class="col m9">
+				<span class="badge bg-color-TEASER">Youtube Trending</span>
+				<div class="row">
+					<div class="col m3" ng-repeat="post in videos.slice(0,4)">
 						<div class="card">
-							<div class="card-image">
-								<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">
-									<img class="img-responsive img-fixed-height-150" src="http://res.cloudinary.com/weekendcinema/image/upload/v1/cinema/{{cinema.cinemaId}}-profile.jpg"
-									 alt="">
-								</a>
-							</div>
-							<div class="card-content">
-								<div class="card-tag bg-color-tomato" ng-show="{{cinema.general.rating}}">
-									{{cinema.general.rating}}
-								</div>
-								<h5 class="ellipsis-text">
-									<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}" data-toggle="tooltip" title="{{cinema.name}}">{{cinema.name}}</a>
-								</h5>
-							</div>
+							<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
+								<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+							</a>
+			
 						</div>
-					</owl-carousel-item>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<span class="badge bg-color-TEASER">Youtube Trending</span>
-		</div>
-		<div class="row">
-			<div class="col m3 s12" ng-repeat="post in videos.slice(0,4)">
-				<div class="card">
-					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col m3 s12" ng-repeat="post in videos.slice(4,8)">
+						<div class="card">
+							<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
+								<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+							</a>
+							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col m3 s12" ng-repeat="post in videos.slice(8,12)">
+						<div class="card">
+							<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
+								<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+							</a>
+							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col m3 s12" ng-repeat="post in videos.slice(12,16)">
+						<div class="card">
+							<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
+								<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+							</a>
+							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col m3 s12" ng-repeat="post in videos.slice(16,20)">
+						<div class="card">
+							<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
+								<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col m3 s12" ng-repeat="post in videos.slice(4,8)">
-				<div class="card">
-					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
-				</div>
+	
+			<div class="col m3">
+				<span class="badge  bg-color-tomato  margin-top-5">Reviews</span>
+				<ul>
+					<li ng-repeat="cinema in cinemas | emptyFilter : 'general.releaseDt' | emptyFilter: 'general.rating'">
+						<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+					</li>
+				</ul>
+				<span class="badge  bg-color-INCINEMAS margin-top-5">Ready to Release</span>
+				<ul>
+					<li ng-repeat="cinema in cinemas | emptyFilter : 'general.releaseDt' | emptyFilter: 'general.rating':true|orderBy: 'general.releaseDt'">
+						<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+					</li>
+				</ul>
+				<span class="badge  bg-color-MUSIC  margin-top-5">Recent Audio</span>
+				<ul>
+					<li ng-repeat="cinema in cinemas |  emptyFilter : 'songs.releaseDt' | orderBy: 'songs.releaseDt' :true">
+						<a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+					</li>
+				</ul>
+				<span class="badge  bg-color-darkorange  margin-top-5">In Shooting</span>
+                <ul>
+                    <li ng-repeat="cinema in cinemas | emptyFilter : 'general.releaseDt':true">
+                        <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+                    </li>
+                </ul>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col m3 s12" ng-repeat="post in videos.slice(8,12)">
-				<div class="card">
-					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col m3 s12" ng-repeat="post in videos.slice(12,16)">
-				<div class="card">
-					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col m3 s12" ng-repeat="post in videos.slice(16,20)">
-				<div class="card">
-					<a class="card-image" ui-sref="post({postName:post._id})" href="#/post/{{post._id}}">
-						<img class="img-responsive" src="https://i.ytimg.com/vi/{{post.media.video[0]}}/mqdefault.jpg" alt="">
-					</a>
-					<div class="card-content">
-						<h5>{{post.eng.ttl}} -
-							<span ng-bind="post.lstmntDt| date:'mediumDate'"></span>
-						</h5>
-					</div>
-				</div>
-			</div>
+
 		</div>
 	</div>
 </div>

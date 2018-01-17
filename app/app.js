@@ -77,6 +77,7 @@ app.constant('constants', {
     loadCinema: '/v1/cinema/',
     searchCinema: '/v1/searchCinema/',
     upcomingCinema: '/v1/upcomingCinemas',
+    getCinemas: '/v1/cinemas',
     jukeBox: '/v1/jukeBox',
     post: '/v1/post/',
     getCelebrity: '/v1/celebrity/'

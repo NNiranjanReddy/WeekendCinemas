@@ -40,6 +40,17 @@ function CinemaController(db) {
     });
   };
 
+
+  this.getCinemas = function (req, res, next) {
+    cinemaDAO.getCinemas(function (err, data) {
+      if (err) throw next(err);
+      var response = {
+        "data": data
+      }
+      res.json(response);
+    });
+  };
+
   this.jukeBox = function (req, res, next) {
     cinemaDAO.jukeBox(function (err, responseData) {
       if (err) throw next(err);

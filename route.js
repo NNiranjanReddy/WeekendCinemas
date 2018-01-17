@@ -19,6 +19,7 @@ module.exports = function (app, db, express, path) {
   app.get("/v1/upcomingCinemas", cinemaController.upcomingCinemas);
   app.get("/v1/searchCinema/:text", cinemaController.searchCinema);
   app.get("/v1/recentCinemas", cinemaController.recentCinemas);
+  app.get("/v1/cinemas", cinemaController.getCinemas);
   app.get("/v1/jukeBox", cinemaController.jukeBox);
   app.get("/v1/cinema/:id", cinemaController.getCinema);
   app.get("/v1/celebrity/:id", celebrityController.getCelebrity);

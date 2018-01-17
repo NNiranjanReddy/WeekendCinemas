@@ -1,25 +1,32 @@
-function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
+function CinemaHomeCtrl($scope, $rootScope,$state,RestAPI,constants) {
     var me = $scope;
-    me.searchList = [];
     me.isLoading = true;
-    RestAPI.get(constants.endpoints.upcomingCinema).success(function(response) {
-        me.upcomingCinemas = response.data ? response.data : [];
-        me.isLoading = false;
-    }).error(function() {
-        me.upcomingCinemas = [];
-        me.isLoading = false;
-    });
-    me.searchCinema = function(){
-        RestAPI.get(constants.endpoints.searchCinema+me.searchKey).success(function(response){
-           me.searchList = response;
-        }).error(function(){
-           me.searchList.push(me.searchKey);
+    me.loaderTotalCount = 1;
+    me.loaderCount = 0;
+    
+    me.showOrHideLoader = function() {
+        me.loaderCount++;
+        if (me.loaderTotalCount == me.loaderCount) {
+          me.isLoading = false;
+        }
+    }
+    if( $rootScope.cinemas ){
+        me.cinemas = $rootScope.cinemas;
+        me.showOrHideLoader();
+    }
+    else{
+        RestAPI.get(constants.endpoints.getCinemas).success(function (response) {
+            me.cinemas  = response.data;
+            $rootScope.cinemas = me.cinemas;
+            me.showOrHideLoader();
+        }).error(function () {
+            me.cinemas  = [];
+            $rootScope.cinemas = me.cinemas;
+            me.showOrHideLoader();
         });
     }
-    me.filterNull = function(value, index, array){
-        return true;
-    }
+
 }
 
-app.controller('CinemaHomeCtrl', [ '$scope','$http','$state','RestAPI','constants',CinemaHomeCtrl ]);
+app.controller('CinemaHomeCtrl', [ '$scope','$rootScope','$state','RestAPI','constants',CinemaHomeCtrl ]);
 

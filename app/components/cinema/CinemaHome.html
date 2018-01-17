@@ -2,21 +2,37 @@
 <div ng-if="!isLoading">
     <div class="container">
         <div class="row">
-            <div class="col m6">
-                <span class="badge  bg-color-tomato  margin-top-5">Ready to Release</span>
+                <div class="col m3">
+                        <span class="badge  bg-color-tomato  margin-top-5">Reviews</span>
+                        <ol>
+                            <li ng-repeat="cinema in cinemas | emptyFilter : 'general.releaseDt' | emptyFilter: 'general.rating'">
+                                <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+                            </li>
+                        </ol>
+                </div>
+            <div class="col m3">
+                <span class="badge  bg-color-darkorange  margin-top-5">In Shooting</span>
                 <ol>
-                    <li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt'">
+                    <li ng-repeat="cinema in cinemas | emptyFilter : 'general.releaseDt':true">
                         <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
                     </li>
                 </ol>
             </div>
-            <div class="col m6">
-                <span class="badge  bg-color-darkorange  margin-top-5">In Shooting</span>
-                <ol>
-                    <li ng-repeat="cinema in upcomingCinemas | emptyFilter : 'general.releaseDt':true">
-                        <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
-                    </li>
-                </ol>
+            <div class="col m3">
+                    <span class="badge  bg-color-MUSIC  margin-top-5">Recent Audio</span>
+                    <ol>
+                        <li ng-repeat="cinema in cinemas |  emptyFilter : 'songs.releaseDt' | orderBy: 'songs.releaseDt' :true">
+                            <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+                        </li>
+                    </ol>
+                </div>
+            <div class="col m3">
+                    <span class="badge  bg-color-INCINEMAS margin-top-5">Ready to Release</span>
+                    <ol>
+                        <li ng-repeat="cinema in cinemas | emptyFilter : 'general.releaseDt' | emptyFilter: 'general.rating':true|orderBy: 'general.releaseDt'">
+                            <a ui-sref="cinema({cinemaName:cinema.cinemaId})" href="#/cinema/{{cinema.cinemaId}}">{{cinema.name}}</a>
+                        </li>
+                    </ol>
             </div>
             
         </div>

@@ -111,7 +111,43 @@ function CinemaDAO(db) {
       }
     });
   };
-
+  this.getCinemas = function (callback) {
+    var date = new Date(new Date().toDateString());
+    var prevYear = new Date(new Date().toDateString());
+    prevYear.setUTCFullYear(prevYear.getUTCFullYear()-1);
+    var query = 
+    {
+      "$or": [{
+        "general.releaseDt": {
+          "$gte": prevYear
+        }
+      }, {
+        "general.releaseDt": {
+          "$eq": ""
+        }
+      }]
+    };
+    
+    var projection = {
+      "cinemaId": true,
+      "name": true,
+      "general.releaseDt": true,
+      "songs.releaseDt": true,
+      "general.rating": true,
+      "lang": true,
+      "_id": false
+    }
+    var sort = {
+      'general.releaseDt': -1
+    }
+    cinemaCollection.find(query, projection).sort(sort).toArray(function (err, data) {
+      if (err) {
+        return callback(null, '{}');
+      } else {
+        callback(err, data);
+      }
+    });
+  };
   this.jukeBox = function (callback) {
     var query = {
       "songs.releaseDt": {

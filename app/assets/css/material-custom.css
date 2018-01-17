@@ -14,7 +14,7 @@ nav ul a {
 nav .nav-wrapper {
     position: relative;
     height: 100%;
-    width: 88%;
+    width: 100%;
 }
 nav ul a {
     font-size: 1rem;
@@ -34,7 +34,7 @@ thead > tr {
     margin-bottom: 0
 } 
 .container{
-    width: 88%;
+    width: 100%;
 }   
 .card{
     margin: 0 0 5px 0;
@@ -134,7 +134,7 @@ i.left {
 }
 
 .row .col {
-    padding:.5rem;
+    padding: 5px 10px;
 }
 footer .container{
     padding-left:0px;

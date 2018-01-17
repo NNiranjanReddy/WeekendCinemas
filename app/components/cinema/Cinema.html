@@ -24,14 +24,14 @@
 						<li ng-show="cinema.general.genre.length">Genre :
 							<and list="cinema.general.genre"></and>
 						</li>
-						<li ng-show="cinema.general.releaseDt">Release : {{ cinema.general.releaseDt | date :'mediumDate'}}
+						<li>Release Date: {{ (cinema.general.releaseDt | date :'mediumDate')||'TBA'}}
 						</li>
-						<li ng-show="cinema.general.duration">Duration : {{cinema.general.duration}}
+						<li>Duration : {{(cinema.general.duration)||'TBA'}}
 						</li>
-						<li ng-show="cinema.general.certificate">Certificate : {{cinema.general.certificate}}
+						<li>Certificate : {{(cinema.general.certificate)||'TBA'}}
 						</li>
-						<li ng-show="cinema.general.rating">Rating : {{cinema.general.rating}}
-							<ul class="list-inline star-vote">
+						<li >Rating : {{(cinema.general.rating)||'TBD'}}
+							<ul class="list-inline star-vote" ng-show="cinema.general.rating">
 								<li ng-repeat="number in [1,2,3,4,5]">
 									<i ng-class="{'fa fa-2x fa-star': (number-cinema.general.rating)<=0,'fa fa-2x fa-star-o': (number-cinema.general.rating)>=1,'fa fa-2x fa-star-half-o': ((number-cinema.general.rating)>0 && (number-cinema.general.rating)<1)}"></i>
 								</li>

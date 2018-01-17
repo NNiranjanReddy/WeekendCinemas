@@ -77,6 +77,7 @@ app.constant('constants', {
     loadCinema: '/v1/cinema/',
     searchCinema: '/v1/searchCinema/',
     upcomingCinema: '/v1/upcomingCinemas',
+    getCinemas: '/v1/cinemas',
     jukeBox: '/v1/jukeBox',
     post: '/v1/post/',
     getCelebrity: '/v1/celebrity/'
@@ -210,43 +211,45 @@ function CelebrityHomeCtrl($scope, $http) {
 app.controller('CelebrityHomeCtrl', [ '$scope', '$http',CelebrityHomeCtrl ]);
 
 
-function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, constants,StringUtil) {
+function CinemaCtrl($scope, $rootScope, $http, $stateParams, $location, RestAPI, constants, StringUtil) {
 	var me = $scope;
 	me.cinemaName = $stateParams.cinemaName;
-	me.cast  = [];
+	me.cast = [];
 	me.isLoading = true;
 	me.currentSong = "";
 	me.found = true;
-	me.cinemaUrl =$location.absUrl();
+	me.cinemaUrl = $location.absUrl();
 	me.jsonLd = {};
 
 	me.pluginOn = true;
 	me.rendering = false;
 	me.rendered = function () {
-	  me.rendering = false;
+		me.rendering = false;
 	};
-	me.$watch('pluginOn', function (newVal, oldVal) { 
-	  if (newVal !== oldVal) {
-		me.rendering = true;
-	  }
+	me.$watch('pluginOn', function (newVal, oldVal) {
+		if (newVal !== oldVal) {
+			me.rendering = true;
+		}
 	});
 	me.$on('$routeChangeSuccess', function () {
-	  me.rendering = true;
+		me.rendering = true;
 	});
 	me.setCurrentSong = function (val) {
-		me.currentSong = val+'?autoplay=1';
+		 if(val){
+			 me.currentSong = val + '?autoplay=1';
+		 }
 	};
-	me.getName = function(id){
-		return id ? StringUtil.generateName(id) : id ;
+	me.getName = function (id) {
+		return id ? StringUtil.generateName(id) : id;
 	};
 	RestAPI.get(constants.endpoints.loadCinema + me.cinemaName).success(function (response) {
 		me.cinema = response || null;
-		$rootScope.title =   me.cinema.name + ' Telugu Movie Review | '+ me.cinema.name + ' Review and Rating | '  + me.cinema.name + ' telugu Review and Rating | ' + me.cinema.name + ' Telugu Cinema Review | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Movie Review in Telugu | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Telugu Review | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Movie Review in Telugu | '  + me.cinema.name + ' Film Review | '  + me.cinema.name + ' Telugu Review | '  + me.cinema.name + ' Review | '  + me.cinema.name + ' Cinema Review | '  + me.cinema.name + ' Review | '  + me.cinema.name + ' Movie Review | '+me.cinema.name+ ' Teaser | '+ me.cinema.name+' Trailer';
-		$rootScope.description = me.cinema.name + ' Telugu Movie Review , '+ me.cinema.name + ' Review and Rating , '  + me.cinema.name + ' telugu Review and Rating , ' + me.cinema.name + ' Telugu Cinema Review , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Movie Review in Telugu , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Telugu Review , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Movie Review in Telugu , '  + me.cinema.name + ' Film Review , '  + me.cinema.name + ' Telugu Review , '  + me.cinema.name + ' Review , '  + me.cinema.name + ' Cinema Review , '  + me.cinema.name + ' Review , '  + me.cinema.name + ' Movie Review , '+me.cinema.name+ ' Teaser , '+ me.cinema.name+' Trailer';
+		$rootScope.title = me.cinema.name + ' Review |'+ me.cinema.name + ' Teaser | ' + me.cinema.name + ' Trailer';
+		$rootScope.description = me.cinema.name + ' Telugu Movie Review , ' + me.cinema.name + ' Review and Rating , ' + me.cinema.name + ' telugu Review and Rating , ' + me.cinema.name + ' Telugu Cinema Review , ' + me.cinema.name + ' Film Review , ' + me.cinema.name + ' Movie Review in Telugu , ' + me.cinema.name + ' Film Review , ' + me.cinema.name + ' Telugu Review , ' + me.cinema.name + ' Film Review , ' + me.cinema.name + ' Movie Review in Telugu , ' + me.cinema.name + ' Film Review , ' + me.cinema.name + ' Telugu Review , ' + me.cinema.name + ' Review , ' + me.cinema.name + ' Cinema Review , ' + me.cinema.name + ' Review , ' + me.cinema.name + ' Movie Review , ' + me.cinema.name + ' Teaser , ' + me.cinema.name + ' Trailer';
 		$rootScope.keywords = $rootScope.description;
 		me.banners = [];
-		if(me.cinema.general.banner){
-			me.cinema.general.banner.forEach(function(element) {
+		if (me.cinema.general.banner) {
+			me.cinema.general.banner.forEach(function (element) {
 				me.banners.push(me.getName(element.bannerId));
 			});
 		}
@@ -261,7 +264,7 @@ function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, c
 			video.type === 'Trailer';
 		}) : null;
 
-		me.director =  me.cinema.people.find(function (cel) {
+		me.director = me.cinema.people.find(function (cel) {
 			return cel.type === 'Director';
 		});
 
@@ -269,39 +272,41 @@ function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, c
 			return cel.type === 'Producer';
 		});
 
-		me.cinema.people.forEach(function(cel){
-			 if(cel.type == 'Actor'){
-				 me.cast.push(cel);
-			 }
+		me.cinema.people.forEach(function (cel) {
+			if (cel.type == 'Actor') {
+				me.cast.push(cel);
+			}
 		});
 
 		me.people = me.cinema.people.cast ? me.cinema.people.cast.concat(me.cinema.people.crew) : me.cinema.people;
 		me.jsonLd = {
 			"@context": "http://schema.org",
 			"@type": "Movie",
-			"dateCreated":me.cinema.general.releaseDt,
+			"dateCreated": me.cinema.general.releaseDt,
+			"dateModified": me.cinema.lstmntDt,
+			"datePublished": me.cinema.lstmntDt,
 			"name": me.cinema.name,
-			"url":me.cinemaUrl,
-			"image":"https://res.cloudinary.com/weekendcinema/image/upload/v1515773285/cinema/"+me.cinema.cinemaId+"-cover.jpg",
+			"url": me.cinemaUrl,
+			"image": "https://res.cloudinary.com/weekendcinema/image/upload/v1515773285/cinema/" + me.cinema.cinemaId + "-cover.jpg",
 			"description": "",
-			"review":{
-					"@type": "Review",
-					"description": "",
-					"author":"weekendcinema.in",
-					"reviewRating": {
-						"@type": "Rating",
-						"ratingValue":me.cinema.general.rating
-					}
+			"review": {
+				"@type": "Review",
+				"description": "",
+				"author": "weekendcinema.in",
+				"reviewRating": {
+					"@type": "Rating",
+					"ratingValue": me.cinema.general.rating
+				}
 			},
 			"director": {
-			"@type": "Person",
-			"name": me.getName(me.director ? me.director.celebrityId:"")
+				"@type": "Person",
+				"name": me.getName(me.director ? me.director.celebrityId : "")
 			},
 			"actor": [
-			 ]
+			]
 		};
-		me.cast.forEach(function(cel){
-			var person  = {
+		me.cast.forEach(function (cel) {
+			var person = {
 				"@type": "Person",
 				"name": ""
 			};
@@ -314,33 +319,40 @@ function CinemaCtrl($scope, $rootScope,$http, $stateParams,$location, RestAPI, c
 		me.isLoading = false;
 	});
 }
-app.controller('CinemaCtrl', ['$scope','$rootScope', '$http', '$stateParams','$location', 'RestAPI', 'constants','StringUtil', CinemaCtrl]);
+app.controller('CinemaCtrl', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'RestAPI', 'constants', 'StringUtil', CinemaCtrl]);
 
 
-function CinemaHomeCtrl($scope, $http,$state,RestAPI,constants) {
+function CinemaHomeCtrl($scope, $rootScope,$state,RestAPI,constants) {
     var me = $scope;
-    me.searchList = [];
     me.isLoading = true;
-    RestAPI.get(constants.endpoints.upcomingCinema).success(function(response) {
-        me.upcomingCinemas = response.data ? response.data : [];
-        me.isLoading = false;
-    }).error(function() {
-        me.upcomingCinemas = [];
-        me.isLoading = false;
-    });
-    me.searchCinema = function(){
-        RestAPI.get(constants.endpoints.searchCinema+me.searchKey).success(function(response){
-           me.searchList = response;
-        }).error(function(){
-           me.searchList.push(me.searchKey);
+    me.loaderTotalCount = 1;
+    me.loaderCount = 0;
+    
+    me.showOrHideLoader = function() {
+        me.loaderCount++;
+        if (me.loaderTotalCount == me.loaderCount) {
+          me.isLoading = false;
+        }
+    }
+    if( $rootScope.cinemas ){
+        me.cinemas = $rootScope.cinemas;
+        me.showOrHideLoader();
+    }
+    else{
+        RestAPI.get(constants.endpoints.getCinemas).success(function (response) {
+            me.cinemas  = response.data;
+            $rootScope.cinemas = me.cinemas;
+            me.showOrHideLoader();
+        }).error(function () {
+            me.cinemas  = [];
+            $rootScope.cinemas = me.cinemas;
+            me.showOrHideLoader();
         });
     }
-    me.filterNull = function(value, index, array){
-        return true;
-    }
+
 }
 
-app.controller('CinemaHomeCtrl', [ '$scope','$http','$state','RestAPI','constants',CinemaHomeCtrl ]);
+app.controller('CinemaHomeCtrl', [ '$scope','$rootScope','$state','RestAPI','constants',CinemaHomeCtrl ]);
 
 
 function BodyDirective() {
@@ -745,8 +757,15 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   me.videos = [];
   me.weekendcinemaPosts = [];
   me.isLoading = true;
-  me.loaderTotalCount = 3;
+  me.loaderTotalCount = 2;
   me.loaderCount = 0;
+
+  me.showOrHideLoader = function() {
+    me.loaderCount++;
+    if (me.loaderTotalCount == me.loaderCount) {
+      me.isLoading = false;
+    }
+  }
 
   var GET = RestAPI.get(constants.api.url + '/posts');
   GET.success(function(response) {
@@ -763,31 +782,21 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   GET.error(function() {
     me.posts = [];
   });
-
-  var GET = RestAPI.get(constants.api.url + '/upcomingCinemas');
-  GET.success(function(response) {
-    me.upcomingCinemas = response.data ? response.data : [];
-    $rootScope.upcomingCinemas = me.upcomingCinemas;
+  if( $rootScope.cinemas ){
+    me.cinemas = $rootScope.cinemas;
     me.showOrHideLoader();
-  });
-  GET.error(function() {
-    me.upcomingCinemas = [];
-  });
-
-  var GET = RestAPI.get(constants.api.url + '/recentCinemas');
-  GET.success(function(response) {
-    me.recentCinemas = response.data ? response.data : [];
-    me.showOrHideLoader();
-  });
-  GET.error(function() {
-    me.recentCinemas = [];
-  });
-  me.showOrHideLoader = function() {
-    me.loaderCount++;
-    if (me.loaderTotalCount == me.loaderCount) {
-      me.isLoading = false;
-    }
   }
+  else{
+      RestAPI.get(constants.endpoints.getCinemas).success(function (response) {
+        me.cinemas  = response.data;
+        $rootScope.cinemas = me.cinemas;
+        me.showOrHideLoader();
+      }).error(function () {
+            me.cinemas  = [];
+            $rootScope.cinemas = me.cinemas;
+            me.showOrHideLoader();
+      });
+  }  
 }
 
 app.controller('HomeCtrl', ['$scope', '$rootScope', 'RestAPI', '$window',

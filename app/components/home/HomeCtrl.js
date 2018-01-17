@@ -4,8 +4,15 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   me.videos = [];
   me.weekendcinemaPosts = [];
   me.isLoading = true;
-  me.loaderTotalCount = 3;
+  me.loaderTotalCount = 2;
   me.loaderCount = 0;
+
+  me.showOrHideLoader = function() {
+    me.loaderCount++;
+    if (me.loaderTotalCount == me.loaderCount) {
+      me.isLoading = false;
+    }
+  }
 
   var GET = RestAPI.get(constants.api.url + '/posts');
   GET.success(function(response) {
@@ -22,31 +29,21 @@ function HomeCtrl($scope, $rootScope, RestAPI, $window, constants, $interval) {
   GET.error(function() {
     me.posts = [];
   });
-
-  var GET = RestAPI.get(constants.api.url + '/upcomingCinemas');
-  GET.success(function(response) {
-    me.upcomingCinemas = response.data ? response.data : [];
-    $rootScope.upcomingCinemas = me.upcomingCinemas;
+  if( $rootScope.cinemas ){
+    me.cinemas = $rootScope.cinemas;
     me.showOrHideLoader();
-  });
-  GET.error(function() {
-    me.upcomingCinemas = [];
-  });
-
-  var GET = RestAPI.get(constants.api.url + '/recentCinemas');
-  GET.success(function(response) {
-    me.recentCinemas = response.data ? response.data : [];
-    me.showOrHideLoader();
-  });
-  GET.error(function() {
-    me.recentCinemas = [];
-  });
-  me.showOrHideLoader = function() {
-    me.loaderCount++;
-    if (me.loaderTotalCount == me.loaderCount) {
-      me.isLoading = false;
-    }
   }
+  else{
+      RestAPI.get(constants.endpoints.getCinemas).success(function (response) {
+        me.cinemas  = response.data;
+        $rootScope.cinemas = me.cinemas;
+        me.showOrHideLoader();
+      }).error(function () {
+            me.cinemas  = [];
+            $rootScope.cinemas = me.cinemas;
+            me.showOrHideLoader();
+      });
+  }  
 }
 
 app.controller('HomeCtrl', ['$scope', '$rootScope', 'RestAPI', '$window',
